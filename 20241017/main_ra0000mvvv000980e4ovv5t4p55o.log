@@ -1,0 +1,2834 @@
+10/17 05:41:00.349|EXEC_START  |
+10/17 05:41:00.350|SCRIPT_START|SCRIPT=main, PROJECT=【データ連携HUB】WE0203_サポートサービス等応対情報取込, REPOSITORY=/home/z098847/projects/【データ連携HUB】WE0203_サポートサービス等応対情報取込, VERSION=73
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0203
+--/-- --:--:--.---|VARIABLE    |NAME=レコードNo, VALUE=103
+10/17 05:41:00.350|TRY_START   |NAME=try_catch
+10/17 05:41:00.350|START       |NAME=AP設定取得 
+--/-- --:--:--.---|VARIABLE    |NAME=機能名, VALUE=サポートサービス等応対情報取込
+--/-- --:--:--.---|INFO        |機能名(String) 入力=[サポートサービス等応対情報取込]
+--/-- --:--:--.---|VARIABLE    |NAME=実行スクリプト名, VALUE=
+--/-- --:--:--.---|INFO        |実行スクリプト名(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=AP設定取得エラー, VALUE=true
+--/-- --:--:--.---|INFO        |AP設定取得エラー(boolean) 入力=[true]
+--/-- --:--:--.---|VARIABLE    |NAME=実行日時, VALUE=1729111260357
+--/-- --:--:--.---|INFO        |実行日時(Date) 入力=[2024-10-17T05:41:00.357+0900]
+--/-- --:--:--.---|VARIABLE    |NAME=S3バケットIN, VALUE=bm-s3-datahub-if-prod
+--/-- --:--:--.---|INFO        |S3バケットIN(String) 入力=[bm-s3-datahub-if-prod]
+--/-- --:--:--.---|VARIABLE    |NAME=S3フォルダIN, VALUE=/WE0203
+--/-- --:--:--.---|INFO        |S3フォルダIN(String) 入力=[/WE0203]
+--/-- --:--:--.---|VARIABLE    |NAME=S3バケットOUT, VALUE=bm-s3-datahub-save-prod
+--/-- --:--:--.---|INFO        |S3バケットOUT(String) 入力=[bm-s3-datahub-save-prod]
+--/-- --:--:--.---|VARIABLE    |NAME=S3フォルダOUT, VALUE=/
+--/-- --:--:--.---|INFO        |S3フォルダOUT(String) 入力=[/]
+--/-- --:--:--.---|VARIABLE    |NAME=DSCフォルダ, VALUE=/data/MERGE/app/data/WE0203103
+--/-- --:--:--.---|INFO        |DSCフォルダ(String) 入力=[/data/MERGE/app/data/WE0203103]
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップフォルダパス, VALUE=/data/MERGE/app/data/WE0203103/BACKUP
+--/-- --:--:--.---|INFO        |バックアップフォルダパス(String) 入力=[/data/MERGE/app/data/WE0203103/BACKUP]
+--/-- --:--:--.---|VARIABLE    |NAME=エラーフォルダパス, VALUE=/data/MERGE/app/data/WE0203103/ERROR
+--/-- --:--:--.---|INFO        |エラーフォルダパス(String) 入力=[/data/MERGE/app/data/WE0203103/ERROR]
+--/-- --:--:--.---|VARIABLE    |NAME=ファイル名称（フィルター）1, VALUE=026-000*
+--/-- --:--:--.---|INFO        |ファイル名称（フィルター）1(String) 入力=[026-000*]
+--/-- --:--:--.---|VARIABLE    |NAME=ファイル名称（フィルター）2, VALUE=
+--/-- --:--:--.---|INFO        |ファイル名称（フィルター）2(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=運用日付判定(時), VALUE=21
+--/-- --:--:--.---|INFO        |運用日付判定(時)(String) 入力=[21]
+--/-- --:--:--.---|VARIABLE    |NAME=運用日付判定(分), VALUE=30
+--/-- --:--:--.---|INFO        |運用日付判定(分)(String) 入力=[30]
+--/-- --:--:--.---|VARIABLE    |NAME=予備１（作業用フォルダ）, VALUE=/data/MERGE/app/data/WE0203000/work/0103
+--/-- --:--:--.---|INFO        |予備１（作業用フォルダ）(String) 入力=[/data/MERGE/app/data/WE0203000/work/0103]
+--/-- --:--:--.---|VARIABLE    |NAME=予備２（サービス名）, VALUE=ギガらくカメラ
+--/-- --:--:--.---|INFO        |予備２（サービス名）(String) 入力=[ギガらくカメラ]
+--/-- --:--:--.---|VARIABLE    |NAME=予備３, VALUE=
+--/-- --:--:--.---|INFO        |予備３(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=予備４, VALUE=
+--/-- --:--:--.---|INFO        |予備４(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=予備５, VALUE=
+--/-- --:--:--.---|INFO        |予備５(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=予備６, VALUE=
+--/-- --:--:--.---|INFO        |予備６(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=予備７, VALUE=
+--/-- --:--:--.---|INFO        |予備７(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=予備８, VALUE=
+--/-- --:--:--.---|INFO        |予備８(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=予備９, VALUE=
+--/-- --:--:--.---|INFO        |予備９(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=予備１０, VALUE=
+--/-- --:--:--.---|INFO        |予備１０(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=処理フォルダ, VALUE=20241017054100_ra0000mvvv000980e4ovv5t4p55o_WE0203
+--/-- --:--:--.---|INFO        |処理フォルダ(String) 入力=[20241017054100_ra0000mvvv000980e4ovv5t4p55o_WE0203]
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップフォルダ名, VALUE=20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup
+--/-- --:--:--.---|INFO        |バックアップフォルダ名(String) 入力=[20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup]
+--/-- --:--:--.---|VARIABLE    |NAME=エラーフォルダ名, VALUE=20241017054100_ra0000mvvv000980e4ovv5t4p55o_error
+--/-- --:--:--.---|INFO        |エラーフォルダ名(String) 入力=[20241017054100_ra0000mvvv000980e4ovv5t4p55o_error]
+10/17 05:41:00.388|END         |
+10/17 05:41:00.388|BRANCH_START|NAME=if_1
+--/-- --:--:--.---|EVALUATION  |NAME=AP設定エラー, RESULT=false
+10/17 05:41:00.388|BRANCH_END  |
+10/17 05:41:00.388|START       |NAME=開始ログ出力 
+10/17 05:41:00.389|SCRIPT_START|SCRIPT=ログ出力, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=9
+--/-- --:--:--.---|VARIABLE    |NAME=param02, VALUE=サポートサービス等応対情報取込
+--/-- --:--:--.---|VARIABLE    |NAME=カテゴリ, VALUE=START
+--/-- --:--:--.---|VARIABLE    |NAME=param01, VALUE=WE0203
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージID, VALUE=MSG0101
+10/17 05:41:00.389|START       |NAME=メッセージ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=ログレベル, VALUE=I
+--/-- --:--:--.---|INFO        |ログレベル(String) 入力=[I]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=ra0000mvvv000980e4ovv5t4p55o WE0203（サポートサービス等応対情報取込）処理を開始します。
+--/-- --:--:--.---|INFO        |メッセージ(String) 入力=[ra0000mvvv000980e4ovv5t4p55o WE0203（サポートサービス等応対情報取込）処理を開始します。]
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=ra0000mvvv000980e4ovv5t4p55o
+--/-- --:--:--.---|INFO        |実行ID(String) 入力=[ra0000mvvv000980e4ovv5t4p55o]
+10/17 05:41:00.391|END         |
+10/17 05:41:00.391|BRANCH_START|NAME=ログレベル判定
+--/-- --:--:--.---|EVALUATION  |NAME=INFO, RESULT=true
+10/17 05:41:00.391|START       |NAME=ログ出力_INFO 
+10/17 05:41:00.391|END         |
+10/17 05:41:00.391|BRANCH_END  |
+10/17 05:41:00.391|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=警告終了, RESULT=false
+10/17 05:41:00.391|BRANCH_END  |
+10/17 05:41:00.391|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:00.391|END         |
+10/17 05:41:00.391|START       |NAME=規制情報設定(開始) 
+10/17 05:41:00.391|SCRIPT_START|SCRIPT=規制情報/01_規制情報設定_開始, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=5
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0203
+--/-- --:--:--.---|VARIABLE    |NAME=レコードNo, VALUE=103
+10/17 05:41:00.391|TRY_START   |NAME=try_catch
+10/17 05:41:00.391|START       |NAME=規制情報更新 [amazon_rds_postgresql_adapter/execute_select_query]
+--/-- --:--:--.---|INFO        |[1]件のデータの抽出に成功しました。
+10/17 05:41:00.396|END         |
+10/17 05:41:00.396|BRANCH_START|NAME=結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=更新失敗(規制中), RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=更新失敗(その他エラー), RESULT=false
+10/17 05:41:00.396|BRANCH_END  |
+10/17 05:41:00.396|TRY_END     |
+10/17 05:41:00.396|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:00.396|END         |
+10/17 05:41:00.396|BRANCH_START|NAME=if_2
+--/-- --:--:--.---|EVALUATION  |NAME=規制情報設定(開始)エラー, RESULT=false
+10/17 05:41:00.396|BRANCH_END  |
+10/17 05:41:00.396|START       |NAME=規制情報取得 
+10/17 05:41:00.396|SCRIPT_START|SCRIPT=規制情報/02_規制情報取得, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=5
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0203
+--/-- --:--:--.---|VARIABLE    |NAME=レコードNo, VALUE=103
+10/17 05:41:00.396|TRY_START   |NAME=try_catch
+10/17 05:41:00.396|START       |NAME=規制情報取得 [amazon_rds_postgresql_adapter/execute_select_query]
+--/-- --:--:--.---|INFO        |[1]件のデータの抽出に成功しました。
+10/17 05:41:00.397|END         |
+10/17 05:41:00.397|BRANCH_START|NAME=結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=取得成功, RESULT=true
+10/17 05:41:00.397|START       |NAME=結果取得2 
+10/17 05:41:00.399|END         |
+10/17 05:41:00.399|BRANCH_END  |
+10/17 05:41:00.399|TRY_END     |
+--/-- --:--:--.---|VARIABLE    |NAME=取得結果, VALUE=com.appresso.ds.xmlfw.xml.MemoryXmlData@165ded28
+10/17 05:41:00.399|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:00.399|END         |
+10/17 05:41:00.399|BRANCH_START|NAME=if_3
+--/-- --:--:--.---|EVALUATION  |NAME=リトライ超過エラー, RESULT=false
+10/17 05:41:00.399|BRANCH_END  |
+10/17 05:41:00.399|START       |NAME=レコードタイプId取得 
+10/17 05:41:00.399|SCRIPT_START|SCRIPT=com/004_レコードタイプId取得, PROJECT=【データ連携HUB】WE0203_サポートサービス等応対情報取込, REPOSITORY=/home/z098847/projects/【データ連携HUB】WE0203_サポートサービス等応対情報取込, VERSION=12
+10/17 05:41:00.399|START       |NAME=SFDCセッション取得 
+10/17 05:41:00.400|SCRIPT_START|SCRIPT=セッションファイル生成, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=8
+10/17 05:41:00.400|START       |NAME=セッションファイル存在確認 [file_operation_adapter/check_exist_file]
+10/17 05:41:00.401|END         |
+10/17 05:41:00.401|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=ファイル無し, RESULT=false
+10/17 05:41:00.401|START       |NAME=セッションファイル読取1 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを抽出しました。
+10/17 05:41:00.402|END         |
+10/17 05:41:00.402|START       |NAME=変数代入1 
+--/-- --:--:--.---|VARIABLE    |NAME=サーバURL, VALUE=https://ntt-east-crm.my.salesforce.com/services/Soap/u/43.0
+--/-- --:--:--.---|INFO        |サーバURL(String) 入力=[https://ntt-east-crm.my.salesforce.com/services/Soap/u/43.0]
+--/-- --:--:--.---|VARIABLE    |NAME=セッションID, VALUE=00D2v000002FbUv!ARcAQIlURfz1g9VPRMtamlym.ALWslD4iuvIvl.qD095JlcmStcRn7pVzRy9uCjLgELwRZJDo8XNz.5JeusgQGzkO1QiR22u
+--/-- --:--:--.---|INFO        |セッションID(String) 入力=[00D2v000002FbUv!ARcAQIlURfz1g9VPRMtamlym.ALWslD4iuvIvl.qD095JlcmStcRn7pVzRy9uCjLgELwRZJDo8XNz.5JeusgQGzkO1QiR22u]
+10/17 05:41:00.402|END         |
+10/17 05:41:00.402|BRANCH_END  |
+10/17 05:41:00.402|TRY_START   |NAME=try_catch
+10/17 05:41:00.402|START       |NAME=セッションログイン [salesforce_adapter/session_id_login]
+--/-- --:--:--.---|INFO        |サーバ[https://ntt-east-crm.my.salesforce.com/services/Soap/u/43.0]へセッションIDによる接続を開始します。
+10/17 05:41:00.717|END         |
+10/17 05:41:00.717|TRY_END     |
+10/17 05:41:00.717|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:00.717|END         |
+10/17 05:41:00.717|START       |NAME=レコードタイプID取得 [salesforce_adapter/get_data_soql]
+--/-- --:--:--.---|INFO        |[1]件のデータ読み取り（SOQL実行）に成功しました。
+10/17 05:41:00.781|END         |
+10/17 05:41:00.781|START       |NAME=レコードタイプID設定 
+--/-- --:--:--.---|VARIABLE    |NAME=レコードタイプID, VALUE=0122v000002BEILAA4
+--/-- --:--:--.---|INFO        |レコードタイプID(String) 入力=[0122v000002BEILAA4]
+10/17 05:41:00.781|END         |
+10/17 05:41:00.781|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=取得件数が1ではない場合, RESULT=false
+10/17 05:41:00.781|BRANCH_END  |
+10/17 05:41:00.781|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:00.781|END         |
+10/17 05:41:00.781|START       |NAME=前回中間ファイル削除 [file_operation_adapter/delete_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0203103/BACKUP/*]ファイル/ディレクトリを削除しました。
+--/-- --:--:--.---|INFO        |[1]件を削除しました。
+10/17 05:41:00.787|END         |
+10/17 05:41:00.787|START       |NAME=フォルダ作成 
+10/17 05:41:00.787|SCRIPT_START|SCRIPT=一時フォルダ作成, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=6
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップフォルダパス, VALUE=/data/MERGE/app/data/WE0203103/BACKUP
+--/-- --:--:--.---|VARIABLE    |NAME=処理フォルダ名, VALUE=20241017054100_ra0000mvvv000980e4ovv5t4p55o_WE0203
+--/-- --:--:--.---|VARIABLE    |NAME=エラーフォルダ名, VALUE=20241017054100_ra0000mvvv000980e4ovv5t4p55o_error
+--/-- --:--:--.---|VARIABLE    |NAME=エラーフォルダパス, VALUE=/data/MERGE/app/data/WE0203103/ERROR
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップフォルダ名, VALUE=20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup
+10/17 05:41:00.787|START       |NAME=処理フォルダ存在確認 [file_operation_adapter/check_exist_file]
+10/17 05:41:00.792|END         |
+10/17 05:41:00.792|BRANCH_START|NAME=if4
+--/-- --:--:--.---|EVALUATION  |NAME=処理フォルダ有り, RESULT=false
+10/17 05:41:00.792|BRANCH_END  |
+10/17 05:41:00.792|START       |NAME=処理フォルダ作成 [file_operation_adapter/make_directory]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/temp/20241017054100_ra0000mvvv000980e4ovv5t4p55o_WE0203]ディレクトリを作成しました。
+10/17 05:41:00.793|END         |
+10/17 05:41:00.793|START       |NAME=バックアップフォルダ存在確認 [file_operation_adapter/check_exist_file]
+10/17 05:41:00.794|END         |
+10/17 05:41:00.794|BRANCH_START|NAME=if5
+--/-- --:--:--.---|EVALUATION  |NAME=バックアップフォルダ無し, RESULT=true
+10/17 05:41:00.794|START       |NAME=バックアップフォルダ作成 [file_operation_adapter/make_directory]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup]ディレクトリを作成しました。
+10/17 05:41:00.801|END         |
+10/17 05:41:00.801|BRANCH_END  |
+10/17 05:41:00.801|START       |NAME=エラーフォルダ存在確認 [file_operation_adapter/check_exist_file]
+10/17 05:41:00.801|END         |
+10/17 05:41:00.801|BRANCH_START|NAME=if6
+--/-- --:--:--.---|EVALUATION  |NAME=エラーフォルダ無し, RESULT=true
+10/17 05:41:00.801|START       |NAME=エラーフォルダ作成 [file_operation_adapter/make_directory]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0203103/ERROR/20241017054100_ra0000mvvv000980e4ovv5t4p55o_error]ディレクトリを作成しました。
+10/17 05:41:00.808|END         |
+10/17 05:41:00.808|BRANCH_END  |
+10/17 05:41:00.808|START       |NAME=変数格納1 
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップフォルダパス, VALUE=/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup
+--/-- --:--:--.---|INFO        |バックアップフォルダパス(String) 入力=[/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup]
+--/-- --:--:--.---|VARIABLE    |NAME=エラーフォルダパス, VALUE=/data/MERGE/app/data/WE0203103/ERROR/20241017054100_ra0000mvvv000980e4ovv5t4p55o_error
+--/-- --:--:--.---|INFO        |エラーフォルダパス(String) 入力=[/data/MERGE/app/data/WE0203103/ERROR/20241017054100_ra0000mvvv000980e4ovv5t4p55o_error]
+--/-- --:--:--.---|VARIABLE    |NAME=処理フォルダパス, VALUE=/data/MERGE/app/temp/20241017054100_ra0000mvvv000980e4ovv5t4p55o_WE0203
+--/-- --:--:--.---|INFO        |処理フォルダパス(String) 入力=[/data/MERGE/app/temp/20241017054100_ra0000mvvv000980e4ovv5t4p55o_WE0203]
+10/17 05:41:00.808|END         |
+10/17 05:41:00.808|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:00.808|END         |
+10/17 05:41:00.808|START       |NAME=応対情報取込 
+10/17 05:41:00.809|SCRIPT_START|SCRIPT=177_サポートサービス等応対情報取込, PROJECT=【データ連携HUB】WE0203_サポートサービス等応対情報取込, REPOSITORY=/home/z098847/projects/【データ連携HUB】WE0203_サポートサービス等応対情報取込, VERSION=98
+--/-- --:--:--.---|VARIABLE    |NAME=サービス名, VALUE=ギガらくカメラ
+--/-- --:--:--.---|VARIABLE    |NAME=S3フォルダOUT, VALUE=/
+--/-- --:--:--.---|VARIABLE    |NAME=S3バケットIN, VALUE=bm-s3-datahub-if-prod
+--/-- --:--:--.---|VARIABLE    |NAME=S3フォルダIN, VALUE=/WE0203
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=
+--/-- --:--:--.---|VARIABLE    |NAME=レコードＮｏ, VALUE=103
+--/-- --:--:--.---|VARIABLE    |NAME=作業用ディレクトリ, VALUE=/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup
+--/-- --:--:--.---|VARIABLE    |NAME=エラーディレクトリ, VALUE=/data/MERGE/app/data/WE0203103/ERROR/20241017054100_ra0000mvvv000980e4ovv5t4p55o_error
+--/-- --:--:--.---|VARIABLE    |NAME=機能名, VALUE=サポートサービス等応対情報取込
+--/-- --:--:--.---|VARIABLE    |NAME=S3バケットOUT, VALUE=bm-s3-datahub-save-prod
+--/-- --:--:--.---|VARIABLE    |NAME=一時ディレクトリ, VALUE=/data/MERGE/app/temp/20241017054100_ra0000mvvv000980e4ovv5t4p55o_WE0203
+--/-- --:--:--.---|VARIABLE    |NAME=取込ファイル名パターン, VALUE=026-000*
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0203
+--/-- --:--:--.---|VARIABLE    |NAME=レコードタイプＩＤ, VALUE=0122v000002BEILAA4
+10/17 05:41:00.809|TRY_START   |NAME=try_catch
+10/17 05:41:00.809|START       |NAME=実行スクリプトＮｏ設定 
+--/-- --:--:--.---|VARIABLE    |NAME=スクリプトＮｏ, VALUE=100
+--/-- --:--:--.---|INFO        |スクリプトＮｏ(String) 入力=[100]
+10/17 05:41:00.809|END         |
+10/17 05:41:00.809|START       |NAME=各種パス名設定 
+--/-- --:--:--.---|VARIABLE    |NAME=S3バックアップディレクトリ, VALUE=/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup/S3Backup
+--/-- --:--:--.---|INFO        |S3バックアップディレクトリ(String) 入力=[/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup/S3Backup]
+--/-- --:--:--.---|VARIABLE    |NAME=契約状況コードTファイル, VALUE=/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup/code/code042.csv
+--/-- --:--:--.---|INFO        |契約状況コードTファイル(String) 入力=[/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup/code/code042.csv]
+10/17 05:41:00.809|END         |
+10/17 05:41:00.809|START       |NAME=S3バックアップDir作成 [file_operation_adapter/make_directory]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup//S3Backup]ディレクトリを作成しました。
+10/17 05:41:00.812|END         |
+10/17 05:41:00.812|START       |NAME=契約状況コードT用Dir作成 [file_operation_adapter/make_directory]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup//code]ディレクトリを作成しました。
+10/17 05:41:00.814|END         |
+10/17 05:41:00.814|START       |NAME=各種コード管理T(042)取得 [amazon_rds_postgresql_adapter/execute_select_query]
+--/-- --:--:--.---|INFO        |[各種コード管理T(042)取得(177_サポートサービス等応対情報取込@300bdb53)]PSP処理を開始しました。
+10/17 05:41:00.815|END         |
+10/17 05:41:00.815|START       |NAME=契約状況コードTファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:00.819|END         |
+--/-- --:--:--.---|INFO        |[1]件のデータの抽出に成功しました。
+--/-- --:--:--.---|INFO        |[各種コード管理T(042)取得(177_サポートサービス等応対情報取込@300bdb53)]PSP処理を終了しました。
+10/17 05:41:00.820|START       |NAME=S3内ファイル取得 [amazon_s3_adapter/get]
+10/17 05:41:01.955|END         |
+10/17 05:41:01.955|START       |NAME=対象ファイル一覧取得 [file_operation_adapter/list_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/temp/20241017054100_ra0000mvvv000980e4ovv5t4p55o_WE0203]ディレクトリのファイル名一覧を取得しました。
+10/17 05:41:01.957|END         |
+10/17 05:41:01.957|START       |NAME=作業対象ファイル抽出 
+10/17 05:41:01.958|END         |
+10/17 05:41:01.958|LOOP_START  |NAME=foreach（ファイル件数）
+10/17 05:41:01.959|START       |NAME=取込ファイル名設定 
+--/-- --:--:--.---|VARIABLE    |NAME=取込ファイル名, VALUE=026-000_20241017.csv
+--/-- --:--:--.---|INFO        |取込ファイル名(String) 入力=[026-000_20241017.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=エラーCSVファイル名, VALUE=026-000_20241017_ERROR.csv
+--/-- --:--:--.---|INFO        |エラーCSVファイル名(String) 入力=[026-000_20241017_ERROR.csv]
+10/17 05:41:01.959|END         |
+10/17 05:41:01.959|START       |NAME=S3バックアップDirにコピー [file_operation_adapter/copy_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/temp/20241017054100_ra0000mvvv000980e4ovv5t4p55o_WE0203/026-000_20241017.csv]ファイル/ディレクトリをコピーしました。
+--/-- --:--:--.---|INFO        |[1]件をコピーしました。
+10/17 05:41:01.965|END         |
+10/17 05:41:01.965|START       |NAME=作業用ディレクトリに移動 [file_operation_adapter/move_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/temp/20241017054100_ra0000mvvv000980e4ovv5t4p55o_WE0203/026-000_20241017.csv]ファイル/ディレクトリを移動しました。
+--/-- --:--:--.---|INFO        |[1]件を移動しました。
+10/17 05:41:01.969|END         |
+10/17 05:41:01.969|START       |NAME=ファイル取込 
+10/17 05:41:01.969|SCRIPT_START|SCRIPT=sub/100_ファイル取込, PROJECT=【データ連携HUB】WE0203_サポートサービス等応対情報取込, REPOSITORY=/home/z098847/projects/【データ連携HUB】WE0203_サポートサービス等応対情報取込, VERSION=37
+--/-- --:--:--.---|VARIABLE    |NAME=契約状況コードTファイル, VALUE=/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup/code/code042.csv
+--/-- --:--:--.---|VARIABLE    |NAME=取込対象ファイル, VALUE=/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup/026-000_20241017.csv
+10/17 05:41:01.969|START       |NAME=取込ファイル読込 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[246]行のデータを抽出しました。
+10/17 05:41:01.982|END         |
+10/17 05:41:01.982|START       |NAME=取込ファイル編集 
+10/17 05:41:01.988|END         |
+10/17 05:41:01.988|START       |NAME=UPSERT対象ファイルに出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[244]行のデータを挿入しました。
+10/17 05:41:01.994|END         |
+10/17 05:41:01.994|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:01.995|END         |
+10/17 05:41:01.995|START       |NAME=応対結果連携 
+10/17 05:41:01.996|SCRIPT_START|SCRIPT=com/001_応対結果連携, PROJECT=【データ連携HUB】WE0203_サポートサービス等応対情報取込, REPOSITORY=/home/z098847/projects/【データ連携HUB】WE0203_サポートサービス等応対情報取込, VERSION=185
+--/-- --:--:--.---|VARIABLE    |NAME=正常件数, VALUE=0
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0203
+--/-- --:--:--.---|VARIABLE    |NAME=エラーCSVファイル名, VALUE=026-000_20241017_ERROR.csv
+--/-- --:--:--.---|VARIABLE    |NAME=レコードタイプＩＤ, VALUE=0122v000002BEILAA4
+--/-- --:--:--.---|VARIABLE    |NAME=作業用ディレクトリ, VALUE=/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup
+--/-- --:--:--.---|VARIABLE    |NAME=サービス名, VALUE=ギガらくカメラ
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|VARIABLE    |NAME=エラーディレクトリ, VALUE=/data/MERGE/app/data/WE0203103/ERROR/20241017054100_ra0000mvvv000980e4ovv5t4p55o_error
+--/-- --:--:--.---|VARIABLE    |NAME=UPSERT対象ファイル, VALUE=026-000_20241017.csv
+--/-- --:--:--.---|VARIABLE    |NAME=機能名, VALUE=サポートサービス等応対情報取込
+10/17 05:41:01.996|TRY_START   |NAME=try_catch
+10/17 05:41:01.996|START       |NAME=SFDCセッション取得 
+10/17 05:41:01.996|SCRIPT_START|SCRIPT=セッションファイル生成, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=8
+10/17 05:41:01.996|START       |NAME=セッションファイル存在確認 [file_operation_adapter/check_exist_file]
+10/17 05:41:01.997|END         |
+10/17 05:41:01.997|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=ファイル無し, RESULT=false
+10/17 05:41:01.997|START       |NAME=セッションファイル読取1 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを抽出しました。
+10/17 05:41:01.999|END         |
+10/17 05:41:01.999|START       |NAME=変数代入1 
+--/-- --:--:--.---|VARIABLE    |NAME=サーバURL, VALUE=https://ntt-east-crm.my.salesforce.com/services/Soap/u/43.0
+--/-- --:--:--.---|INFO        |サーバURL(String) 入力=[https://ntt-east-crm.my.salesforce.com/services/Soap/u/43.0]
+--/-- --:--:--.---|VARIABLE    |NAME=セッションID, VALUE=00D2v000002FbUv!ARcAQIlURfz1g9VPRMtamlym.ALWslD4iuvIvl.qD095JlcmStcRn7pVzRy9uCjLgELwRZJDo8XNz.5JeusgQGzkO1QiR22u
+--/-- --:--:--.---|INFO        |セッションID(String) 入力=[00D2v000002FbUv!ARcAQIlURfz1g9VPRMtamlym.ALWslD4iuvIvl.qD095JlcmStcRn7pVzRy9uCjLgELwRZJDo8XNz.5JeusgQGzkO1QiR22u]
+10/17 05:41:01.999|END         |
+10/17 05:41:01.999|BRANCH_END  |
+10/17 05:41:01.999|TRY_START   |NAME=try_catch
+10/17 05:41:01.999|START       |NAME=セッションログイン [salesforce_adapter/session_id_login]
+--/-- --:--:--.---|INFO        |サーバ[https://ntt-east-crm.my.salesforce.com/services/Soap/u/43.0]へセッションIDによる接続を開始します。
+10/17 05:41:02.314|END         |
+10/17 05:41:02.314|TRY_END     |
+10/17 05:41:02.315|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:02.315|END         |
+10/17 05:41:02.315|START       |NAME=中間ファイル名作成 
+--/-- --:--:--.---|VARIABLE    |NAME=UPSERT対象ファイル_エラー除去, VALUE=NoErr_026-000_20241017.csv
+--/-- --:--:--.---|INFO        |UPSERT対象ファイル_エラー除去(String) 入力=[NoErr_026-000_20241017.csv]
+10/17 05:41:02.315|END         |
+10/17 05:41:02.315|START       |NAME=UPSERT対象ファイル読込 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[244]行のデータを抽出しました。
+10/17 05:41:02.327|END         |
+10/17 05:41:02.327|START       |NAME=mapping 
+10/17 05:41:02.330|END         |
+10/17 05:41:02.330|START       |NAME=form_query_parameter [salesforce_adapter/form_query_parameter]
+--/-- --:--:--.---|INFO        |[244]件の入力データから、[1]件のIN句のパラメータの形成に成功しました。
+10/17 05:41:02.476|END         |
+10/17 05:41:02.476|LOOP_START  |NAME=foreach(1)
+10/17 05:41:02.477|START       |NAME=項目値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=コール番号, VALUE=CallNumber__c IN('103229768','103229807','103229836','103229845','103230322','103230371','103230395','103230423','103230451','103230466','103230601','103230683','103230711','103230731','103230768','103230783','103230790','103230821','103230838','103230856','103230865','103230869','103230879','103230884','103230895','103230913','103230922','103230924','103230925','103230926','103230927','103230929','103230931','103230933','103230935','103230938','103230940','103230942','103230945','103230947','103230949','103230950','103230954','103230957','103230959','103230961','103230963','103230965','103230967','103230970','103230972','103230974','103230976','103230979','103230982','103230988','103230991','103230992','103230994','103230996','103230998','103231002','103231004','103231006','103231011','103231014','103231016','103231018','103231020','103231022','103231024','103231026','103231029','103231032','103231034','103231039','103231041','103231043','103231046','103231047','103231050','103231052','103231053','103231055','103231057','103231060','103231062','103231064','103231066','103231068','103231069','103231071','103231074','103231076','103231078','103231080','103231081','103231086','103231088','103231089','103231092','103231094','103231096','103231099','103231101','103231103','103231105','103231107','103231109','103231111','103231113','103231117','103231119','103231121','103231123','103231125','103231127','103231129','103231161','103231171','103231335','103231376','103231397','103231418','103231479','103231577','103231626','103231632','103231657','103231678','103231745','103231810','103231823','103231828','103231902','103231957','103232099','103232212','103232329','103232901','103232975','103232988','103233019','103233065','103233087','103233107','103233128','103233134','103233155','103233174','103233192','103233216','103233232','103233249','103233257','103233258','103233282','103233320','103233367','103233532','103233655','103233667','103233671','103233693','103233846','103233940','103233942','103233943','103233947','103233949','103233951','103233954','103233957','103233958','103233959','103233961','103233962','103233963','103233965','103233967','103233970','103233971','103233972','103233973','103233974','103233975','103233977','103233978','103233980','103233981','103233983','103233986','103233987','103233988','103233990','103233991','103233992','103233993','103233994','103233995','103233996','103233997','103233998','103233999','103234000','103234001','103234002','103234003','103234004','103234005','103234006','103234008','103234009','103234010','103234011','103234012','103234013','103234014','103234016','103234017','103234096','103234098','103234158','103234179','103234185','103234188','103234210','103234211','103234230','103234232','103234233','103234234','103234235','103234236','103234237','103234238','103234239','103234240','103234241','103234242','103234243','103234244','103234245','103234246')
+--/-- --:--:--.---|INFO        |コール番号(String) 入力=[CallNumber__c IN('103229768','103229807','103229836','103229845','103230322','103230371','103230395','103230423','103230451','103230466','103230601','103230683','103230711','103230731','103230768','103230783','103230790','103230821','103230838','103230856','103230865','103230869','103230879','103230884','103230895','103230913','103230922','103230924','103230925','103230926','103230927','103230929','103230931','103230933','103230935','103230938','103230940','103230942','103230945','103230947','103230949','103230950','103230954','103230957','103230959','103230961','103230963','103230965','103230967','103230970','103230972','103230974','103230976','103230979','103230982','103230988','103230991','103230992','103230994','103230996','103230998','103231002','103231004','103231006','103231011','103231014','103231016','103231018','103231020','103231022','103231024','103231026','103231029','103231032','103231034','103231039','103231041','103231043','103231046','103231047','103231050','103231052','103231053','103231055','103231057','103231060','103231062','103231064','103231066','103231068','103231069','103231071','103231074','103231076','103231078','103231080','103231081','103231086','103231088','103231089','103231092','103231094','103231096','103231099','103231101','103231103','103231105','103231107','103231109','103231111','103231113','103231117','103231119','103231121','103231123','103231125','103231127','103231129','103231161','103231171','103231335','103231376','103231397','103231418','103231479','103231577','103231626','103231632','103231657','103231678','103231745','103231810','103231823','103231828','103231902','103231957','103232099','103232212','103232329','103232901','103232975','103232988','103233019','103233065','103233087','103233107','103233128','103233134','103233155','103233174','103233192','103233216','103233232','103233249','103233257','103233258','103233282','103233320','103233367','103233532','103233655','103233667','103233671','103233693','103233846','103233940','103233942','103233943','103233947','103233949','103233951','103233954','103233957','103233958','103233959','103233961','103233962','103233963','103233965','103233967','103233970','103233971','103233972','103233973','103233974','103233975','103233977','103233978','103233980','103233981','103233983','103233986','103233987','103233988','103233990','103233991','103233992','103233993','103233994','103233995','103233996','103233997','103233998','103233999','103234000','103234001','103234002','103234003','103234004','103234005','103234006','103234008','103234009','103234010','103234011','103234012','103234013','103234014','103234016','103234017','103234096','103234098','103234158','103234179','103234185','103234188','103234210','103234211','103234230','103234232','103234233','103234234','103234235','103234236','103234237','103234238','103234239','103234240','103234241','103234242','103234243','103234244','103234245','103234246')]
+10/17 05:41:02.477|END         |
+10/17 05:41:02.477|START       |NAME=コール番号取得(1) [salesforce_adapter/get_data_soql]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り（SOQL実行）に成功しました。
+10/17 05:41:02.551|END         |
+10/17 05:41:02.551|START       |NAME=集計 
+--/-- --:--:--.---|INFO        |集計処理(グループ分けあり)が正常に終了しました。
+10/17 05:41:02.551|END         |
+10/17 05:41:02.551|START       |NAME=mapping_1 
+--/-- --:--:--.---|INFO        |[mapping_1(com/001_応対結果連携@6719cc9c)]PSP処理を開始しました。
+10/17 05:41:02.551|END         |
+10/17 05:41:02.551|START       |NAME=コール番号集計CSV作成 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[0]行のデータを挿入しました。
+10/17 05:41:02.555|END         |
+--/-- --:--:--.---|INFO        |[mapping_1(com/001_応対結果連携@6719cc9c)]PSP処理を終了しました。
+10/17 05:41:02.555|LOOP_END    |COUNT=1
+10/17 05:41:02.555|START       |NAME=エラーレコード抽出条件 
+10/17 05:41:02.561|END         |
+10/17 05:41:02.561|LOOP_START  |NAME=foreach(2)
+10/17 05:41:02.561|LOOP_END    |COUNT=0
+10/17 05:41:02.561|BRANCH_START|NAME=if(1)
+--/-- --:--:--.---|EVALUATION  |NAME=エラーあり, RESULT=false
+10/17 05:41:02.561|START       |NAME=エラー除去後CSV出力_エラーなし [file_operation_adapter/copy_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup/026-000_20241017.csv]ファイル/ディレクトリをコピーしました。
+--/-- --:--:--.---|INFO        |[1]件をコピーしました。
+10/17 05:41:02.567|END         |
+10/17 05:41:02.567|BRANCH_END  |
+10/17 05:41:02.567|START       |NAME=エラー除去後CSV読込 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[244]行のデータを抽出しました。
+10/17 05:41:02.578|END         |
+10/17 05:41:02.578|START       |NAME=コール番号がSFにないデータ抽出 
+--/-- --:--:--.---|INFO        |[コール番号がSFにないデータ抽出(com/001_応対結果連携@6719cc9c)]PSP処理を開始しました。
+10/17 05:41:02.579|END         |
+10/17 05:41:02.579|START       |NAME=insert中間ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[244]行のデータを挿入しました。
+10/17 05:41:02.587|END         |
+--/-- --:--:--.---|INFO        |[コール番号がSFにないデータ抽出(com/001_応対結果連携@6719cc9c)]PSP処理を終了しました。
+10/17 05:41:02.587|START       |NAME=EC2DB情報取得 
+10/17 05:41:02.588|SCRIPT_START|SCRIPT=com/002_EC2DB_顧客ID、設置場所住所コード取得, PROJECT=【データ連携HUB】WE0203_サポートサービス等応対情報取込, REPOSITORY=/home/z098847/projects/【データ連携HUB】WE0203_サポートサービス等応対情報取込, VERSION=57
+--/-- --:--:--.---|VARIABLE    |NAME=UPSERT対象ファイル, VALUE=026-000_20241017.csv
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|VARIABLE    |NAME=エラーディレクトリ, VALUE=/data/MERGE/app/data/WE0203103/ERROR/20241017054100_ra0000mvvv000980e4ovv5t4p55o_error
+--/-- --:--:--.---|VARIABLE    |NAME=検索エラーCSVファイル名, VALUE=サポートサービス_検索_error.csv
+--/-- --:--:--.---|VARIABLE    |NAME=作業用ディレクトリ, VALUE=/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup
+--/-- --:--:--.---|VARIABLE    |NAME=正常件数, VALUE=0
+10/17 05:41:02.588|START       |NAME=mapping_3 
+--/-- --:--:--.---|INFO        |[mapping_3(com/002_EC2DB_顧客ID、設置場所住所コード取得@6ff2962b)]PSP処理を開始しました。
+10/17 05:41:02.588|END         |
+10/17 05:41:02.588|START       |NAME=csv_write空ファイル [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.591|END         |
+--/-- --:--:--.---|INFO        |[mapping_3(com/002_EC2DB_顧客ID、設置場所住所コード取得@6ff2962b)]PSP処理を終了しました。
+10/17 05:41:02.591|START       |NAME=対象ファイル読込 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[244]行のデータを抽出しました。
+10/17 05:41:02.602|END         |
+10/17 05:41:02.602|START       |NAME=mapping 
+10/17 05:41:02.602|END         |
+10/17 05:41:02.602|START       |NAME=顧客ID、設置場所住所コードを取得 [oracle_adapter/execute_select_query]
+--/-- --:--:--.---|INFO        |[顧客ID、設置場所住所コードを取得(com/002_EC2DB_顧客ID、設置場所住所コード取得@6ff2962b)]PSP処理を開始しました。
+10/17 05:41:02.625|END         |
+10/17 05:41:02.625|LOOP_START  |NAME=foreach
+10/17 05:41:02.691|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|INFO        |[95]件のデータの抽出に成功しました。
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001112054448
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001112054448]
+10/17 05:41:02.691|END         |
+10/17 05:41:02.691|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.691|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.694|END         |
+10/17 05:41:02.694|BRANCH_END  |
+10/17 05:41:02.694|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001112054448
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001112054448]
+10/17 05:41:02.695|END         |
+10/17 05:41:02.695|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001112054448
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001112054448]
+10/17 05:41:02.695|END         |
+10/17 05:41:02.695|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=false
+10/17 05:41:02.695|BRANCH_END  |
+10/17 05:41:02.695|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001112054448
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001112054448]
+10/17 05:41:02.695|END         |
+10/17 05:41:02.695|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001112054448
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001112054448]
+10/17 05:41:02.695|END         |
+10/17 05:41:02.695|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=false
+10/17 05:41:02.695|BRANCH_END  |
+10/17 05:41:02.695|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001112054448
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001112054448]
+10/17 05:41:02.695|END         |
+10/17 05:41:02.695|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=COP0000010598982
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[COP0000010598982]
+10/17 05:41:02.695|END         |
+10/17 05:41:02.695|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.695|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.697|END         |
+10/17 05:41:02.698|BRANCH_END  |
+10/17 05:41:02.698|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=COP0000010598982
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[COP0000010598982]
+10/17 05:41:02.698|END         |
+10/17 05:41:02.698|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001176055061
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001176055061]
+10/17 05:41:02.698|END         |
+10/17 05:41:02.698|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.698|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.700|END         |
+10/17 05:41:02.700|BRANCH_END  |
+10/17 05:41:02.700|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001176055061
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001176055061]
+10/17 05:41:02.700|END         |
+10/17 05:41:02.700|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001203450142
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001203450142]
+10/17 05:41:02.700|END         |
+10/17 05:41:02.700|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.700|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.703|END         |
+10/17 05:41:02.703|BRANCH_END  |
+10/17 05:41:02.703|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001203450142
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001203450142]
+10/17 05:41:02.703|END         |
+10/17 05:41:02.703|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=COP0000007563357
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[COP0000007563357]
+10/17 05:41:02.703|END         |
+10/17 05:41:02.703|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.703|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.706|END         |
+10/17 05:41:02.706|BRANCH_END  |
+10/17 05:41:02.706|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=COP0000007563357
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[COP0000007563357]
+10/17 05:41:02.706|END         |
+10/17 05:41:02.706|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001176055061
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001176055061]
+10/17 05:41:02.706|END         |
+10/17 05:41:02.706|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.706|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.708|END         |
+10/17 05:41:02.708|BRANCH_END  |
+10/17 05:41:02.709|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001176055061
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001176055061]
+10/17 05:41:02.709|END         |
+10/17 05:41:02.709|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001126683887
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001126683887]
+10/17 05:41:02.709|END         |
+10/17 05:41:02.709|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.709|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.711|END         |
+10/17 05:41:02.711|BRANCH_END  |
+10/17 05:41:02.711|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001126683887
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001126683887]
+10/17 05:41:02.711|END         |
+10/17 05:41:02.711|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001234382795
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001234382795]
+10/17 05:41:02.712|END         |
+10/17 05:41:02.712|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.712|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.714|END         |
+10/17 05:41:02.714|BRANCH_END  |
+10/17 05:41:02.714|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001234382795
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001234382795]
+10/17 05:41:02.714|END         |
+10/17 05:41:02.714|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001105981232
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001105981232]
+10/17 05:41:02.714|END         |
+10/17 05:41:02.714|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.714|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.717|END         |
+10/17 05:41:02.717|BRANCH_END  |
+10/17 05:41:02.717|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001105981232
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001105981232]
+10/17 05:41:02.717|END         |
+10/17 05:41:02.717|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001308949701
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001308949701]
+10/17 05:41:02.717|END         |
+10/17 05:41:02.717|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.717|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.720|END         |
+10/17 05:41:02.720|BRANCH_END  |
+10/17 05:41:02.720|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001308949701
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001308949701]
+10/17 05:41:02.720|END         |
+10/17 05:41:02.720|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001215128718
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001215128718]
+10/17 05:41:02.720|END         |
+10/17 05:41:02.720|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.720|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.723|END         |
+10/17 05:41:02.723|BRANCH_END  |
+10/17 05:41:02.723|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001215128718
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001215128718]
+10/17 05:41:02.723|END         |
+10/17 05:41:02.723|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001377986119
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001377986119]
+10/17 05:41:02.723|END         |
+10/17 05:41:02.723|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.723|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.726|END         |
+10/17 05:41:02.726|BRANCH_END  |
+10/17 05:41:02.726|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001377986119
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001377986119]
+10/17 05:41:02.726|END         |
+10/17 05:41:02.726|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001472941556
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001472941556]
+10/17 05:41:02.726|END         |
+10/17 05:41:02.726|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.726|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.729|END         |
+10/17 05:41:02.729|BRANCH_END  |
+10/17 05:41:02.729|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001472941556
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001472941556]
+10/17 05:41:02.729|END         |
+10/17 05:41:02.729|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001469085287
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001469085287]
+10/17 05:41:02.729|END         |
+10/17 05:41:02.729|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.729|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.732|END         |
+10/17 05:41:02.732|BRANCH_END  |
+10/17 05:41:02.732|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001469085287
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001469085287]
+10/17 05:41:02.732|END         |
+10/17 05:41:02.732|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001456558619
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001456558619]
+10/17 05:41:02.732|END         |
+10/17 05:41:02.732|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.732|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.735|END         |
+10/17 05:41:02.735|BRANCH_END  |
+10/17 05:41:02.735|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001456558619
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001456558619]
+10/17 05:41:02.735|END         |
+10/17 05:41:02.735|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001466250312
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001466250312]
+10/17 05:41:02.735|END         |
+10/17 05:41:02.735|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.735|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.738|END         |
+10/17 05:41:02.738|BRANCH_END  |
+10/17 05:41:02.738|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001466250312
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001466250312]
+10/17 05:41:02.738|END         |
+10/17 05:41:02.738|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=COP0000007563357
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[COP0000007563357]
+10/17 05:41:02.738|END         |
+10/17 05:41:02.738|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.738|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.741|END         |
+10/17 05:41:02.741|BRANCH_END  |
+10/17 05:41:02.741|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=COP0000007563357
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[COP0000007563357]
+10/17 05:41:02.741|END         |
+10/17 05:41:02.741|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001161506769
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001161506769]
+10/17 05:41:02.741|END         |
+10/17 05:41:02.741|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.741|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.744|END         |
+10/17 05:41:02.744|BRANCH_END  |
+10/17 05:41:02.744|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001161506769
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001161506769]
+10/17 05:41:02.744|END         |
+10/17 05:41:02.744|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001398992212
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001398992212]
+10/17 05:41:02.744|END         |
+10/17 05:41:02.744|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.744|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.747|END         |
+10/17 05:41:02.747|BRANCH_END  |
+10/17 05:41:02.747|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001398992212
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001398992212]
+10/17 05:41:02.747|END         |
+10/17 05:41:02.747|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001447443702
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001447443702]
+10/17 05:41:02.747|END         |
+10/17 05:41:02.747|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.747|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.750|END         |
+10/17 05:41:02.750|BRANCH_END  |
+10/17 05:41:02.750|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001447443702
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001447443702]
+10/17 05:41:02.750|END         |
+10/17 05:41:02.750|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001455179044
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001455179044]
+10/17 05:41:02.750|END         |
+10/17 05:41:02.750|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.750|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.753|END         |
+10/17 05:41:02.753|BRANCH_END  |
+10/17 05:41:02.753|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001455179044
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001455179044]
+10/17 05:41:02.753|END         |
+10/17 05:41:02.753|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001449833655
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001449833655]
+10/17 05:41:02.753|END         |
+10/17 05:41:02.753|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.753|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.756|END         |
+10/17 05:41:02.756|BRANCH_END  |
+10/17 05:41:02.756|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001449833655
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001449833655]
+10/17 05:41:02.756|END         |
+10/17 05:41:02.756|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001468240366
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001468240366]
+10/17 05:41:02.756|END         |
+10/17 05:41:02.756|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.756|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.758|END         |
+10/17 05:41:02.758|BRANCH_END  |
+10/17 05:41:02.758|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001468240366
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001468240366]
+10/17 05:41:02.758|END         |
+10/17 05:41:02.758|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001466211672
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001466211672]
+10/17 05:41:02.759|END         |
+10/17 05:41:02.759|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.759|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.761|END         |
+10/17 05:41:02.761|BRANCH_END  |
+10/17 05:41:02.761|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001466211672
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001466211672]
+10/17 05:41:02.761|END         |
+10/17 05:41:02.761|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001416588885
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001416588885]
+10/17 05:41:02.761|END         |
+10/17 05:41:02.761|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.761|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.764|END         |
+10/17 05:41:02.764|BRANCH_END  |
+10/17 05:41:02.764|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001416588885
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001416588885]
+10/17 05:41:02.764|END         |
+10/17 05:41:02.764|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001470220585
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001470220585]
+10/17 05:41:02.764|END         |
+10/17 05:41:02.764|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.764|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.767|END         |
+10/17 05:41:02.767|BRANCH_END  |
+10/17 05:41:02.767|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001470220585
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001470220585]
+10/17 05:41:02.767|END         |
+10/17 05:41:02.767|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001273553941
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001273553941]
+10/17 05:41:02.767|END         |
+10/17 05:41:02.767|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.767|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.770|END         |
+10/17 05:41:02.770|BRANCH_END  |
+10/17 05:41:02.770|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001273553941
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001273553941]
+10/17 05:41:02.770|END         |
+10/17 05:41:02.770|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001416020392
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001416020392]
+10/17 05:41:02.770|END         |
+10/17 05:41:02.770|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.770|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.773|END         |
+10/17 05:41:02.773|BRANCH_END  |
+10/17 05:41:02.773|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001416020392
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001416020392]
+10/17 05:41:02.773|END         |
+10/17 05:41:02.773|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001423696887
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001423696887]
+10/17 05:41:02.773|END         |
+10/17 05:41:02.773|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.773|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.775|END         |
+10/17 05:41:02.775|BRANCH_END  |
+10/17 05:41:02.775|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001423696887
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001423696887]
+10/17 05:41:02.775|END         |
+10/17 05:41:02.775|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001466791785
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001466791785]
+10/17 05:41:02.776|END         |
+10/17 05:41:02.776|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.776|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.778|END         |
+10/17 05:41:02.778|BRANCH_END  |
+10/17 05:41:02.778|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001466791785
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001466791785]
+10/17 05:41:02.778|END         |
+10/17 05:41:02.778|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001462059568
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001462059568]
+10/17 05:41:02.778|END         |
+10/17 05:41:02.778|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.778|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.781|END         |
+10/17 05:41:02.781|BRANCH_END  |
+10/17 05:41:02.781|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001462059568
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001462059568]
+10/17 05:41:02.781|END         |
+10/17 05:41:02.781|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001468355923
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001468355923]
+10/17 05:41:02.781|END         |
+10/17 05:41:02.781|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.781|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.784|END         |
+10/17 05:41:02.784|BRANCH_END  |
+10/17 05:41:02.784|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001468355923
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001468355923]
+10/17 05:41:02.784|END         |
+10/17 05:41:02.784|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001234382795
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001234382795]
+10/17 05:41:02.784|END         |
+10/17 05:41:02.784|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.784|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.787|END         |
+10/17 05:41:02.787|BRANCH_END  |
+10/17 05:41:02.787|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001234382795
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001234382795]
+10/17 05:41:02.787|END         |
+10/17 05:41:02.787|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001441156875
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001441156875]
+10/17 05:41:02.787|END         |
+10/17 05:41:02.787|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.787|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.789|END         |
+10/17 05:41:02.789|BRANCH_END  |
+10/17 05:41:02.789|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001441156875
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001441156875]
+10/17 05:41:02.790|END         |
+10/17 05:41:02.790|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001441161466
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001441161466]
+10/17 05:41:02.790|END         |
+10/17 05:41:02.790|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.790|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.792|END         |
+10/17 05:41:02.792|BRANCH_END  |
+10/17 05:41:02.792|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001441161466
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001441161466]
+10/17 05:41:02.792|END         |
+10/17 05:41:02.792|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001441588225
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001441588225]
+10/17 05:41:02.792|END         |
+10/17 05:41:02.792|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.792|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.795|END         |
+10/17 05:41:02.795|BRANCH_END  |
+10/17 05:41:02.795|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001441588225
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001441588225]
+10/17 05:41:02.795|END         |
+10/17 05:41:02.795|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001448133541
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001448133541]
+10/17 05:41:02.795|END         |
+10/17 05:41:02.795|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.795|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.798|END         |
+10/17 05:41:02.798|BRANCH_END  |
+10/17 05:41:02.798|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001448133541
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001448133541]
+10/17 05:41:02.798|END         |
+10/17 05:41:02.798|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001470249678
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001470249678]
+10/17 05:41:02.798|END         |
+10/17 05:41:02.798|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.798|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.801|END         |
+10/17 05:41:02.801|BRANCH_END  |
+10/17 05:41:02.801|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001470249678
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001470249678]
+10/17 05:41:02.801|END         |
+10/17 05:41:02.801|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001114569728
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001114569728]
+10/17 05:41:02.801|END         |
+10/17 05:41:02.801|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.801|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.804|END         |
+10/17 05:41:02.804|BRANCH_END  |
+10/17 05:41:02.804|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001114569728
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001114569728]
+10/17 05:41:02.804|END         |
+10/17 05:41:02.804|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001144730853
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001144730853]
+10/17 05:41:02.804|END         |
+10/17 05:41:02.804|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.804|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.806|END         |
+10/17 05:41:02.806|BRANCH_END  |
+10/17 05:41:02.806|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001144730853
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001144730853]
+10/17 05:41:02.806|END         |
+10/17 05:41:02.806|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001257885129
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001257885129]
+10/17 05:41:02.806|END         |
+10/17 05:41:02.806|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.806|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.808|END         |
+10/17 05:41:02.808|BRANCH_END  |
+10/17 05:41:02.808|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001257885129
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001257885129]
+10/17 05:41:02.808|END         |
+10/17 05:41:02.808|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=COP0000010598982
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[COP0000010598982]
+10/17 05:41:02.808|END         |
+10/17 05:41:02.808|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.808|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.810|END         |
+10/17 05:41:02.810|BRANCH_END  |
+10/17 05:41:02.810|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=COP0000010598982
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[COP0000010598982]
+10/17 05:41:02.810|END         |
+10/17 05:41:02.810|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001142392404
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001142392404]
+10/17 05:41:02.810|END         |
+10/17 05:41:02.810|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.810|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.812|END         |
+10/17 05:41:02.812|BRANCH_END  |
+10/17 05:41:02.812|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001142392404
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001142392404]
+10/17 05:41:02.812|END         |
+10/17 05:41:02.812|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001292191773
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001292191773]
+10/17 05:41:02.812|END         |
+10/17 05:41:02.812|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.812|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.814|END         |
+10/17 05:41:02.814|BRANCH_END  |
+10/17 05:41:02.814|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001292191773
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001292191773]
+10/17 05:41:02.814|END         |
+10/17 05:41:02.814|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=COP0000006282491
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[COP0000006282491]
+10/17 05:41:02.814|END         |
+10/17 05:41:02.814|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.814|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.816|END         |
+10/17 05:41:02.816|BRANCH_END  |
+10/17 05:41:02.816|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=COP0000006282491
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[COP0000006282491]
+10/17 05:41:02.816|END         |
+10/17 05:41:02.816|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001455179044
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001455179044]
+10/17 05:41:02.816|END         |
+10/17 05:41:02.816|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.816|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.818|END         |
+10/17 05:41:02.818|BRANCH_END  |
+10/17 05:41:02.818|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001455179044
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001455179044]
+10/17 05:41:02.818|END         |
+10/17 05:41:02.818|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001308949701
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001308949701]
+10/17 05:41:02.818|END         |
+10/17 05:41:02.818|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.818|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.820|END         |
+10/17 05:41:02.820|BRANCH_END  |
+10/17 05:41:02.820|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001308949701
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001308949701]
+10/17 05:41:02.820|END         |
+10/17 05:41:02.820|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=COP0000007563357
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[COP0000007563357]
+10/17 05:41:02.820|END         |
+10/17 05:41:02.820|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.820|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.822|END         |
+10/17 05:41:02.822|BRANCH_END  |
+10/17 05:41:02.822|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=COP0000007563357
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[COP0000007563357]
+10/17 05:41:02.822|END         |
+10/17 05:41:02.822|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001213670592
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001213670592]
+10/17 05:41:02.823|END         |
+10/17 05:41:02.823|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.823|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.825|END         |
+10/17 05:41:02.825|BRANCH_END  |
+10/17 05:41:02.825|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001213670592
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001213670592]
+10/17 05:41:02.825|END         |
+10/17 05:41:02.825|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001143740174
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001143740174]
+10/17 05:41:02.825|END         |
+10/17 05:41:02.825|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.825|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.827|END         |
+10/17 05:41:02.827|BRANCH_END  |
+10/17 05:41:02.827|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001143740174
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001143740174]
+10/17 05:41:02.827|END         |
+10/17 05:41:02.827|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001416588885
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001416588885]
+10/17 05:41:02.827|END         |
+10/17 05:41:02.827|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.827|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.829|END         |
+10/17 05:41:02.829|BRANCH_END  |
+10/17 05:41:02.829|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001416588885
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001416588885]
+10/17 05:41:02.829|END         |
+10/17 05:41:02.829|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001390255605
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001390255605]
+10/17 05:41:02.829|END         |
+10/17 05:41:02.829|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.829|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.831|END         |
+10/17 05:41:02.831|BRANCH_END  |
+10/17 05:41:02.831|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001390255605
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001390255605]
+10/17 05:41:02.831|END         |
+10/17 05:41:02.831|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001112054448
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001112054448]
+10/17 05:41:02.831|END         |
+10/17 05:41:02.831|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.831|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.833|END         |
+10/17 05:41:02.833|BRANCH_END  |
+10/17 05:41:02.833|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001112054448
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001112054448]
+10/17 05:41:02.833|END         |
+10/17 05:41:02.833|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001142159502
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001142159502]
+10/17 05:41:02.833|END         |
+10/17 05:41:02.833|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.833|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.835|END         |
+10/17 05:41:02.835|BRANCH_END  |
+10/17 05:41:02.835|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001142159502
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001142159502]
+10/17 05:41:02.835|END         |
+10/17 05:41:02.835|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001183079579
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001183079579]
+10/17 05:41:02.835|END         |
+10/17 05:41:02.835|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.835|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.837|END         |
+10/17 05:41:02.837|BRANCH_END  |
+10/17 05:41:02.837|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001183079579
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001183079579]
+10/17 05:41:02.837|END         |
+10/17 05:41:02.837|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001469686668
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001469686668]
+10/17 05:41:02.837|END         |
+10/17 05:41:02.837|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.837|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.839|END         |
+10/17 05:41:02.839|BRANCH_END  |
+10/17 05:41:02.839|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001469686668
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001469686668]
+10/17 05:41:02.839|END         |
+10/17 05:41:02.839|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001273553941
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001273553941]
+10/17 05:41:02.839|END         |
+10/17 05:41:02.839|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.839|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.841|END         |
+10/17 05:41:02.841|BRANCH_END  |
+10/17 05:41:02.841|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001273553941
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001273553941]
+10/17 05:41:02.841|END         |
+10/17 05:41:02.841|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001106397315
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001106397315]
+10/17 05:41:02.841|END         |
+10/17 05:41:02.841|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.841|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.843|END         |
+10/17 05:41:02.843|BRANCH_END  |
+10/17 05:41:02.843|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001106397315
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001106397315]
+10/17 05:41:02.843|END         |
+10/17 05:41:02.843|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001462059568
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001462059568]
+10/17 05:41:02.843|END         |
+10/17 05:41:02.843|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.843|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.845|END         |
+10/17 05:41:02.845|BRANCH_END  |
+10/17 05:41:02.845|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001462059568
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001462059568]
+10/17 05:41:02.845|END         |
+10/17 05:41:02.845|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001161506769
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001161506769]
+10/17 05:41:02.845|END         |
+10/17 05:41:02.845|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.845|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.847|END         |
+10/17 05:41:02.847|BRANCH_END  |
+10/17 05:41:02.847|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001161506769
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001161506769]
+10/17 05:41:02.847|END         |
+10/17 05:41:02.847|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001470249678
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001470249678]
+10/17 05:41:02.848|END         |
+10/17 05:41:02.848|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.848|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.850|END         |
+10/17 05:41:02.850|BRANCH_END  |
+10/17 05:41:02.850|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001470249678
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001470249678]
+10/17 05:41:02.850|END         |
+10/17 05:41:02.850|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001252449517
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001252449517]
+10/17 05:41:02.850|END         |
+10/17 05:41:02.850|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.850|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.852|END         |
+10/17 05:41:02.852|BRANCH_END  |
+10/17 05:41:02.852|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001252449517
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001252449517]
+10/17 05:41:02.852|END         |
+10/17 05:41:02.852|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001252449517
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001252449517]
+10/17 05:41:02.852|END         |
+10/17 05:41:02.852|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=false
+10/17 05:41:02.852|BRANCH_END  |
+10/17 05:41:02.852|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001252449517
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001252449517]
+10/17 05:41:02.852|END         |
+10/17 05:41:02.852|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001161506769
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001161506769]
+10/17 05:41:02.852|END         |
+10/17 05:41:02.852|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.852|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.854|END         |
+10/17 05:41:02.854|BRANCH_END  |
+10/17 05:41:02.854|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001161506769
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001161506769]
+10/17 05:41:02.854|END         |
+10/17 05:41:02.854|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001161506769
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001161506769]
+10/17 05:41:02.854|END         |
+10/17 05:41:02.854|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=false
+10/17 05:41:02.854|BRANCH_END  |
+10/17 05:41:02.854|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001161506769
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001161506769]
+10/17 05:41:02.854|END         |
+10/17 05:41:02.854|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001465043809
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001465043809]
+10/17 05:41:02.854|END         |
+10/17 05:41:02.854|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.854|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.856|END         |
+10/17 05:41:02.856|BRANCH_END  |
+10/17 05:41:02.856|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001465043809
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001465043809]
+10/17 05:41:02.856|END         |
+10/17 05:41:02.856|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001467500607
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001467500607]
+10/17 05:41:02.856|END         |
+10/17 05:41:02.856|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.856|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.858|END         |
+10/17 05:41:02.858|BRANCH_END  |
+10/17 05:41:02.858|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001467500607
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001467500607]
+10/17 05:41:02.858|END         |
+10/17 05:41:02.858|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001455915031
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001455915031]
+10/17 05:41:02.858|END         |
+10/17 05:41:02.858|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.858|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.860|END         |
+10/17 05:41:02.860|BRANCH_END  |
+10/17 05:41:02.860|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001455915031
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001455915031]
+10/17 05:41:02.860|END         |
+10/17 05:41:02.860|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001449418883
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001449418883]
+10/17 05:41:02.860|END         |
+10/17 05:41:02.860|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.860|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.862|END         |
+10/17 05:41:02.862|BRANCH_END  |
+10/17 05:41:02.862|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001449418883
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001449418883]
+10/17 05:41:02.862|END         |
+10/17 05:41:02.862|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001472171748
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001472171748]
+10/17 05:41:02.862|END         |
+10/17 05:41:02.862|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.862|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.864|END         |
+10/17 05:41:02.864|BRANCH_END  |
+10/17 05:41:02.864|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001472171748
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001472171748]
+10/17 05:41:02.864|END         |
+10/17 05:41:02.864|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001434530507
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001434530507]
+10/17 05:41:02.864|END         |
+10/17 05:41:02.864|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.864|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.866|END         |
+10/17 05:41:02.866|BRANCH_END  |
+10/17 05:41:02.866|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001434530507
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001434530507]
+10/17 05:41:02.867|END         |
+10/17 05:41:02.867|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001442752779
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001442752779]
+10/17 05:41:02.867|END         |
+10/17 05:41:02.867|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.867|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.869|END         |
+10/17 05:41:02.869|BRANCH_END  |
+10/17 05:41:02.869|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001442752779
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001442752779]
+10/17 05:41:02.869|END         |
+10/17 05:41:02.869|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001215128718
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001215128718]
+10/17 05:41:02.869|END         |
+10/17 05:41:02.869|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.869|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.871|END         |
+10/17 05:41:02.871|BRANCH_END  |
+10/17 05:41:02.871|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001215128718
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001215128718]
+10/17 05:41:02.871|END         |
+10/17 05:41:02.871|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001360891130
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001360891130]
+10/17 05:41:02.871|END         |
+10/17 05:41:02.871|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.871|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.873|END         |
+10/17 05:41:02.873|BRANCH_END  |
+10/17 05:41:02.873|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001360891130
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001360891130]
+10/17 05:41:02.873|END         |
+10/17 05:41:02.873|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001433707535
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001433707535]
+10/17 05:41:02.873|END         |
+10/17 05:41:02.873|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.873|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.875|END         |
+10/17 05:41:02.875|BRANCH_END  |
+10/17 05:41:02.875|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001433707535
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001433707535]
+10/17 05:41:02.875|END         |
+10/17 05:41:02.875|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001461129507
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001461129507]
+10/17 05:41:02.875|END         |
+10/17 05:41:02.875|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.875|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.877|END         |
+10/17 05:41:02.877|BRANCH_END  |
+10/17 05:41:02.877|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001461129507
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001461129507]
+10/17 05:41:02.877|END         |
+10/17 05:41:02.877|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001464171954
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001464171954]
+10/17 05:41:02.877|END         |
+10/17 05:41:02.877|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.877|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.879|END         |
+10/17 05:41:02.879|BRANCH_END  |
+10/17 05:41:02.879|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001464171954
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001464171954]
+10/17 05:41:02.879|END         |
+10/17 05:41:02.879|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001466278637
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001466278637]
+10/17 05:41:02.879|END         |
+10/17 05:41:02.879|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.879|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.881|END         |
+10/17 05:41:02.881|BRANCH_END  |
+10/17 05:41:02.881|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001466278637
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001466278637]
+10/17 05:41:02.881|END         |
+10/17 05:41:02.881|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=COP0000007563357
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[COP0000007563357]
+10/17 05:41:02.881|END         |
+10/17 05:41:02.881|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.881|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.883|END         |
+10/17 05:41:02.883|BRANCH_END  |
+10/17 05:41:02.883|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=COP0000007563357
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[COP0000007563357]
+10/17 05:41:02.883|END         |
+10/17 05:41:02.883|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001455179044
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001455179044]
+10/17 05:41:02.883|END         |
+10/17 05:41:02.883|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.883|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.885|END         |
+10/17 05:41:02.885|BRANCH_END  |
+10/17 05:41:02.885|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001455179044
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001455179044]
+10/17 05:41:02.885|END         |
+10/17 05:41:02.885|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001463791887
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001463791887]
+10/17 05:41:02.886|END         |
+10/17 05:41:02.886|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.886|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.888|END         |
+10/17 05:41:02.888|BRANCH_END  |
+10/17 05:41:02.888|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001463791887
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001463791887]
+10/17 05:41:02.888|END         |
+10/17 05:41:02.888|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001186053194
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001186053194]
+10/17 05:41:02.888|END         |
+10/17 05:41:02.888|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.888|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.890|END         |
+10/17 05:41:02.890|BRANCH_END  |
+10/17 05:41:02.890|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001186053194
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001186053194]
+10/17 05:41:02.890|END         |
+10/17 05:41:02.890|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001463791887
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001463791887]
+10/17 05:41:02.890|END         |
+10/17 05:41:02.890|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.890|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.892|END         |
+10/17 05:41:02.892|BRANCH_END  |
+10/17 05:41:02.892|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001463791887
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001463791887]
+10/17 05:41:02.892|END         |
+10/17 05:41:02.892|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001190739954
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001190739954]
+10/17 05:41:02.892|END         |
+10/17 05:41:02.892|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.892|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.894|END         |
+10/17 05:41:02.894|BRANCH_END  |
+10/17 05:41:02.894|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001190739954
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001190739954]
+10/17 05:41:02.894|END         |
+10/17 05:41:02.894|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001194433438
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001194433438]
+10/17 05:41:02.894|END         |
+10/17 05:41:02.894|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.894|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.896|END         |
+10/17 05:41:02.896|BRANCH_END  |
+10/17 05:41:02.896|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001194433438
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001194433438]
+10/17 05:41:02.896|END         |
+10/17 05:41:02.896|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001194433438
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001194433438]
+10/17 05:41:02.896|END         |
+10/17 05:41:02.896|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=false
+10/17 05:41:02.896|BRANCH_END  |
+10/17 05:41:02.896|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001194433438
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001194433438]
+10/17 05:41:02.896|END         |
+10/17 05:41:02.896|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001472536509
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001472536509]
+10/17 05:41:02.896|END         |
+10/17 05:41:02.896|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.896|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.898|END         |
+10/17 05:41:02.898|BRANCH_END  |
+10/17 05:41:02.898|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001472536509
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001472536509]
+10/17 05:41:02.898|END         |
+10/17 05:41:02.898|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001237102918
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001237102918]
+10/17 05:41:02.898|END         |
+10/17 05:41:02.898|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.898|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.900|END         |
+10/17 05:41:02.900|BRANCH_END  |
+10/17 05:41:02.900|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001237102918
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001237102918]
+10/17 05:41:02.900|END         |
+10/17 05:41:02.900|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001161558805
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001161558805]
+10/17 05:41:02.900|END         |
+10/17 05:41:02.900|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.900|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.902|END         |
+10/17 05:41:02.902|BRANCH_END  |
+10/17 05:41:02.902|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001161558805
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001161558805]
+10/17 05:41:02.902|END         |
+10/17 05:41:02.902|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001308949701
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001308949701]
+10/17 05:41:02.902|END         |
+10/17 05:41:02.902|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.902|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.904|END         |
+10/17 05:41:02.904|BRANCH_END  |
+10/17 05:41:02.904|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001308949701
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001308949701]
+10/17 05:41:02.904|END         |
+10/17 05:41:02.904|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001389828797
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001389828797]
+10/17 05:41:02.905|END         |
+10/17 05:41:02.905|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.905|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.907|END         |
+10/17 05:41:02.907|BRANCH_END  |
+10/17 05:41:02.907|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001389828797
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001389828797]
+10/17 05:41:02.907|END         |
+10/17 05:41:02.907|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001327172081
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001327172081]
+10/17 05:41:02.907|END         |
+10/17 05:41:02.907|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.907|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.909|END         |
+10/17 05:41:02.909|BRANCH_END  |
+10/17 05:41:02.909|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001327172081
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001327172081]
+10/17 05:41:02.909|END         |
+10/17 05:41:02.909|START       |NAME=契約者ID_現在 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_現在, VALUE=CAF0001472510769
+--/-- --:--:--.---|INFO        |契約者ID_現在(String) 入力=[CAF0001472510769]
+10/17 05:41:02.909|END         |
+10/17 05:41:02.909|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=契約者ID_現在 != 前回, RESULT=true
+10/17 05:41:02.909|START       |NAME=csv_write [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.911|END         |
+10/17 05:41:02.911|BRANCH_END  |
+10/17 05:41:02.911|START       |NAME=契約者ID_前回 
+--/-- --:--:--.---|VARIABLE    |NAME=契約者ID_前回, VALUE=CAF0001472510769
+--/-- --:--:--.---|INFO        |契約者ID_前回(String) 入力=[CAF0001472510769]
+10/17 05:41:02.911|END         |
+10/17 05:41:02.911|LOOP_END    |COUNT=95
+--/-- --:--:--.---|INFO        |[顧客ID、設置場所住所コードを取得(com/002_EC2DB_顧客ID、設置場所住所コード取得@6ff2962b)]PSP処理を終了しました。
+10/17 05:41:02.912|START       |NAME=mapping(1) 
+10/17 05:41:02.917|END         |
+10/17 05:41:02.917|START       |NAME=insertファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[95]行のデータを挿入しました。
+10/17 05:41:02.922|END         |
+10/17 05:41:02.922|START       |NAME=エラーデータ抽出 
+10/17 05:41:02.925|END         |
+10/17 05:41:02.925|LOOP_START  |NAME=エラー件数loop
+10/17 05:41:02.925|START       |NAME=mapping(2) 
+10/17 05:41:02.925|END         |
+10/17 05:41:02.925|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.929|END         |
+10/17 05:41:02.929|START       |NAME=mapping(2) 
+10/17 05:41:02.929|END         |
+10/17 05:41:02.929|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.932|END         |
+10/17 05:41:02.932|START       |NAME=mapping(2) 
+10/17 05:41:02.932|END         |
+10/17 05:41:02.932|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.935|END         |
+10/17 05:41:02.935|START       |NAME=mapping(2) 
+10/17 05:41:02.935|END         |
+10/17 05:41:02.935|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.938|END         |
+10/17 05:41:02.938|START       |NAME=mapping(2) 
+10/17 05:41:02.938|END         |
+10/17 05:41:02.938|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.941|END         |
+10/17 05:41:02.941|START       |NAME=mapping(2) 
+10/17 05:41:02.941|END         |
+10/17 05:41:02.941|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.944|END         |
+10/17 05:41:02.944|START       |NAME=mapping(2) 
+10/17 05:41:02.944|END         |
+10/17 05:41:02.944|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.947|END         |
+10/17 05:41:02.947|START       |NAME=mapping(2) 
+10/17 05:41:02.948|END         |
+10/17 05:41:02.948|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.950|END         |
+10/17 05:41:02.950|START       |NAME=mapping(2) 
+10/17 05:41:02.951|END         |
+10/17 05:41:02.951|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.953|END         |
+10/17 05:41:02.953|START       |NAME=mapping(2) 
+10/17 05:41:02.954|END         |
+10/17 05:41:02.954|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.956|END         |
+10/17 05:41:02.956|START       |NAME=mapping(2) 
+10/17 05:41:02.956|END         |
+10/17 05:41:02.956|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.958|END         |
+10/17 05:41:02.958|START       |NAME=mapping(2) 
+10/17 05:41:02.959|END         |
+10/17 05:41:02.959|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.961|END         |
+10/17 05:41:02.961|START       |NAME=mapping(2) 
+10/17 05:41:02.961|END         |
+10/17 05:41:02.961|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.963|END         |
+10/17 05:41:02.963|START       |NAME=mapping(2) 
+10/17 05:41:02.963|END         |
+10/17 05:41:02.963|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.965|END         |
+10/17 05:41:02.965|START       |NAME=mapping(2) 
+10/17 05:41:02.965|END         |
+10/17 05:41:02.965|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.968|END         |
+10/17 05:41:02.968|START       |NAME=mapping(2) 
+10/17 05:41:02.968|END         |
+10/17 05:41:02.968|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.970|END         |
+10/17 05:41:02.970|START       |NAME=mapping(2) 
+10/17 05:41:02.970|END         |
+10/17 05:41:02.970|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.972|END         |
+10/17 05:41:02.972|START       |NAME=mapping(2) 
+10/17 05:41:02.972|END         |
+10/17 05:41:02.972|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.974|END         |
+10/17 05:41:02.974|START       |NAME=mapping(2) 
+10/17 05:41:02.975|END         |
+10/17 05:41:02.975|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.977|END         |
+10/17 05:41:02.977|START       |NAME=mapping(2) 
+10/17 05:41:02.977|END         |
+10/17 05:41:02.977|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.979|END         |
+10/17 05:41:02.979|START       |NAME=mapping(2) 
+10/17 05:41:02.979|END         |
+10/17 05:41:02.979|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.981|END         |
+10/17 05:41:02.981|START       |NAME=mapping(2) 
+10/17 05:41:02.981|END         |
+10/17 05:41:02.981|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.983|END         |
+10/17 05:41:02.983|START       |NAME=mapping(2) 
+10/17 05:41:02.983|END         |
+10/17 05:41:02.983|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.985|END         |
+10/17 05:41:02.986|START       |NAME=mapping(2) 
+10/17 05:41:02.986|END         |
+10/17 05:41:02.986|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.988|END         |
+10/17 05:41:02.988|START       |NAME=mapping(2) 
+10/17 05:41:02.988|END         |
+10/17 05:41:02.988|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.990|END         |
+10/17 05:41:02.990|START       |NAME=mapping(2) 
+10/17 05:41:02.990|END         |
+10/17 05:41:02.990|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.992|END         |
+10/17 05:41:02.992|START       |NAME=mapping(2) 
+10/17 05:41:02.992|END         |
+10/17 05:41:02.992|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.994|END         |
+10/17 05:41:02.994|START       |NAME=mapping(2) 
+10/17 05:41:02.995|END         |
+10/17 05:41:02.995|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.997|END         |
+10/17 05:41:02.997|START       |NAME=mapping(2) 
+10/17 05:41:02.997|END         |
+10/17 05:41:02.997|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:02.999|END         |
+10/17 05:41:02.999|START       |NAME=mapping(2) 
+10/17 05:41:02.999|END         |
+10/17 05:41:02.999|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.001|END         |
+10/17 05:41:03.001|START       |NAME=mapping(2) 
+10/17 05:41:03.001|END         |
+10/17 05:41:03.001|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.003|END         |
+10/17 05:41:03.003|START       |NAME=mapping(2) 
+10/17 05:41:03.004|END         |
+10/17 05:41:03.004|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.006|END         |
+10/17 05:41:03.006|START       |NAME=mapping(2) 
+10/17 05:41:03.006|END         |
+10/17 05:41:03.006|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.008|END         |
+10/17 05:41:03.008|START       |NAME=mapping(2) 
+10/17 05:41:03.008|END         |
+10/17 05:41:03.008|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.010|END         |
+10/17 05:41:03.010|START       |NAME=mapping(2) 
+10/17 05:41:03.010|END         |
+10/17 05:41:03.010|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.012|END         |
+10/17 05:41:03.012|START       |NAME=mapping(2) 
+10/17 05:41:03.012|END         |
+10/17 05:41:03.012|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.014|END         |
+10/17 05:41:03.014|START       |NAME=mapping(2) 
+10/17 05:41:03.015|END         |
+10/17 05:41:03.015|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.017|END         |
+10/17 05:41:03.017|START       |NAME=mapping(2) 
+10/17 05:41:03.018|END         |
+10/17 05:41:03.018|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.020|END         |
+10/17 05:41:03.020|START       |NAME=mapping(2) 
+10/17 05:41:03.020|END         |
+10/17 05:41:03.020|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.023|END         |
+10/17 05:41:03.023|START       |NAME=mapping(2) 
+10/17 05:41:03.023|END         |
+10/17 05:41:03.023|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.026|END         |
+10/17 05:41:03.026|START       |NAME=mapping(2) 
+10/17 05:41:03.026|END         |
+10/17 05:41:03.026|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.029|END         |
+10/17 05:41:03.029|START       |NAME=mapping(2) 
+10/17 05:41:03.029|END         |
+10/17 05:41:03.029|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.032|END         |
+10/17 05:41:03.032|START       |NAME=mapping(2) 
+10/17 05:41:03.032|END         |
+10/17 05:41:03.032|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.035|END         |
+10/17 05:41:03.035|START       |NAME=mapping(2) 
+10/17 05:41:03.035|END         |
+10/17 05:41:03.035|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.038|END         |
+10/17 05:41:03.038|START       |NAME=mapping(2) 
+10/17 05:41:03.038|END         |
+10/17 05:41:03.038|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.041|END         |
+10/17 05:41:03.041|START       |NAME=mapping(2) 
+10/17 05:41:03.041|END         |
+10/17 05:41:03.041|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.044|END         |
+10/17 05:41:03.044|START       |NAME=mapping(2) 
+10/17 05:41:03.044|END         |
+10/17 05:41:03.044|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.047|END         |
+10/17 05:41:03.047|START       |NAME=mapping(2) 
+10/17 05:41:03.047|END         |
+10/17 05:41:03.047|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.050|END         |
+10/17 05:41:03.050|START       |NAME=mapping(2) 
+10/17 05:41:03.050|END         |
+10/17 05:41:03.050|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.053|END         |
+10/17 05:41:03.053|START       |NAME=mapping(2) 
+10/17 05:41:03.053|END         |
+10/17 05:41:03.053|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.055|END         |
+10/17 05:41:03.055|START       |NAME=mapping(2) 
+10/17 05:41:03.056|END         |
+10/17 05:41:03.056|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.058|END         |
+10/17 05:41:03.058|START       |NAME=mapping(2) 
+10/17 05:41:03.059|END         |
+10/17 05:41:03.059|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.061|END         |
+10/17 05:41:03.061|START       |NAME=mapping(2) 
+10/17 05:41:03.062|END         |
+10/17 05:41:03.062|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.064|END         |
+10/17 05:41:03.064|START       |NAME=mapping(2) 
+10/17 05:41:03.065|END         |
+10/17 05:41:03.065|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.067|END         |
+10/17 05:41:03.067|START       |NAME=mapping(2) 
+10/17 05:41:03.068|END         |
+10/17 05:41:03.068|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.070|END         |
+10/17 05:41:03.070|START       |NAME=mapping(2) 
+10/17 05:41:03.070|END         |
+10/17 05:41:03.070|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.073|END         |
+10/17 05:41:03.073|START       |NAME=mapping(2) 
+10/17 05:41:03.073|END         |
+10/17 05:41:03.073|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.076|END         |
+10/17 05:41:03.076|START       |NAME=mapping(2) 
+10/17 05:41:03.076|END         |
+10/17 05:41:03.076|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.079|END         |
+10/17 05:41:03.079|START       |NAME=mapping(2) 
+10/17 05:41:03.079|END         |
+10/17 05:41:03.079|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.082|END         |
+10/17 05:41:03.082|START       |NAME=mapping(2) 
+10/17 05:41:03.082|END         |
+10/17 05:41:03.082|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.085|END         |
+10/17 05:41:03.085|START       |NAME=mapping(2) 
+10/17 05:41:03.085|END         |
+10/17 05:41:03.085|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.088|END         |
+10/17 05:41:03.088|START       |NAME=mapping(2) 
+10/17 05:41:03.088|END         |
+10/17 05:41:03.088|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.091|END         |
+10/17 05:41:03.091|START       |NAME=mapping(2) 
+10/17 05:41:03.091|END         |
+10/17 05:41:03.091|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.094|END         |
+10/17 05:41:03.094|START       |NAME=mapping(2) 
+10/17 05:41:03.094|END         |
+10/17 05:41:03.094|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.097|END         |
+10/17 05:41:03.097|START       |NAME=mapping(2) 
+10/17 05:41:03.097|END         |
+10/17 05:41:03.097|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.100|END         |
+10/17 05:41:03.100|START       |NAME=mapping(2) 
+10/17 05:41:03.100|END         |
+10/17 05:41:03.100|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.103|END         |
+10/17 05:41:03.103|START       |NAME=mapping(2) 
+10/17 05:41:03.103|END         |
+10/17 05:41:03.103|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.106|END         |
+10/17 05:41:03.106|START       |NAME=mapping(2) 
+10/17 05:41:03.106|END         |
+10/17 05:41:03.106|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.109|END         |
+10/17 05:41:03.109|START       |NAME=mapping(2) 
+10/17 05:41:03.109|END         |
+10/17 05:41:03.109|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.112|END         |
+10/17 05:41:03.112|START       |NAME=mapping(2) 
+10/17 05:41:03.112|END         |
+10/17 05:41:03.112|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.115|END         |
+10/17 05:41:03.115|START       |NAME=mapping(2) 
+10/17 05:41:03.115|END         |
+10/17 05:41:03.115|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.118|END         |
+10/17 05:41:03.118|START       |NAME=mapping(2) 
+10/17 05:41:03.118|END         |
+10/17 05:41:03.118|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.121|END         |
+10/17 05:41:03.121|START       |NAME=mapping(2) 
+10/17 05:41:03.121|END         |
+10/17 05:41:03.121|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.124|END         |
+10/17 05:41:03.124|START       |NAME=mapping(2) 
+10/17 05:41:03.124|END         |
+10/17 05:41:03.124|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.127|END         |
+10/17 05:41:03.127|START       |NAME=mapping(2) 
+10/17 05:41:03.127|END         |
+10/17 05:41:03.127|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.130|END         |
+10/17 05:41:03.130|START       |NAME=mapping(2) 
+10/17 05:41:03.130|END         |
+10/17 05:41:03.130|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.133|END         |
+10/17 05:41:03.133|START       |NAME=mapping(2) 
+10/17 05:41:03.133|END         |
+10/17 05:41:03.133|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.136|END         |
+10/17 05:41:03.136|START       |NAME=mapping(2) 
+10/17 05:41:03.136|END         |
+10/17 05:41:03.136|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.139|END         |
+10/17 05:41:03.139|START       |NAME=mapping(2) 
+10/17 05:41:03.139|END         |
+10/17 05:41:03.139|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.142|END         |
+10/17 05:41:03.142|START       |NAME=mapping(2) 
+10/17 05:41:03.142|END         |
+10/17 05:41:03.142|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.145|END         |
+10/17 05:41:03.145|START       |NAME=mapping(2) 
+10/17 05:41:03.145|END         |
+10/17 05:41:03.145|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.148|END         |
+10/17 05:41:03.148|START       |NAME=mapping(2) 
+10/17 05:41:03.148|END         |
+10/17 05:41:03.148|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.151|END         |
+10/17 05:41:03.151|START       |NAME=mapping(2) 
+10/17 05:41:03.151|END         |
+10/17 05:41:03.151|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.154|END         |
+10/17 05:41:03.154|START       |NAME=mapping(2) 
+10/17 05:41:03.154|END         |
+10/17 05:41:03.154|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.157|END         |
+10/17 05:41:03.157|START       |NAME=mapping(2) 
+10/17 05:41:03.157|END         |
+10/17 05:41:03.157|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.160|END         |
+10/17 05:41:03.160|START       |NAME=mapping(2) 
+10/17 05:41:03.160|END         |
+10/17 05:41:03.160|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.163|END         |
+10/17 05:41:03.163|START       |NAME=mapping(2) 
+10/17 05:41:03.163|END         |
+10/17 05:41:03.163|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.166|END         |
+10/17 05:41:03.166|START       |NAME=mapping(2) 
+10/17 05:41:03.166|END         |
+10/17 05:41:03.166|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.169|END         |
+10/17 05:41:03.169|START       |NAME=mapping(2) 
+10/17 05:41:03.169|END         |
+10/17 05:41:03.169|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.172|END         |
+10/17 05:41:03.172|START       |NAME=mapping(2) 
+10/17 05:41:03.172|END         |
+10/17 05:41:03.172|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.175|END         |
+10/17 05:41:03.175|START       |NAME=mapping(2) 
+10/17 05:41:03.175|END         |
+10/17 05:41:03.175|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.178|END         |
+10/17 05:41:03.178|START       |NAME=mapping(2) 
+10/17 05:41:03.178|END         |
+10/17 05:41:03.178|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.181|END         |
+10/17 05:41:03.181|START       |NAME=mapping(2) 
+10/17 05:41:03.181|END         |
+10/17 05:41:03.181|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.184|END         |
+10/17 05:41:03.184|START       |NAME=mapping(2) 
+10/17 05:41:03.184|END         |
+10/17 05:41:03.184|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.187|END         |
+10/17 05:41:03.187|START       |NAME=mapping(2) 
+10/17 05:41:03.187|END         |
+10/17 05:41:03.187|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.190|END         |
+10/17 05:41:03.190|START       |NAME=mapping(2) 
+10/17 05:41:03.190|END         |
+10/17 05:41:03.190|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.193|END         |
+10/17 05:41:03.193|START       |NAME=mapping(2) 
+10/17 05:41:03.193|END         |
+10/17 05:41:03.193|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.196|END         |
+10/17 05:41:03.196|START       |NAME=mapping(2) 
+10/17 05:41:03.196|END         |
+10/17 05:41:03.196|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.198|END         |
+10/17 05:41:03.199|START       |NAME=mapping(2) 
+10/17 05:41:03.199|END         |
+10/17 05:41:03.199|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.201|END         |
+10/17 05:41:03.201|START       |NAME=mapping(2) 
+10/17 05:41:03.202|END         |
+10/17 05:41:03.202|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.203|END         |
+10/17 05:41:03.204|START       |NAME=mapping(2) 
+10/17 05:41:03.204|END         |
+10/17 05:41:03.204|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.206|END         |
+10/17 05:41:03.206|START       |NAME=mapping(2) 
+10/17 05:41:03.206|END         |
+10/17 05:41:03.206|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.208|END         |
+10/17 05:41:03.208|START       |NAME=mapping(2) 
+10/17 05:41:03.208|END         |
+10/17 05:41:03.208|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.210|END         |
+10/17 05:41:03.210|START       |NAME=mapping(2) 
+10/17 05:41:03.210|END         |
+10/17 05:41:03.210|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.212|END         |
+10/17 05:41:03.212|START       |NAME=mapping(2) 
+10/17 05:41:03.212|END         |
+10/17 05:41:03.212|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.214|END         |
+10/17 05:41:03.214|START       |NAME=mapping(2) 
+10/17 05:41:03.215|END         |
+10/17 05:41:03.215|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.217|END         |
+10/17 05:41:03.217|START       |NAME=mapping(2) 
+10/17 05:41:03.217|END         |
+10/17 05:41:03.217|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.219|END         |
+10/17 05:41:03.219|START       |NAME=mapping(2) 
+10/17 05:41:03.219|END         |
+10/17 05:41:03.219|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.221|END         |
+10/17 05:41:03.221|START       |NAME=mapping(2) 
+10/17 05:41:03.221|END         |
+10/17 05:41:03.221|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.223|END         |
+10/17 05:41:03.223|START       |NAME=mapping(2) 
+10/17 05:41:03.224|END         |
+10/17 05:41:03.224|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.226|END         |
+10/17 05:41:03.226|START       |NAME=mapping(2) 
+10/17 05:41:03.226|END         |
+10/17 05:41:03.226|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.228|END         |
+10/17 05:41:03.228|START       |NAME=mapping(2) 
+10/17 05:41:03.228|END         |
+10/17 05:41:03.228|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.230|END         |
+10/17 05:41:03.230|START       |NAME=mapping(2) 
+10/17 05:41:03.230|END         |
+10/17 05:41:03.230|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.232|END         |
+10/17 05:41:03.232|START       |NAME=mapping(2) 
+10/17 05:41:03.233|END         |
+10/17 05:41:03.233|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.235|END         |
+10/17 05:41:03.235|START       |NAME=mapping(2) 
+10/17 05:41:03.235|END         |
+10/17 05:41:03.235|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.237|END         |
+10/17 05:41:03.237|START       |NAME=mapping(2) 
+10/17 05:41:03.237|END         |
+10/17 05:41:03.237|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.239|END         |
+10/17 05:41:03.239|START       |NAME=mapping(2) 
+10/17 05:41:03.239|END         |
+10/17 05:41:03.239|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.242|END         |
+10/17 05:41:03.242|START       |NAME=mapping(2) 
+10/17 05:41:03.242|END         |
+10/17 05:41:03.242|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.244|END         |
+10/17 05:41:03.244|START       |NAME=mapping(2) 
+10/17 05:41:03.244|END         |
+10/17 05:41:03.244|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.246|END         |
+10/17 05:41:03.246|START       |NAME=mapping(2) 
+10/17 05:41:03.246|END         |
+10/17 05:41:03.246|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.248|END         |
+10/17 05:41:03.248|START       |NAME=mapping(2) 
+10/17 05:41:03.249|END         |
+10/17 05:41:03.249|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.251|END         |
+10/17 05:41:03.251|START       |NAME=mapping(2) 
+10/17 05:41:03.251|END         |
+10/17 05:41:03.251|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.253|END         |
+10/17 05:41:03.253|START       |NAME=mapping(2) 
+10/17 05:41:03.253|END         |
+10/17 05:41:03.253|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.255|END         |
+10/17 05:41:03.255|START       |NAME=mapping(2) 
+10/17 05:41:03.255|END         |
+10/17 05:41:03.255|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.257|END         |
+10/17 05:41:03.257|START       |NAME=mapping(2) 
+10/17 05:41:03.258|END         |
+10/17 05:41:03.258|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.260|END         |
+10/17 05:41:03.260|START       |NAME=mapping(2) 
+10/17 05:41:03.260|END         |
+10/17 05:41:03.260|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.262|END         |
+10/17 05:41:03.262|START       |NAME=mapping(2) 
+10/17 05:41:03.262|END         |
+10/17 05:41:03.262|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.264|END         |
+10/17 05:41:03.264|START       |NAME=mapping(2) 
+10/17 05:41:03.264|END         |
+10/17 05:41:03.264|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.266|END         |
+10/17 05:41:03.266|START       |NAME=mapping(2) 
+10/17 05:41:03.267|END         |
+10/17 05:41:03.267|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.269|END         |
+10/17 05:41:03.269|START       |NAME=mapping(2) 
+10/17 05:41:03.269|END         |
+10/17 05:41:03.269|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.271|END         |
+10/17 05:41:03.271|START       |NAME=mapping(2) 
+10/17 05:41:03.271|END         |
+10/17 05:41:03.271|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.273|END         |
+10/17 05:41:03.273|START       |NAME=mapping(2) 
+10/17 05:41:03.273|END         |
+10/17 05:41:03.273|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.275|END         |
+10/17 05:41:03.275|START       |NAME=mapping(2) 
+10/17 05:41:03.275|END         |
+10/17 05:41:03.276|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.278|END         |
+10/17 05:41:03.278|START       |NAME=mapping(2) 
+10/17 05:41:03.278|END         |
+10/17 05:41:03.278|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.280|END         |
+10/17 05:41:03.280|START       |NAME=mapping(2) 
+10/17 05:41:03.280|END         |
+10/17 05:41:03.280|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.282|END         |
+10/17 05:41:03.282|START       |NAME=mapping(2) 
+10/17 05:41:03.282|END         |
+10/17 05:41:03.282|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.284|END         |
+10/17 05:41:03.284|START       |NAME=mapping(2) 
+10/17 05:41:03.284|END         |
+10/17 05:41:03.284|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.286|END         |
+10/17 05:41:03.286|START       |NAME=mapping(2) 
+10/17 05:41:03.287|END         |
+10/17 05:41:03.287|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.289|END         |
+10/17 05:41:03.289|START       |NAME=mapping(2) 
+10/17 05:41:03.289|END         |
+10/17 05:41:03.289|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.291|END         |
+10/17 05:41:03.291|START       |NAME=mapping(2) 
+10/17 05:41:03.291|END         |
+10/17 05:41:03.291|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.293|END         |
+10/17 05:41:03.293|START       |NAME=mapping(2) 
+10/17 05:41:03.293|END         |
+10/17 05:41:03.293|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.295|END         |
+10/17 05:41:03.295|START       |NAME=mapping(2) 
+10/17 05:41:03.295|END         |
+10/17 05:41:03.295|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.298|END         |
+10/17 05:41:03.298|START       |NAME=mapping(2) 
+10/17 05:41:03.298|END         |
+10/17 05:41:03.298|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.300|END         |
+10/17 05:41:03.300|START       |NAME=mapping(2) 
+10/17 05:41:03.300|END         |
+10/17 05:41:03.300|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.302|END         |
+10/17 05:41:03.302|START       |NAME=mapping(2) 
+10/17 05:41:03.302|END         |
+10/17 05:41:03.302|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.304|END         |
+10/17 05:41:03.304|START       |NAME=mapping(2) 
+10/17 05:41:03.305|END         |
+10/17 05:41:03.305|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.307|END         |
+10/17 05:41:03.307|START       |NAME=mapping(2) 
+10/17 05:41:03.307|END         |
+10/17 05:41:03.307|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.309|END         |
+10/17 05:41:03.309|START       |NAME=mapping(2) 
+10/17 05:41:03.309|END         |
+10/17 05:41:03.309|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.311|END         |
+10/17 05:41:03.311|START       |NAME=mapping(2) 
+10/17 05:41:03.311|END         |
+10/17 05:41:03.311|START       |NAME=エラーファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/17 05:41:03.313|END         |
+10/17 05:41:03.313|LOOP_END    |COUNT=149
+10/17 05:41:03.313|BRANCH_START|NAME=エラー有無判定
+--/-- --:--:--.---|EVALUATION  |NAME=番号未登録あり, RESULT=true
+10/17 05:41:03.313|START       |NAME=ログ出力_0027_2 
+10/17 05:41:03.313|SCRIPT_START|SCRIPT=ログ出力, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=9
+--/-- --:--:--.---|VARIABLE    |NAME=カテゴリ, VALUE=IF
+--/-- --:--:--.---|VARIABLE    |NAME=param01, VALUE=サポートサービス_検索_error.csv
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージID, VALUE=MSG0315
+10/17 05:41:03.313|START       |NAME=メッセージ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=ログレベル, VALUE=I
+--/-- --:--:--.---|INFO        |ログレベル(String) 入力=[I]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=ra0000mvvv000980e4ovv5t4p55o リスト検索用番号テーブルにレコードが存在しません。詳細はサポートサービス_検索_error.csvファイルに参照してください。
+--/-- --:--:--.---|INFO        |メッセージ(String) 入力=[ra0000mvvv000980e4ovv5t4p55o リスト検索用番号テーブルにレコードが存在しません。詳細はサポートサービス_検索_error.csvファイルに参照してください。]
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=ra0000mvvv000980e4ovv5t4p55o
+--/-- --:--:--.---|INFO        |実行ID(String) 入力=[ra0000mvvv000980e4ovv5t4p55o]
+10/17 05:41:03.316|END         |
+10/17 05:41:03.316|BRANCH_START|NAME=ログレベル判定
+--/-- --:--:--.---|EVALUATION  |NAME=INFO, RESULT=true
+10/17 05:41:03.316|START       |NAME=ログ出力_INFO 
+10/17 05:41:03.316|END         |
+10/17 05:41:03.316|BRANCH_END  |
+10/17 05:41:03.316|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=警告終了, RESULT=false
+10/17 05:41:03.316|BRANCH_END  |
+10/17 05:41:03.316|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:03.316|END         |
+10/17 05:41:03.316|BRANCH_END  |
+10/17 05:41:03.316|START       |NAME=スキップ件数集計 
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=正常件数, VALUE=149
+--/-- --:--:--.---|INFO        |正常件数(String) 入力=[149]
+10/17 05:41:03.316|END         |
+10/17 05:41:03.316|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:03.316|END         |
+10/17 05:41:03.316|START       |NAME=戻り値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=正常件数, VALUE=149
+--/-- --:--:--.---|INFO        |正常件数(int) 入力=[149]
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+10/17 05:41:03.316|END         |
+10/17 05:41:03.316|START       |NAME=セッションファイル生成_Bulk 
+10/17 05:41:03.317|SCRIPT_START|SCRIPT=セッションファイル生成_Bulk, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=7
+10/17 05:41:03.317|START       |NAME=セッションファイル存在確認 [file_operation_adapter/check_exist_file]
+10/17 05:41:03.318|END         |
+10/17 05:41:03.318|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=ファイル無し, RESULT=false
+10/17 05:41:03.318|START       |NAME=セッションファイル読取1 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを抽出しました。
+10/17 05:41:03.319|END         |
+10/17 05:41:03.319|START       |NAME=変数代入1 
+--/-- --:--:--.---|VARIABLE    |NAME=サーバURL, VALUE=https://ntt-east-crm.my.salesforce.com/services/Soap/u/43.0
+--/-- --:--:--.---|INFO        |サーバURL(String) 入力=[https://ntt-east-crm.my.salesforce.com/services/Soap/u/43.0]
+--/-- --:--:--.---|VARIABLE    |NAME=セッションID, VALUE=00D2v000002FbUv!ARcAQIlURfz1g9VPRMtamlym.ALWslD4iuvIvl.qD095JlcmStcRn7pVzRy9uCjLgELwRZJDo8XNz.5JeusgQGzkO1QiR22u
+--/-- --:--:--.---|INFO        |セッションID(String) 入力=[00D2v000002FbUv!ARcAQIlURfz1g9VPRMtamlym.ALWslD4iuvIvl.qD095JlcmStcRn7pVzRy9uCjLgELwRZJDo8XNz.5JeusgQGzkO1QiR22u]
+10/17 05:41:03.319|END         |
+10/17 05:41:03.319|BRANCH_END  |
+10/17 05:41:03.319|TRY_START   |NAME=try_catch
+10/17 05:41:03.319|START       |NAME=セッションログイン_Bulk [salesforce_bulk_adapter/session_id_login]
+--/-- --:--:--.---|INFO        |サーバ[https://ntt-east-crm.my.salesforce.com/services/Soap/u/43.0]へセッションIDによる接続を開始します。
+10/17 05:41:03.530|END         |
+10/17 05:41:03.530|TRY_END     |
+10/17 05:41:03.530|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:03.530|END         |
+10/17 05:41:03.530|START       |NAME=INSERT対象ファイル読込 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[INSERT対象ファイル読込(com/001_応対結果連携@6719cc9c)]PSP処理を開始しました。
+10/17 05:41:03.533|END         |
+10/17 05:41:03.533|START       |NAME=mapping_3 
+--/-- --:--:--.---|INFO        |[95]行のデータを抽出しました。
+10/17 05:41:03.544|END         |
+--/-- --:--:--.---|INFO        |[INSERT対象ファイル読込(com/001_応対結果連携@6719cc9c)]PSP処理を終了しました。
+10/17 05:41:03.544|START       |NAME=応対結果insert [salesforce_bulk_adapter/bulk_put_insert]
+--/-- --:--:--.---|INFO        |ジョブ[750GC00000ttTz3YAE]を作成しました。
+--/-- --:--:--.---|WARN        |エラーレコード：[入力行番号：14][Error：INVALID_FIELD:Foreign key external ID: 9053102404102006000 not found for field AccIDAddressCode__c in entity Office__c:--]
+--/-- --:--:--.---|WARN        |エラーレコード：[入力行番号：30][Error：INVALID_FIELD:Foreign key external ID: 4218336010201015004 not found for field AccIDAddressCode__c in entity Office__c:--]
+--/-- --:--:--.---|WARN        |エラーレコード：[入力行番号：31][Error：INVALID_FIELD:Foreign key external ID: 4218336010201053001 not found for field AccIDAddressCode__c in entity Office__c:--]
+--/-- --:--:--.---|WARN        |エラーレコード：[入力行番号：33][Error：INVALID_FIELD:Foreign key external ID: 4218336010201036001 not found for field AccIDAddressCode__c in entity Office__c:--]
+--/-- --:--:--.---|WARN        |エラーレコード：[入力行番号：39][Error：INVALID_FIELD:Foreign key external ID: 9078326114206064001 not found for field AccIDAddressCode__c in entity Office__c:--]
+--/-- --:--:--.---|WARN        |エラーレコード：[入力行番号：40][Error：INVALID_FIELD:Foreign key external ID: 9101474313203003002 not found for field AccIDAddressCode__c in entity Office__c:--]
+--/-- --:--:--.---|WARN        |エラーレコード：[入力行番号：61][Error：INVALID_FIELD:Foreign key external ID: 4218336010201036001 not found for field AccIDAddressCode__c in entity Office__c:--]
+--/-- --:--:--.---|WARN        |エラーレコード：[入力行番号：63][Error：INVALID_FIELD:Foreign key external ID: 9101474313203003002 not found for field AccIDAddressCode__c in entity Office__c:--]
+--/-- --:--:--.---|WARN        |エラーレコード：[入力行番号：95][Error：INVALID_FIELD:Foreign key external ID: 9102443005207030002 not found for field AccIDAddressCode__c in entity Office__c:--]
+--/-- --:--:--.---|INFO        |[95]件の入力データから[1]バッチの作成に成功しました。
+--/-- --:--:--.---|INFO        |Bulkデータ書き込み（INSERT）結果：成功[86]件  失敗[9]件
+10/17 05:41:08.483|END         |
+10/17 05:41:08.483|START       |NAME=エラー抽出 
+--/-- --:--:--.---|INFO        |[エラー抽出(com/001_応対結果連携@6719cc9c)]PSP処理を開始しました。
+10/17 05:41:08.483|END         |
+10/17 05:41:08.483|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=エラーありの場合, RESULT=true
+10/17 05:41:08.483|START       |NAME=登録エラー出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[9]行のデータを挿入しました。
+10/17 05:41:08.487|END         |
+--/-- --:--:--.---|INFO        |[エラー抽出(com/001_応対結果連携@6719cc9c)]PSP処理を終了しました。
+10/17 05:41:08.487|BRANCH_END  |
+10/17 05:41:08.487|START       |NAME=update対応抽出条件 
+10/17 05:41:08.491|END         |
+10/17 05:41:08.491|START       |NAME=応対結果update [salesforce_bulk_adapter/bulk_put_update]
+--/-- --:--:--.---|INFO        |[0]件の入力データから[0]バッチの作成に成功しました。
+--/-- --:--:--.---|INFO        |Bulkデータ書き込み（UPDATE）結果：成功[0]件  失敗[0]件
+10/17 05:41:08.491|END         |
+10/17 05:41:08.491|START       |NAME=エラー抽出(1) 
+--/-- --:--:--.---|INFO        |[エラー抽出(1)(com/001_応対結果連携@6719cc9c)]PSP処理を開始しました。
+10/17 05:41:08.492|END         |
+10/17 05:41:08.492|BRANCH_START|NAME=if(5)
+--/-- --:--:--.---|EVALUATION  |NAME=エラーありの場合, RESULT=false
+10/17 05:41:08.492|BRANCH_END  |
+10/17 05:41:08.492|BRANCH_START|NAME=if(4)
+--/-- --:--:--.---|EVALUATION  |NAME=登録また更新エラーの場合, RESULT=true
+10/17 05:41:08.492|START       |NAME=ログ出力_更新異常 
+10/17 05:41:08.492|SCRIPT_START|SCRIPT=ログ出力, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=9
+--/-- --:--:--.---|VARIABLE    |NAME=param02, VALUE=/data/MERGE/app/data/WE0203103/ERROR/20241017054100_ra0000mvvv000980e4ovv5t4p55o_error/026-000_20241017_ERROR.csv
+--/-- --:--:--.---|VARIABLE    |NAME=カテゴリ, VALUE=IF
+--/-- --:--:--.---|VARIABLE    |NAME=param01, VALUE=他チャネル応対情報
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージID, VALUE=MSG0255
+10/17 05:41:08.492|START       |NAME=メッセージ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=ログレベル, VALUE=E
+--/-- --:--:--.---|INFO        |ログレベル(String) 入力=[E]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=ra0000mvvv000980e4ovv5t4p55o 登録／更新に失敗したレコードがあります。オブジェクト=他チャネル応対情報、エラーファイル=/data/MERGE/app/data/WE0203103/ERROR/20241017054100_ra0000mvvv000980e4ovv5t4p55o_error/026-000_20241017_ERROR.csv
+--/-- --:--:--.---|INFO        |メッセージ(String) 入力=[ra0000mvvv000980e4ovv5t4p55o 登録／更新に失敗したレコードがあります。オブジェクト=他チャネル応対情報、エラーファイル=/data/MERGE/app/data/WE0203103/ERROR/20241017054100_ra0000mvvv000980e4ovv5t4p55o_error/026-000_20241017_ERROR.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=ra0000mvvv000980e4ovv5t4p55o
+--/-- --:--:--.---|INFO        |実行ID(String) 入力=[ra0000mvvv000980e4ovv5t4p55o]
+10/17 05:41:08.495|END         |
+10/17 05:41:08.495|BRANCH_START|NAME=ログレベル判定
+--/-- --:--:--.---|EVALUATION  |NAME=INFO, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=WARN, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=ERROR, RESULT=true
+10/17 05:41:08.495|START       |NAME=ログ出力_ERROR 
+10/17 05:41:08.495|END         |
+10/17 05:41:08.495|BRANCH_END  |
+10/17 05:41:08.495|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=警告終了, RESULT=false
+10/17 05:41:08.495|BRANCH_END  |
+10/17 05:41:08.495|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:08.495|END         |
+10/17 05:41:08.495|BRANCH_END  |
+10/17 05:41:08.495|START       |NAME=処理結果フラグ、処理件数設定 
+--/-- --:--:--.---|VARIABLE    |NAME=正常件数, VALUE=235
+--/-- --:--:--.---|INFO        |正常件数(int) 入力=[235]
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=9
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[9]
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=1
+--/-- --:--:--.---|INFO        |処理結果フラグ(String) 入力=[1]
+10/17 05:41:08.495|END         |
+10/17 05:41:08.495|TRY_END     |
+10/17 05:41:08.495|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:08.495|END         |
+10/17 05:41:08.495|START       |NAME=件数編集 
+--/-- --:--:--.---|VARIABLE    |NAME=正常件数, VALUE=235
+--/-- --:--:--.---|INFO        |正常件数(int) 入力=[235]
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=9
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[9]
+10/17 05:41:08.495|END         |
+10/17 05:41:08.495|BRANCH_START|NAME=応対結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=応対結果異常, RESULT=false
+10/17 05:41:08.495|BRANCH_END  |
+10/17 05:41:08.495|BRANCH_START|NAME=処理結果フラグ判定
+--/-- --:--:--.---|EVALUATION  |NAME=２の場合, RESULT=false
+10/17 05:41:08.495|BRANCH_END  |
+10/17 05:41:08.495|START       |NAME=作業ファイル削除 [file_operation_adapter/delete_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup/*.csv]ファイル/ディレクトリを削除しました。
+--/-- --:--:--.---|INFO        |[6]件を削除しました。
+10/17 05:41:08.518|END         |
+10/17 05:41:08.518|LOOP_END    |COUNT=1
+10/17 05:41:08.518|START       |NAME=S3バックアップ 
+10/17 05:41:08.518|SCRIPT_START|SCRIPT=S3バックアップ圧縮格納, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=13
+--/-- --:--:--.---|VARIABLE    |NAME=バケットIN, VALUE=bm-s3-datahub-if-prod
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0203
+--/-- --:--:--.---|VARIABLE    |NAME=フォルダパスIN, VALUE=/WE0203
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップフォルダパス, VALUE=/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup/S3Backup
+10/17 05:41:08.518|START       |NAME=格納フォルダ名作成 
+--/-- --:--:--.---|VARIABLE    |NAME=格納フォルダ名, VALUE=WE0203_20241017
+--/-- --:--:--.---|INFO        |格納フォルダ名(String) 入力=[WE0203_20241017]
+--/-- --:--:--.---|VARIABLE    |NAME=ZIPファイル名, VALUE=WE0203_20241017054108518.zip
+--/-- --:--:--.---|INFO        |ZIPファイル名(String) 入力=[WE0203_20241017054108518.zip]
+10/17 05:41:08.518|END         |
+10/17 05:41:08.518|START       |NAME=バックアップファイル一覧取得 [file_operation_adapter/list_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup/S3Backup]ディレクトリのファイル名一覧を取得しました。
+10/17 05:41:08.521|END         |
+10/17 05:41:08.521|BRANCH_START|NAME=if(1)
+--/-- --:--:--.---|EVALUATION  |NAME=バックアップファイル存在, RESULT=true
+10/17 05:41:08.521|START       |NAME=バックアップファイル圧縮 [file_operation_adapter/compress_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup/S3Backup/WE0203_20241017054108518.zip]ファイル/ディレクトリを圧縮しました。
+10/17 05:41:08.536|END         |
+10/17 05:41:08.536|START       |NAME=バックアップファイル書き込み [amazon_s3_adapter/put]
+10/17 05:41:09.627|END         |
+10/17 05:41:09.627|START       |NAME=ファイルのみ 
+10/17 05:41:09.629|END         |
+10/17 05:41:09.629|LOOP_START  |NAME=foreach
+10/17 05:41:09.630|START       |NAME=ファイル名格納 
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップファイル名, VALUE=026-000_20241017.csv
+--/-- --:--:--.---|INFO        |バックアップファイル名(String) 入力=[026-000_20241017.csv]
+10/17 05:41:09.631|END         |
+10/17 05:41:09.631|START       |NAME=入力ファイル削除 [amazon_s3_adapter/delete]
+10/17 05:41:10.243|END         |
+10/17 05:41:10.243|LOOP_END    |COUNT=1
+10/17 05:41:10.243|BRANCH_END  |
+10/17 05:41:10.243|START       |NAME=バックアップフォルダ削除 [file_operation_adapter/delete_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0203103/BACKUP/20241017054100_ra0000mvvv000980e4ovv5t4p55o_backup/S3Backup]ファイル/ディレクトリを削除しました。
+--/-- --:--:--.---|INFO        |[1]件を削除しました。
+10/17 05:41:10.250|END         |
+10/17 05:41:10.250|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:10.250|END         |
+10/17 05:41:10.251|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常レコードあり, RESULT=true
+10/17 05:41:10.251|START       |NAME=処理結果←異常_1 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=1
+--/-- --:--:--.---|INFO        |処理結果フラグ(String) 入力=[1]
+10/17 05:41:10.251|END         |
+10/17 05:41:10.251|BRANCH_END  |
+10/17 05:41:10.251|TRY_END     |
+10/17 05:41:10.251|BRANCH_START|NAME=処理結果分岐
+--/-- --:--:--.---|EVALUATION  |NAME=処理結果異常, RESULT=true
+10/17 05:41:10.251|BRANCH_END  |
+10/17 05:41:10.251|SCRIPT_END  |EXIT_STATUS=1
+10/17 05:41:10.251|END         |
+10/17 05:41:10.251|START       |NAME=取込結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=1
+--/-- --:--:--.---|INFO        |処理結果フラグ(String) 入力=[1]
+10/17 05:41:10.251|END         |
+10/17 05:41:10.251|BRANCH_START|NAME=処理結果分岐_1
+--/-- --:--:--.---|EVALUATION  |NAME=処理結果正常_1, RESULT=false
+10/17 05:41:10.251|BRANCH_END  |
+10/17 05:41:10.251|START       |NAME=エラーファイル圧縮 
+10/17 05:41:10.251|SCRIPT_START|SCRIPT=S3エラーファイル圧縮格納, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=12
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0203
+--/-- --:--:--.---|VARIABLE    |NAME=エラーフォルダパス, VALUE=/data/MERGE/app/data/WE0203103/ERROR/20241017054100_ra0000mvvv000980e4ovv5t4p55o_error
+10/17 05:41:10.251|START       |NAME=格納フォルダ名作成 
+--/-- --:--:--.---|VARIABLE    |NAME=格納フォルダ名, VALUE=WE0203_20241017
+--/-- --:--:--.---|INFO        |格納フォルダ名(String) 入力=[WE0203_20241017]
+--/-- --:--:--.---|VARIABLE    |NAME=ZIPファイル名, VALUE=WE0203_20241017054110251.zip
+--/-- --:--:--.---|INFO        |ZIPファイル名(String) 入力=[WE0203_20241017054110251.zip]
+10/17 05:41:10.251|END         |
+10/17 05:41:10.251|START       |NAME=エラーファイル一覧取得 [file_operation_adapter/list_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0203103/ERROR/20241017054100_ra0000mvvv000980e4ovv5t4p55o_error]ディレクトリのファイル名一覧を取得しました。
+10/17 05:41:10.253|END         |
+10/17 05:41:10.253|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=エラーファイル存在, RESULT=true
+10/17 05:41:10.253|START       |NAME=エラーファイル圧縮 [file_operation_adapter/compress_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0203103/ERROR/20241017054100_ra0000mvvv000980e4ovv5t4p55o_error/WE0203_20241017054110251.zip]ファイル/ディレクトリを圧縮しました。
+10/17 05:41:10.265|END         |
+10/17 05:41:10.265|START       |NAME=エラーファイル書き込み [amazon_s3_adapter/put]
+10/17 05:41:10.879|END         |
+10/17 05:41:10.880|BRANCH_END  |
+10/17 05:41:10.880|START       |NAME=エラーフォルダ削除 [file_operation_adapter/delete_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0203103/ERROR/20241017054100_ra0000mvvv000980e4ovv5t4p55o_error]ファイル/ディレクトリを削除しました。
+--/-- --:--:--.---|INFO        |[1]件を削除しました。
+10/17 05:41:10.887|END         |
+10/17 05:41:10.887|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:10.887|END         |
+10/17 05:41:10.887|TRY_END     |
+10/17 05:41:10.887|START       |NAME=中間ファイル削除_2 [file_operation_adapter/delete_file]
+10/17 05:41:10.888|END         |
+10/17 05:41:10.888|START       |NAME=終了処理 
+10/17 05:41:10.888|SCRIPT_START|SCRIPT=com/003_終了処理, PROJECT=【データ連携HUB】WE0203_サポートサービス等応対情報取込, REPOSITORY=/home/z098847/projects/【データ連携HUB】WE0203_サポートサービス等応対情報取込, VERSION=15
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=9
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=1
+--/-- --:--:--.---|VARIABLE    |NAME=機能名, VALUE=サポートサービス等応対情報取込
+--/-- --:--:--.---|VARIABLE    |NAME=正常件数, VALUE=235
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0203
+--/-- --:--:--.---|VARIABLE    |NAME=レコードNo, VALUE=103
+10/17 05:41:10.888|START       |NAME=処理件数ログ出力 
+10/17 05:41:10.888|SCRIPT_START|SCRIPT=ログ出力, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=9
+--/-- --:--:--.---|VARIABLE    |NAME=param02, VALUE=9
+--/-- --:--:--.---|VARIABLE    |NAME=カテゴリ, VALUE=IF
+--/-- --:--:--.---|VARIABLE    |NAME=param01, VALUE=235
+--/-- --:--:--.---|VARIABLE    |NAME=param03, VALUE=0
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージID, VALUE=MSG0105
+10/17 05:41:10.888|START       |NAME=メッセージ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=ログレベル, VALUE=I
+--/-- --:--:--.---|INFO        |ログレベル(String) 入力=[I]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=ra0000mvvv000980e4ovv5t4p55o 正常:235 異常:9 警告:0
+--/-- --:--:--.---|INFO        |メッセージ(String) 入力=[ra0000mvvv000980e4ovv5t4p55o 正常:235 異常:9 警告:0]
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=ra0000mvvv000980e4ovv5t4p55o
+--/-- --:--:--.---|INFO        |実行ID(String) 入力=[ra0000mvvv000980e4ovv5t4p55o]
+10/17 05:41:10.891|END         |
+10/17 05:41:10.891|BRANCH_START|NAME=ログレベル判定
+--/-- --:--:--.---|EVALUATION  |NAME=INFO, RESULT=true
+10/17 05:41:10.891|START       |NAME=ログ出力_INFO 
+10/17 05:41:10.891|END         |
+10/17 05:41:10.891|BRANCH_END  |
+10/17 05:41:10.891|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=警告終了, RESULT=false
+10/17 05:41:10.891|BRANCH_END  |
+10/17 05:41:10.891|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:10.891|END         |
+10/17 05:41:10.891|BRANCH_START|NAME=if_9
+--/-- --:--:--.---|EVALUATION  |NAME=異常レコードありor異常_1, RESULT=true
+10/17 05:41:10.891|START       |NAME=規制情報更新_2 
+10/17 05:41:10.891|SCRIPT_START|SCRIPT=規制情報/03_規制情報更新, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=6
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0203
+--/-- --:--:--.---|VARIABLE    |NAME=予備2, VALUE=1
+--/-- --:--:--.---|VARIABLE    |NAME=予備1, VALUE=0
+--/-- --:--:--.---|VARIABLE    |NAME=レコードNo, VALUE=103
+10/17 05:41:10.891|TRY_START   |NAME=try_catch
+10/17 05:41:10.891|START       |NAME=規制情報更新 [amazon_rds_postgresql_adapter/execute_select_query]
+--/-- --:--:--.---|INFO        |[1]件のデータの抽出に成功しました。
+10/17 05:41:10.895|END         |
+10/17 05:41:10.895|BRANCH_START|NAME=結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=更新失敗, RESULT=false
+10/17 05:41:10.895|BRANCH_END  |
+10/17 05:41:10.895|TRY_END     |
+10/17 05:41:10.895|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:10.895|END         |
+10/17 05:41:10.895|BRANCH_END  |
+10/17 05:41:10.895|BRANCH_START|NAME=if_10
+--/-- --:--:--.---|EVALUATION  |NAME=規制情報更新失敗, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=異常レコードありor異常_2, RESULT=true
+10/17 05:41:10.895|START       |NAME=終了ログ出力(異常)_6 
+10/17 05:41:10.895|SCRIPT_START|SCRIPT=ログ出力, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=9
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=1
+--/-- --:--:--.---|VARIABLE    |NAME=param02, VALUE=サポートサービス等応対情報取込
+--/-- --:--:--.---|VARIABLE    |NAME=カテゴリ, VALUE=END
+--/-- --:--:--.---|VARIABLE    |NAME=param01, VALUE=WE0203
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージID, VALUE=MSG0015
+10/17 05:41:10.895|START       |NAME=メッセージ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=ログレベル, VALUE=E
+--/-- --:--:--.---|INFO        |ログレベル(String) 入力=[E]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=ra0000mvvv000980e4ovv5t4p55o WE0203処理を異常終了しました（サポートサービス等応対情報取込）
+--/-- --:--:--.---|INFO        |メッセージ(String) 入力=[ra0000mvvv000980e4ovv5t4p55o WE0203処理を異常終了しました（サポートサービス等応対情報取込）]
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=ra0000mvvv000980e4ovv5t4p55o
+--/-- --:--:--.---|INFO        |実行ID(String) 入力=[ra0000mvvv000980e4ovv5t4p55o]
+10/17 05:41:10.898|END         |
+10/17 05:41:10.898|BRANCH_START|NAME=ログレベル判定
+--/-- --:--:--.---|EVALUATION  |NAME=INFO, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=WARN, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=ERROR, RESULT=true
+10/17 05:41:10.898|START       |NAME=ログ出力_ERROR 
+10/17 05:41:10.898|END         |
+10/17 05:41:10.898|BRANCH_END  |
+10/17 05:41:10.898|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=true
+10/17 05:41:10.898|START       |NAME=エラーメール送信（異常） 
+10/17 05:41:10.898|SCRIPT_START|SCRIPT=エラーメール送信, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=2
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=1
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=ra0000mvvv000980e4ovv5t4p55o
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=サポートサービス等応対情報取込
+10/17 05:41:10.898|START       |NAME=通知日時取得 
+--/-- --:--:--.---|VARIABLE    |NAME=通知日時, VALUE=2024/10/17 05:41:10
+--/-- --:--:--.---|INFO        |通知日時(String) 入力=[2024/10/17 05:41:10]
+10/17 05:41:10.898|END         |
+10/17 05:41:10.898|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=処理結果_異常, RESULT=true
+10/17 05:41:10.898|START       |NAME=異常時mail送信 [mail_adapter/put_smtp_with_message]
+--/-- --:--:--.---|INFO        |1通のメッセージを送信しました。
+10/17 05:41:10.928|END         |
+10/17 05:41:10.928|BRANCH_END  |
+10/17 05:41:10.928|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:10.928|END         |
+10/17 05:41:10.928|BRANCH_END  |
+10/17 05:41:10.928|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:10.928|END         |
+10/17 05:41:10.928|BRANCH_END  |
+10/17 05:41:10.928|SCRIPT_END  |EXIT_STATUS=0
+10/17 05:41:10.928|END         |
+10/17 05:41:10.928|BRANCH_START|NAME=処理結果_2
+--/-- --:--:--.---|EVALUATION  |NAME=処理結果異常_2, RESULT=true
+10/17 05:41:10.928|BRANCH_END  |
+10/17 05:41:10.928|SCRIPT_END  |EXIT_STATUS=-1
+10/17 05:41:10.928|EXEC_END    |EXIT_STATUS=-1

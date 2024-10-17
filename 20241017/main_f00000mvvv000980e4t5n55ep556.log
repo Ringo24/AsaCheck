@@ -1,0 +1,3568 @@
+10/16 19:15:00.005|EXEC_START  |
+10/16 19:15:00.006|SCRIPT_START|SCRIPT=main, PROJECT=【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), REPOSITORY=/share/projects/【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), VERSION=31
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=レコードNo, VALUE=000
+10/16 19:15:00.006|TRY_START   |NAME=try_規制T設定前
+10/16 19:15:00.006|START       |NAME=AP設定F読込 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=機能名, VALUE=オーダー情報取込(Biz-FLOW)
+--/-- --:--:--.---|INFO        |機能名(String) 入力=[オーダー情報取込(Biz-FLOW)]
+--/-- --:--:--.---|VARIABLE    |NAME=S3バケットIN, VALUE=bm-s3-datahub-if-prod
+--/-- --:--:--.---|INFO        |S3バケットIN(String) 入力=[bm-s3-datahub-if-prod]
+--/-- --:--:--.---|VARIABLE    |NAME=S3フォルダIN, VALUE=/WE0502
+--/-- --:--:--.---|INFO        |S3フォルダIN(String) 入力=[/WE0502]
+--/-- --:--:--.---|VARIABLE    |NAME=S3バケットOUT, VALUE=bm-s3-datahub-bs-prod
+--/-- --:--:--.---|INFO        |S3バケットOUT(String) 入力=[bm-s3-datahub-bs-prod]
+--/-- --:--:--.---|VARIABLE    |NAME=S3フォルダOUT, VALUE=/backup
+--/-- --:--:--.---|INFO        |S3フォルダOUT(String) 入力=[/backup]
+--/-- --:--:--.---|VARIABLE    |NAME=ファイル名称_フィルター1, VALUE=BF_orderstatus_(19[0-9]{2}|20[0-9]{2})(0[0-9]|1[0-2])([0-2][0-9]|3[01])([0-1][0-9]|2[0-3])([0-5][0-9]).csv
+--/-- --:--:--.---|INFO        |ファイル名称_フィルター1(String) 入力=[BF_orderstatus_(19[0-9]{2}|20[0-9]{2})(0[0-9]|1[0-2])([0-2][0-9]|3[01])([0-1][0-9]|2[0-3])([0-5][0-9]).csv]
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップフォルダパス, VALUE=/data/MERGE/app/data/WE0502/BACKUP
+--/-- --:--:--.---|INFO        |バックアップフォルダパス(String) 入力=[/data/MERGE/app/data/WE0502/BACKUP]
+--/-- --:--:--.---|VARIABLE    |NAME=エラーフォルダパス, VALUE=/data/MERGE/app/data/WE0502/ERROR
+--/-- --:--:--.---|INFO        |エラーフォルダパス(String) 入力=[/data/MERGE/app/data/WE0502/ERROR]
+10/16 19:15:00.047|END         |
+10/16 19:15:00.047|BRANCH_START|NAME=AP設定取得結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=AP設定取得エラー, RESULT=false
+10/16 19:15:00.047|BRANCH_END  |
+10/16 19:15:00.047|START       |NAME=ログ出力_処理開始 
+10/16 19:15:00.047|SCRIPT_START|SCRIPT=ログ出力, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=9
+--/-- --:--:--.---|VARIABLE    |NAME=param02, VALUE=オーダー情報取込(Biz-FLOW)
+--/-- --:--:--.---|VARIABLE    |NAME=カテゴリ, VALUE=START
+--/-- --:--:--.---|VARIABLE    |NAME=param01, VALUE=WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージID, VALUE=MSG0101
+10/16 19:15:00.047|START       |NAME=メッセージ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=ログレベル, VALUE=I
+--/-- --:--:--.---|INFO        |ログレベル(String) 入力=[I]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=f00000mvvv000980e4t5n55ep556 WE0502（オーダー情報取込(Biz-FLOW)）処理を開始します。
+--/-- --:--:--.---|INFO        |メッセージ(String) 入力=[f00000mvvv000980e4t5n55ep556 WE0502（オーダー情報取込(Biz-FLOW)）処理を開始します。]
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=f00000mvvv000980e4t5n55ep556
+--/-- --:--:--.---|INFO        |実行ID(String) 入力=[f00000mvvv000980e4t5n55ep556]
+10/16 19:15:00.050|END         |
+10/16 19:15:00.050|BRANCH_START|NAME=ログレベル判定
+--/-- --:--:--.---|EVALUATION  |NAME=INFO, RESULT=true
+10/16 19:15:00.050|START       |NAME=ログ出力_INFO 
+10/16 19:15:00.050|END         |
+10/16 19:15:00.050|BRANCH_END  |
+10/16 19:15:00.050|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=警告終了, RESULT=false
+10/16 19:15:00.050|BRANCH_END  |
+10/16 19:15:00.050|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:00.050|END         |
+10/16 19:15:00.050|START       |NAME=二重起動チェック 
+10/16 19:15:00.050|SCRIPT_START|SCRIPT=規制情報/01_規制情報設定_開始, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=5
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=レコードNo, VALUE=000
+10/16 19:15:00.050|TRY_START   |NAME=try_catch
+10/16 19:15:00.050|START       |NAME=規制情報更新 [amazon_rds_postgresql_adapter/execute_select_query]
+--/-- --:--:--.---|INFO        |[1]件のデータの抽出に成功しました。
+10/16 19:15:00.055|END         |
+10/16 19:15:00.055|BRANCH_START|NAME=結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=更新失敗(規制中), RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=更新失敗(その他エラー), RESULT=false
+10/16 19:15:00.055|BRANCH_END  |
+10/16 19:15:00.055|TRY_END     |
+10/16 19:15:00.055|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:00.055|END         |
+10/16 19:15:00.055|BRANCH_START|NAME=二重起動Chk判定
+--/-- --:--:--.---|EVALUATION  |NAME=二重起動/エラー, RESULT=false
+10/16 19:15:00.055|BRANCH_END  |
+10/16 19:15:00.055|TRY_START   |NAME=try_二重起動C後
+10/16 19:15:00.055|START       |NAME=現在日時・各種一時Dir名設定 
+--/-- --:--:--.---|VARIABLE    |NAME=実行日時, VALUE=1729073700055
+--/-- --:--:--.---|INFO        |実行日時(Date) 入力=[2024-10-16T19:15:00.055+0900]
+--/-- --:--:--.---|VARIABLE    |NAME=作業用ディレクトリParam, VALUE=20241016191500_f00000mvvv000980e4t5n55ep556_WE0502
+--/-- --:--:--.---|INFO        |作業用ディレクトリParam(String) 入力=[20241016191500_f00000mvvv000980e4t5n55ep556_WE0502]
+--/-- --:--:--.---|VARIABLE    |NAME=エラーディレクトリParam, VALUE=20241016191500_f00000mvvv000980e4t5n55ep556_error
+--/-- --:--:--.---|INFO        |エラーディレクトリParam(String) 入力=[20241016191500_f00000mvvv000980e4t5n55ep556_error]
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップディレクトリParam, VALUE=20241016191500_f00000mvvv000980e4t5n55ep556_backup
+--/-- --:--:--.---|INFO        |バックアップディレクトリParam(String) 入力=[20241016191500_f00000mvvv000980e4t5n55ep556_backup]
+10/16 19:15:00.056|END         |
+10/16 19:15:00.056|START       |NAME=各種一時Dir作成処理 
+10/16 19:15:00.056|SCRIPT_START|SCRIPT=一時フォルダ作成, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=6
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップフォルダパス, VALUE=/data/MERGE/app/data/WE0502/BACKUP
+--/-- --:--:--.---|VARIABLE    |NAME=処理フォルダ名, VALUE=20241016191500_f00000mvvv000980e4t5n55ep556_WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=エラーフォルダ名, VALUE=20241016191500_f00000mvvv000980e4t5n55ep556_error
+--/-- --:--:--.---|VARIABLE    |NAME=エラーフォルダパス, VALUE=/data/MERGE/app/data/WE0502/ERROR
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップフォルダ名, VALUE=20241016191500_f00000mvvv000980e4t5n55ep556_backup
+10/16 19:15:00.056|START       |NAME=処理フォルダ存在確認 [file_operation_adapter/check_exist_file]
+10/16 19:15:00.060|END         |
+10/16 19:15:00.060|BRANCH_START|NAME=if4
+--/-- --:--:--.---|EVALUATION  |NAME=処理フォルダ有り, RESULT=false
+10/16 19:15:00.060|BRANCH_END  |
+10/16 19:15:00.060|START       |NAME=処理フォルダ作成 [file_operation_adapter/make_directory]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/temp/20241016191500_f00000mvvv000980e4t5n55ep556_WE0502]ディレクトリを作成しました。
+10/16 19:15:00.062|END         |
+10/16 19:15:00.062|START       |NAME=バックアップフォルダ存在確認 [file_operation_adapter/check_exist_file]
+10/16 19:15:00.063|END         |
+10/16 19:15:00.063|BRANCH_START|NAME=if5
+--/-- --:--:--.---|EVALUATION  |NAME=バックアップフォルダ無し, RESULT=true
+10/16 19:15:00.063|START       |NAME=バックアップフォルダ作成 [file_operation_adapter/make_directory]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0502/BACKUP/20241016191500_f00000mvvv000980e4t5n55ep556_backup]ディレクトリを作成しました。
+10/16 19:15:00.070|END         |
+10/16 19:15:00.070|BRANCH_END  |
+10/16 19:15:00.070|START       |NAME=エラーフォルダ存在確認 [file_operation_adapter/check_exist_file]
+10/16 19:15:00.071|END         |
+10/16 19:15:00.071|BRANCH_START|NAME=if6
+--/-- --:--:--.---|EVALUATION  |NAME=エラーフォルダ無し, RESULT=true
+10/16 19:15:00.071|START       |NAME=エラーフォルダ作成 [file_operation_adapter/make_directory]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error]ディレクトリを作成しました。
+10/16 19:15:00.078|END         |
+10/16 19:15:00.078|BRANCH_END  |
+10/16 19:15:00.078|START       |NAME=変数格納1 
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップフォルダパス, VALUE=/data/MERGE/app/data/WE0502/BACKUP/20241016191500_f00000mvvv000980e4t5n55ep556_backup
+--/-- --:--:--.---|INFO        |バックアップフォルダパス(String) 入力=[/data/MERGE/app/data/WE0502/BACKUP/20241016191500_f00000mvvv000980e4t5n55ep556_backup]
+--/-- --:--:--.---|VARIABLE    |NAME=エラーフォルダパス, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error
+--/-- --:--:--.---|INFO        |エラーフォルダパス(String) 入力=[/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error]
+--/-- --:--:--.---|VARIABLE    |NAME=処理フォルダパス, VALUE=/data/MERGE/app/temp/20241016191500_f00000mvvv000980e4t5n55ep556_WE0502
+--/-- --:--:--.---|INFO        |処理フォルダパス(String) 入力=[/data/MERGE/app/temp/20241016191500_f00000mvvv000980e4t5n55ep556_WE0502]
+10/16 19:15:00.078|END         |
+10/16 19:15:00.078|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:00.078|END         |
+10/16 19:15:00.078|START       |NAME=各種一時Dir結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップディレクトリ, VALUE=/data/MERGE/app/data/WE0502/BACKUP/20241016191500_f00000mvvv000980e4t5n55ep556_backup
+--/-- --:--:--.---|INFO        |バックアップディレクトリ(String) 入力=[/data/MERGE/app/data/WE0502/BACKUP/20241016191500_f00000mvvv000980e4t5n55ep556_backup]
+--/-- --:--:--.---|VARIABLE    |NAME=エラーディレクトリ, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error
+--/-- --:--:--.---|INFO        |エラーディレクトリ(String) 入力=[/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error]
+--/-- --:--:--.---|VARIABLE    |NAME=作業用ディレクトリ, VALUE=/data/MERGE/app/temp/20241016191500_f00000mvvv000980e4t5n55ep556_WE0502
+--/-- --:--:--.---|INFO        |作業用ディレクトリ(String) 入力=[/data/MERGE/app/temp/20241016191500_f00000mvvv000980e4t5n55ep556_WE0502]
+10/16 19:15:00.078|END         |
+10/16 19:15:00.078|START       |NAME=取込処理実行 
+10/16 19:15:00.079|SCRIPT_START|SCRIPT=sub/001_オーダー情報取込処理, PROJECT=【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), REPOSITORY=/share/projects/【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), VERSION=36
+--/-- --:--:--.---|VARIABLE    |NAME=S3フォルダIN, VALUE=/WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=実行日時, VALUE=1729073700055
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップディレクトリ, VALUE=/data/MERGE/app/data/WE0502/BACKUP/20241016191500_f00000mvvv000980e4t5n55ep556_backup
+--/-- --:--:--.---|VARIABLE    |NAME=S3フォルダOUT, VALUE=/backup
+--/-- --:--:--.---|VARIABLE    |NAME=機能名, VALUE=オーダー情報取込(Biz-FLOW)
+--/-- --:--:--.---|VARIABLE    |NAME=ファイル名称_フィルター1, VALUE=BF_orderstatus_(19[0-9]{2}|20[0-9]{2})(0[0-9]|1[0-2])([0-2][0-9]|3[01])([0-1][0-9]|2[0-3])([0-5][0-9]).csv
+--/-- --:--:--.---|VARIABLE    |NAME=S3バケットIN, VALUE=bm-s3-datahub-if-prod
+--/-- --:--:--.---|VARIABLE    |NAME=S3バケットOUT, VALUE=bm-s3-datahub-bs-prod
+--/-- --:--:--.---|VARIABLE    |NAME=エラーディレクトリ, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error
+--/-- --:--:--.---|VARIABLE    |NAME=作業用ディレクトリ, VALUE=/data/MERGE/app/temp/20241016191500_f00000mvvv000980e4t5n55ep556_WE0502
+10/16 19:15:00.079|TRY_START   |NAME=try_S3F取得
+10/16 19:15:00.079|START       |NAME=S3入力Fバックアップ [amazon_s3_adapter/copy]
+--/-- --:--:--.---|INFO        |[2]件コピーしました。
+--/-- --:--:--.---|INFO        |フォルダ: (成功[1]件、失敗[0]件、仮想フォルダ[0]件)
+--/-- --:--:--.---|INFO        |ファイル: (成功[1]件、失敗[0]件)
+10/16 19:15:01.821|END         |
+10/16 19:15:01.821|START       |NAME=S3バックアップ結果 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 19:15:01.822|END         |
+10/16 19:15:01.822|BRANCH_START|NAME=バックアップ結果
+--/-- --:--:--.---|EVALUATION  |NAME=バックアップ失敗, RESULT=false
+10/16 19:15:01.822|BRANCH_END  |
+10/16 19:15:01.822|START       |NAME=S3F一覧取得 [amazon_s3_adapter/list]
+10/16 19:15:02.204|END         |
+10/16 19:15:02.204|START       |NAME=対象ファイル抽出 
+10/16 19:15:02.207|END         |
+10/16 19:15:02.207|LOOP_START  |NAME=繰り返し_ファイルDL
+10/16 19:15:02.208|START       |NAME=DLファイル設定 
+--/-- --:--:--.---|VARIABLE    |NAME=リモートファイルパス, VALUE=/bm-s3-datahub-if-prod/WE0502/BF_orderstatus_202410161910.csv
+--/-- --:--:--.---|INFO        |リモートファイルパス(String) 入力=[/bm-s3-datahub-if-prod/WE0502/BF_orderstatus_202410161910.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=ファイル名のみ, VALUE=BF_orderstatus_202410161910.csv
+--/-- --:--:--.---|INFO        |ファイル名のみ(String) 入力=[BF_orderstatus_202410161910.csv]
+10/16 19:15:02.209|END         |
+10/16 19:15:02.209|START       |NAME=S3F取得_GET [amazon_s3_adapter/get]
+10/16 19:15:02.830|END         |
+10/16 19:15:02.830|START       |NAME=DL結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=ファイル数, VALUE=1
+--/-- --:--:--.---|INFO        |ファイル数(int) 入力=[1]
+--/-- --:--:--.---|VARIABLE    |NAME=ローカルファイルパス, VALUE=/data/MERGE/app/data/WE0502/BACKUP/20241016191500_f00000mvvv000980e4t5n55ep556_backup/BF_orderstatus_202410161910.csv
+--/-- --:--:--.---|INFO        |ローカルファイルパス(String) 入力=[/data/MERGE/app/data/WE0502/BACKUP/20241016191500_f00000mvvv000980e4t5n55ep556_backup/BF_orderstatus_202410161910.csv]
+10/16 19:15:02.835|END         |
+10/16 19:15:02.835|BRANCH_START|NAME=Dl結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=DL失敗, RESULT=false
+10/16 19:15:02.835|BRANCH_END  |
+10/16 19:15:02.835|LOOP_END    |COUNT=1
+10/16 19:15:02.835|BRANCH_START|NAME=DL数判定
+--/-- --:--:--.---|EVALUATION  |NAME=DL0件, RESULT=false
+10/16 19:15:02.835|BRANCH_END  |
+10/16 19:15:02.835|TRY_END     |
+10/16 19:15:02.835|TRY_START   |NAME=try_データ反映処理
+10/16 19:15:02.835|START       |NAME=取得ファイル一覧取得 [file_operation_adapter/list_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0502/BACKUP/20241016191500_f00000mvvv000980e4t5n55ep556_backup]ディレクトリのファイル名一覧を取得しました。
+10/16 19:15:02.838|END         |
+10/16 19:15:02.838|LOOP_START  |NAME=繰り返し_取得F
+10/16 19:15:02.839|START       |NAME=引数作成 
+--/-- --:--:--.---|VARIABLE    |NAME=リモートファイルパス, VALUE=/bm-s3-datahub-if-prod/WE0502/BF_orderstatus_202410161910.csv
+--/-- --:--:--.---|INFO        |リモートファイルパス(String) 入力=[/bm-s3-datahub-if-prod/WE0502/BF_orderstatus_202410161910.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=ローカルファイルパス, VALUE=/data/MERGE/app/data/WE0502/BACKUP/20241016191500_f00000mvvv000980e4t5n55ep556_backup/BF_orderstatus_202410161910.csv
+--/-- --:--:--.---|INFO        |ローカルファイルパス(String) 入力=[/data/MERGE/app/data/WE0502/BACKUP/20241016191500_f00000mvvv000980e4t5n55ep556_backup/BF_orderstatus_202410161910.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=ファイル名のみ, VALUE=BF_orderstatus_202410161910.csv
+--/-- --:--:--.---|INFO        |ファイル名のみ(String) 入力=[BF_orderstatus_202410161910.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=不正レコードファイルパス, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error/BF_orderstatus_202410161910_20241016191500_error.csv
+--/-- --:--:--.---|INFO        |不正レコードファイルパス(String) 入力=[/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error/BF_orderstatus_202410161910_20241016191500_error.csv]
+10/16 19:15:02.841|END         |
+10/16 19:15:02.841|START       |NAME=S3入力ファイル削除 [amazon_s3_adapter/delete]
+10/16 19:15:03.245|END         |
+10/16 19:15:03.245|START       |NAME=データ反映処理 
+10/16 19:15:03.248|SCRIPT_START|SCRIPT=sub/002_オーダー情報反映処理, PROJECT=【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), REPOSITORY=/share/projects/【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), VERSION=71
+--/-- --:--:--.---|VARIABLE    |NAME=ファイル名のみ, VALUE=BF_orderstatus_202410161910.csv
+--/-- --:--:--.---|VARIABLE    |NAME=実行日時, VALUE=1729073700055
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=機能名, VALUE=オーダー情報取込(Biz-FLOW)
+--/-- --:--:--.---|VARIABLE    |NAME=取込ファイル取得元, VALUE=/bm-s3-datahub-if-prod/WE0502/BF_orderstatus_202410161910.csv
+--/-- --:--:--.---|VARIABLE    |NAME=作業用ディレクトリ, VALUE=/data/MERGE/app/temp/20241016191500_f00000mvvv000980e4t5n55ep556_WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=不正レコードファイルパス, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error/BF_orderstatus_202410161910_20241016191500_error.csv
+--/-- --:--:--.---|VARIABLE    |NAME=エラーディレクトリ, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error
+--/-- --:--:--.---|VARIABLE    |NAME=取込ファイルパス, VALUE=/data/MERGE/app/data/WE0502/BACKUP/20241016191500_f00000mvvv000980e4t5n55ep556_backup/BF_orderstatus_202410161910.csv
+10/16 19:15:03.248|START       |NAME=取込F名のみ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=取込ファイルパス, VALUE=/data/MERGE/app/data/WE0502/BACKUP/20241016191500_f00000mvvv000980e4t5n55ep556_backup/BF_orderstatus_202410161910.csv
+--/-- --:--:--.---|INFO        |取込ファイルパス(String) 入力=[/data/MERGE/app/data/WE0502/BACKUP/20241016191500_f00000mvvv000980e4t5n55ep556_backup/BF_orderstatus_202410161910.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=中間1ファイルパス, VALUE=/data/MERGE/app/temp/20241016191500_f00000mvvv000980e4t5n55ep556_WE0502/BF_orderstatus_202410161910_inter1.csv
+--/-- --:--:--.---|INFO        |中間1ファイルパス(String) 入力=[/data/MERGE/app/temp/20241016191500_f00000mvvv000980e4t5n55ep556_WE0502/BF_orderstatus_202410161910_inter1.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=中間2ファイルパス, VALUE=/data/MERGE/app/temp/20241016191500_f00000mvvv000980e4t5n55ep556_WE0502/BF_orderstatus_202410161910_inter2.csv
+--/-- --:--:--.---|INFO        |中間2ファイルパス(String) 入力=[/data/MERGE/app/temp/20241016191500_f00000mvvv000980e4t5n55ep556_WE0502/BF_orderstatus_202410161910_inter2.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=エラーキーファイルパス, VALUE=/data/MERGE/app/temp/20241016191500_f00000mvvv000980e4t5n55ep556_WE0502/BF_orderstatus_202410161910_errkeys.csv
+--/-- --:--:--.---|INFO        |エラーキーファイルパス(String) 入力=[/data/MERGE/app/temp/20241016191500_f00000mvvv000980e4t5n55ep556_WE0502/BF_orderstatus_202410161910_errkeys.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=追加ファイルパス, VALUE=/data/MERGE/app/temp/20241016191500_f00000mvvv000980e4t5n55ep556_WE0502/BF_orderstatus_202410161910_insert.csv
+--/-- --:--:--.---|INFO        |追加ファイルパス(String) 入力=[/data/MERGE/app/temp/20241016191500_f00000mvvv000980e4t5n55ep556_WE0502/BF_orderstatus_202410161910_insert.csv]
+10/16 19:15:03.248|END         |
+10/16 19:15:03.248|TRY_START   |NAME=try_準備
+10/16 19:15:03.248|START       |NAME=SFDCセッションF作成 
+10/16 19:15:03.249|SCRIPT_START|SCRIPT=セッションファイル生成, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=8
+10/16 19:15:03.249|START       |NAME=セッションファイル存在確認 [file_operation_adapter/check_exist_file]
+10/16 19:15:03.250|END         |
+10/16 19:15:03.250|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=ファイル無し, RESULT=false
+10/16 19:15:03.250|START       |NAME=セッションファイル読取1 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを抽出しました。
+10/16 19:15:03.252|END         |
+10/16 19:15:03.252|START       |NAME=変数代入1 
+--/-- --:--:--.---|VARIABLE    |NAME=サーバURL, VALUE=https://ntt-east-crm.my.salesforce.com/services/Soap/u/43.0
+--/-- --:--:--.---|INFO        |サーバURL(String) 入力=[https://ntt-east-crm.my.salesforce.com/services/Soap/u/43.0]
+--/-- --:--:--.---|VARIABLE    |NAME=セッションID, VALUE=00D2v000002FbUv!ARcAQIlURfz1g9VPRMtamlym.ALWslD4iuvIvl.qD095JlcmStcRn7pVzRy9uCjLgELwRZJDo8XNz.5JeusgQGzkO1QiR22u
+--/-- --:--:--.---|INFO        |セッションID(String) 入力=[00D2v000002FbUv!ARcAQIlURfz1g9VPRMtamlym.ALWslD4iuvIvl.qD095JlcmStcRn7pVzRy9uCjLgELwRZJDo8XNz.5JeusgQGzkO1QiR22u]
+10/16 19:15:03.252|END         |
+10/16 19:15:03.252|BRANCH_END  |
+10/16 19:15:03.252|TRY_START   |NAME=try_catch
+10/16 19:15:03.252|START       |NAME=セッションログイン [salesforce_adapter/session_id_login]
+--/-- --:--:--.---|INFO        |サーバ[https://ntt-east-crm.my.salesforce.com/services/Soap/u/43.0]へセッションIDによる接続を開始します。
+10/16 19:15:03.506|END         |
+10/16 19:15:03.506|TRY_END     |
+10/16 19:15:03.506|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:03.506|END         |
+10/16 19:15:03.506|TRY_END     |
+10/16 19:15:03.506|TRY_START   |NAME=try_F読込
+10/16 19:15:03.506|START       |NAME=オーダー進捗F読込_1 [variablelength_adapter/get_data]
+--/-- --:--:--.---|INFO        |[36]行のデータを抽出しました。
+10/16 19:15:03.513|END         |
+10/16 19:15:03.513|LOOP_START  |NAME=繰り返し_F読込_1
+10/16 19:15:03.513|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=1
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[1]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P230482234
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P230482234]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24081302276-03
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24081302276-03]
+10/16 19:15:03.514|END         |
+10/16 19:15:03.514|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:03.514|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24081302276%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24081302276%']
+10/16 19:15:03.514|END         |
+10/16 19:15:03.514|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:03.583|END         |
+10/16 19:15:03.583|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=true
+10/16 19:15:03.583|LOOP_START  |NAME=繰り返し_削除ID
+10/16 19:15:03.583|START       |NAME=削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P230482234
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P230482234]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24081302276-03
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24081302276-03]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMywC2AT
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMywC2AT]
+10/16 19:15:03.583|END         |
+10/16 19:15:03.583|START       |NAME=ID抽出結果 
+10/16 19:15:03.583|END         |
+10/16 19:15:03.583|START       |NAME=中間1出力_2 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:03.587|END         |
+10/16 19:15:03.587|LOOP_END    |COUNT=1
+10/16 19:15:03.587|BRANCH_END  |
+10/16 19:15:03.587|BRANCH_END  |
+10/16 19:15:03.587|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=2
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[2]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241024944
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241024944]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100400902-02
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100400902-02]
+10/16 19:15:03.587|END         |
+10/16 19:15:03.587|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:03.587|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24100400902%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24100400902%']
+10/16 19:15:03.588|END         |
+10/16 19:15:03.588|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:03.650|END         |
+10/16 19:15:03.650|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=true
+10/16 19:15:03.650|LOOP_START  |NAME=繰り返し_削除ID
+10/16 19:15:03.650|START       |NAME=削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241024944
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241024944]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100400902-02
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100400902-02]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMyyJ2AT
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMyyJ2AT]
+10/16 19:15:03.650|END         |
+10/16 19:15:03.650|START       |NAME=ID抽出結果 
+10/16 19:15:03.650|END         |
+10/16 19:15:03.650|START       |NAME=中間1出力_2 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:03.653|END         |
+10/16 19:15:03.653|LOOP_END    |COUNT=1
+10/16 19:15:03.653|BRANCH_END  |
+10/16 19:15:03.653|BRANCH_END  |
+10/16 19:15:03.653|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=3
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[3]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002B57
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002B57]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100701177-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100701177-00]
+10/16 19:15:03.653|END         |
+10/16 19:15:03.653|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:03.653|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24100701177%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24100701177%']
+10/16 19:15:03.653|END         |
+10/16 19:15:03.653|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:03.710|END         |
+10/16 19:15:03.710|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:03.710|START       |NAME=ID抽出結果なし 
+10/16 19:15:03.710|END         |
+10/16 19:15:03.710|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:03.712|END         |
+10/16 19:15:03.712|BRANCH_END  |
+10/16 19:15:03.712|BRANCH_END  |
+10/16 19:15:03.712|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=4
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[4]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002B57
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002B57]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100702403-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100702403-00]
+10/16 19:15:03.713|END         |
+10/16 19:15:03.713|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:03.713|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24100702403%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24100702403%']
+10/16 19:15:03.713|END         |
+10/16 19:15:03.713|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:03.767|END         |
+10/16 19:15:03.767|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:03.767|START       |NAME=ID抽出結果なし 
+10/16 19:15:03.768|END         |
+10/16 19:15:03.768|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:03.770|END         |
+10/16 19:15:03.770|BRANCH_END  |
+10/16 19:15:03.770|BRANCH_END  |
+10/16 19:15:03.770|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=5
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[5]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P21300244A
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P21300244A]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100803788-01
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100803788-01]
+10/16 19:15:03.771|END         |
+10/16 19:15:03.771|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:03.771|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24100803788%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24100803788%']
+10/16 19:15:03.771|END         |
+10/16 19:15:03.771|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:03.826|END         |
+10/16 19:15:03.826|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=true
+10/16 19:15:03.826|LOOP_START  |NAME=繰り返し_削除ID
+10/16 19:15:03.826|START       |NAME=削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P21300244A
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P21300244A]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100803788-01
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100803788-01]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMywb2AD
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMywb2AD]
+10/16 19:15:03.826|END         |
+10/16 19:15:03.826|START       |NAME=ID抽出結果 
+10/16 19:15:03.826|END         |
+10/16 19:15:03.826|START       |NAME=中間1出力_2 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:03.829|END         |
+10/16 19:15:03.829|LOOP_END    |COUNT=1
+10/16 19:15:03.829|BRANCH_END  |
+10/16 19:15:03.829|BRANCH_END  |
+10/16 19:15:03.829|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=6
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[6]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P214016AEC
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P214016AEC]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100900811-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100900811-00]
+10/16 19:15:03.829|END         |
+10/16 19:15:03.829|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:03.829|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24100900811%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24100900811%']
+10/16 19:15:03.829|END         |
+10/16 19:15:03.829|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:03.888|END         |
+10/16 19:15:03.888|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=true
+10/16 19:15:03.888|LOOP_START  |NAME=繰り返し_削除ID
+10/16 19:15:03.888|START       |NAME=削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P214016AEC
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P214016AEC]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100900811-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100900811-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMz6i2AD
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMz6i2AD]
+10/16 19:15:03.888|END         |
+10/16 19:15:03.888|START       |NAME=ID抽出結果 
+10/16 19:15:03.888|END         |
+10/16 19:15:03.888|START       |NAME=中間1出力_2 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:03.891|END         |
+10/16 19:15:03.891|LOOP_END    |COUNT=1
+10/16 19:15:03.891|BRANCH_END  |
+10/16 19:15:03.891|BRANCH_END  |
+10/16 19:15:03.891|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=7
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[7]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P214016AEC
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P214016AEC]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100901622-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100901622-00]
+10/16 19:15:03.891|END         |
+10/16 19:15:03.891|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:03.891|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24100901622%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24100901622%']
+10/16 19:15:03.891|END         |
+10/16 19:15:03.891|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:03.947|END         |
+10/16 19:15:03.947|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=true
+10/16 19:15:03.947|LOOP_START  |NAME=繰り返し_削除ID
+10/16 19:15:03.947|START       |NAME=削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P214016AEC
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P214016AEC]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100901622-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100901622-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMz6j2AD
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMz6j2AD]
+10/16 19:15:03.947|END         |
+10/16 19:15:03.947|START       |NAME=ID抽出結果 
+10/16 19:15:03.948|END         |
+10/16 19:15:03.948|START       |NAME=中間1出力_2 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:03.950|END         |
+10/16 19:15:03.950|LOOP_END    |COUNT=1
+10/16 19:15:03.950|BRANCH_END  |
+10/16 19:15:03.950|BRANCH_END  |
+10/16 19:15:03.950|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=8
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[8]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P214016AEC
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P214016AEC]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101500226-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101500226-00]
+10/16 19:15:03.950|END         |
+10/16 19:15:03.950|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:03.950|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101500226%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101500226%']
+10/16 19:15:03.950|END         |
+10/16 19:15:03.950|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.004|END         |
+10/16 19:15:04.004|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=true
+10/16 19:15:04.004|LOOP_START  |NAME=繰り返し_削除ID
+10/16 19:15:04.004|START       |NAME=削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P214016AEC
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P214016AEC]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101500226-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101500226-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMz7D2AT
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMz7D2AT]
+10/16 19:15:04.005|END         |
+10/16 19:15:04.005|START       |NAME=ID抽出結果 
+10/16 19:15:04.005|END         |
+10/16 19:15:04.005|START       |NAME=中間1出力_2 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.008|END         |
+10/16 19:15:04.008|LOOP_END    |COUNT=1
+10/16 19:15:04.008|BRANCH_END  |
+10/16 19:15:04.008|BRANCH_END  |
+10/16 19:15:04.008|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=9
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[9]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P22400F739
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P22400F739]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101500509-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101500509-00]
+10/16 19:15:04.008|END         |
+10/16 19:15:04.008|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.008|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101500509%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101500509%']
+10/16 19:15:04.008|END         |
+10/16 19:15:04.008|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.065|END         |
+10/16 19:15:04.065|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=true
+10/16 19:15:04.065|LOOP_START  |NAME=繰り返し_削除ID
+10/16 19:15:04.065|START       |NAME=削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P22400F739
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P22400F739]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101500509-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101500509-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMz4o2AD
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMz4o2AD]
+10/16 19:15:04.066|END         |
+10/16 19:15:04.066|START       |NAME=ID抽出結果 
+10/16 19:15:04.066|END         |
+10/16 19:15:04.066|START       |NAME=中間1出力_2 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.069|END         |
+10/16 19:15:04.069|LOOP_END    |COUNT=1
+10/16 19:15:04.069|BRANCH_END  |
+10/16 19:15:04.069|BRANCH_END  |
+10/16 19:15:04.069|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=10
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[10]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101504230-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101504230-00]
+10/16 19:15:04.069|END         |
+10/16 19:15:04.069|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.069|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101504230%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101504230%']
+10/16 19:15:04.070|END         |
+10/16 19:15:04.070|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.120|END         |
+10/16 19:15:04.120|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=true
+10/16 19:15:04.120|LOOP_START  |NAME=繰り返し_削除ID
+10/16 19:15:04.120|START       |NAME=削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101504230-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101504230-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMyqE2AT
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMyqE2AT]
+10/16 19:15:04.120|END         |
+10/16 19:15:04.120|START       |NAME=ID抽出結果 
+10/16 19:15:04.121|END         |
+10/16 19:15:04.121|START       |NAME=中間1出力_2 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.123|END         |
+10/16 19:15:04.123|LOOP_END    |COUNT=1
+10/16 19:15:04.123|BRANCH_END  |
+10/16 19:15:04.123|BRANCH_END  |
+10/16 19:15:04.123|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=11
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[11]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101504248-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101504248-00]
+10/16 19:15:04.124|END         |
+10/16 19:15:04.124|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.124|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101504248%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101504248%']
+10/16 19:15:04.124|END         |
+10/16 19:15:04.124|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.178|END         |
+10/16 19:15:04.178|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=true
+10/16 19:15:04.178|LOOP_START  |NAME=繰り返し_削除ID
+10/16 19:15:04.178|START       |NAME=削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101504248-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101504248-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMyqJ2AT
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMyqJ2AT]
+10/16 19:15:04.178|END         |
+10/16 19:15:04.178|START       |NAME=ID抽出結果 
+10/16 19:15:04.179|END         |
+10/16 19:15:04.179|START       |NAME=中間1出力_2 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.181|END         |
+10/16 19:15:04.181|LOOP_END    |COUNT=1
+10/16 19:15:04.181|BRANCH_END  |
+10/16 19:15:04.181|BRANCH_END  |
+10/16 19:15:04.181|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=12
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[12]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101504278-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101504278-00]
+10/16 19:15:04.182|END         |
+10/16 19:15:04.182|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.182|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101504278%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101504278%']
+10/16 19:15:04.182|END         |
+10/16 19:15:04.182|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.238|END         |
+10/16 19:15:04.238|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=true
+10/16 19:15:04.238|LOOP_START  |NAME=繰り返し_削除ID
+10/16 19:15:04.238|START       |NAME=削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101504278-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101504278-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMyqN2AT
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMyqN2AT]
+10/16 19:15:04.238|END         |
+10/16 19:15:04.238|START       |NAME=ID抽出結果 
+10/16 19:15:04.238|END         |
+10/16 19:15:04.238|START       |NAME=中間1出力_2 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.241|END         |
+10/16 19:15:04.241|LOOP_END    |COUNT=1
+10/16 19:15:04.241|BRANCH_END  |
+10/16 19:15:04.241|BRANCH_END  |
+10/16 19:15:04.241|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=13
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[13]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101504288-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101504288-00]
+10/16 19:15:04.241|END         |
+10/16 19:15:04.241|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.241|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101504288%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101504288%']
+10/16 19:15:04.241|END         |
+10/16 19:15:04.241|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.307|END         |
+10/16 19:15:04.307|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=true
+10/16 19:15:04.307|LOOP_START  |NAME=繰り返し_削除ID
+10/16 19:15:04.307|START       |NAME=削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101504288-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101504288-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMyqP2AT
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMyqP2AT]
+10/16 19:15:04.307|END         |
+10/16 19:15:04.307|START       |NAME=ID抽出結果 
+10/16 19:15:04.308|END         |
+10/16 19:15:04.308|START       |NAME=中間1出力_2 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.310|END         |
+10/16 19:15:04.310|LOOP_END    |COUNT=1
+10/16 19:15:04.310|BRANCH_END  |
+10/16 19:15:04.310|BRANCH_END  |
+10/16 19:15:04.310|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=14
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[14]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002171
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002171]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603294-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603294-00]
+10/16 19:15:04.310|END         |
+10/16 19:15:04.310|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.310|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603294%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603294%']
+10/16 19:15:04.310|END         |
+10/16 19:15:04.310|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.368|END         |
+10/16 19:15:04.368|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:04.368|START       |NAME=ID抽出結果なし 
+10/16 19:15:04.368|END         |
+10/16 19:15:04.368|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.371|END         |
+10/16 19:15:04.371|BRANCH_END  |
+10/16 19:15:04.371|BRANCH_END  |
+10/16 19:15:04.371|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=15
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[15]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002167
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002167]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603680-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603680-00]
+10/16 19:15:04.372|END         |
+10/16 19:15:04.372|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.372|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603680%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603680%']
+10/16 19:15:04.372|END         |
+10/16 19:15:04.372|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.427|END         |
+10/16 19:15:04.427|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=true
+10/16 19:15:04.427|LOOP_START  |NAME=繰り返し_削除ID
+10/16 19:15:04.427|START       |NAME=削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002167
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002167]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603680-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603680-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMz9c2AD
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMz9c2AD]
+10/16 19:15:04.427|END         |
+10/16 19:15:04.427|START       |NAME=ID抽出結果 
+10/16 19:15:04.427|END         |
+10/16 19:15:04.427|START       |NAME=中間1出力_2 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.429|END         |
+10/16 19:15:04.429|LOOP_END    |COUNT=1
+10/16 19:15:04.429|BRANCH_END  |
+10/16 19:15:04.429|BRANCH_END  |
+10/16 19:15:04.429|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=16
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[16]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P212006AFD
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P212006AFD]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603832-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603832-00]
+10/16 19:15:04.430|END         |
+10/16 19:15:04.430|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.430|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603832%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603832%']
+10/16 19:15:04.430|END         |
+10/16 19:15:04.430|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.483|END         |
+10/16 19:15:04.483|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=true
+10/16 19:15:04.483|LOOP_START  |NAME=繰り返し_削除ID
+10/16 19:15:04.483|START       |NAME=削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P212006AFD
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P212006AFD]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603832-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603832-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMzA22AL
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMzA22AL]
+10/16 19:15:04.483|END         |
+10/16 19:15:04.483|START       |NAME=ID抽出結果 
+10/16 19:15:04.483|END         |
+10/16 19:15:04.483|START       |NAME=中間1出力_2 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.486|END         |
+10/16 19:15:04.486|LOOP_END    |COUNT=1
+10/16 19:15:04.486|BRANCH_END  |
+10/16 19:15:04.486|BRANCH_END  |
+10/16 19:15:04.486|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=17
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[17]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P212006ACF
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P212006ACF]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603882-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603882-00]
+10/16 19:15:04.486|END         |
+10/16 19:15:04.486|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.486|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603882%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603882%']
+10/16 19:15:04.486|END         |
+10/16 19:15:04.486|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.542|END         |
+10/16 19:15:04.542|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=true
+10/16 19:15:04.542|LOOP_START  |NAME=繰り返し_削除ID
+10/16 19:15:04.542|START       |NAME=削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P212006ACF
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P212006ACF]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603882-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603882-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMzA82AL
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMzA82AL]
+10/16 19:15:04.543|END         |
+10/16 19:15:04.543|START       |NAME=ID抽出結果 
+10/16 19:15:04.543|END         |
+10/16 19:15:04.543|START       |NAME=中間1出力_2 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.545|END         |
+10/16 19:15:04.545|LOOP_END    |COUNT=1
+10/16 19:15:04.545|BRANCH_END  |
+10/16 19:15:04.545|BRANCH_END  |
+10/16 19:15:04.545|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=18
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[18]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P212006ACF
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P212006ACF]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603951-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603951-00]
+10/16 19:15:04.546|END         |
+10/16 19:15:04.546|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.546|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603951%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603951%']
+10/16 19:15:04.546|END         |
+10/16 19:15:04.546|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.582|END         |
+10/16 19:15:04.582|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=true
+10/16 19:15:04.582|LOOP_START  |NAME=繰り返し_削除ID
+10/16 19:15:04.582|START       |NAME=削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P212006ACF
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P212006ACF]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603951-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603951-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMzAV2A1
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMzAV2A1]
+10/16 19:15:04.582|END         |
+10/16 19:15:04.582|START       |NAME=ID抽出結果 
+10/16 19:15:04.582|END         |
+10/16 19:15:04.582|START       |NAME=中間1出力_2 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.585|END         |
+10/16 19:15:04.585|LOOP_END    |COUNT=1
+10/16 19:15:04.585|BRANCH_END  |
+10/16 19:15:04.585|BRANCH_END  |
+10/16 19:15:04.585|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=19
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[19]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603955-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603955-00]
+10/16 19:15:04.585|END         |
+10/16 19:15:04.585|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.585|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603955%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603955%']
+10/16 19:15:04.585|END         |
+10/16 19:15:04.585|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.637|END         |
+10/16 19:15:04.637|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:04.637|START       |NAME=ID抽出結果なし 
+10/16 19:15:04.637|END         |
+10/16 19:15:04.637|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.640|END         |
+10/16 19:15:04.640|BRANCH_END  |
+10/16 19:15:04.640|BRANCH_END  |
+10/16 19:15:04.640|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=20
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[20]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603956-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603956-00]
+10/16 19:15:04.640|END         |
+10/16 19:15:04.640|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.640|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603956%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603956%']
+10/16 19:15:04.640|END         |
+10/16 19:15:04.640|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.692|END         |
+10/16 19:15:04.692|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:04.692|START       |NAME=ID抽出結果なし 
+10/16 19:15:04.693|END         |
+10/16 19:15:04.693|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.695|END         |
+10/16 19:15:04.695|BRANCH_END  |
+10/16 19:15:04.695|BRANCH_END  |
+10/16 19:15:04.695|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=21
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[21]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603957-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603957-00]
+10/16 19:15:04.695|END         |
+10/16 19:15:04.695|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.695|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603957%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603957%']
+10/16 19:15:04.695|END         |
+10/16 19:15:04.695|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.751|END         |
+10/16 19:15:04.751|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:04.751|START       |NAME=ID抽出結果なし 
+10/16 19:15:04.751|END         |
+10/16 19:15:04.751|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.753|END         |
+10/16 19:15:04.753|BRANCH_END  |
+10/16 19:15:04.753|BRANCH_END  |
+10/16 19:15:04.753|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=22
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[22]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603958-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603958-00]
+10/16 19:15:04.754|END         |
+10/16 19:15:04.754|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.754|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603958%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603958%']
+10/16 19:15:04.754|END         |
+10/16 19:15:04.754|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.803|END         |
+10/16 19:15:04.803|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:04.803|START       |NAME=ID抽出結果なし 
+10/16 19:15:04.803|END         |
+10/16 19:15:04.803|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.806|END         |
+10/16 19:15:04.806|BRANCH_END  |
+10/16 19:15:04.806|BRANCH_END  |
+10/16 19:15:04.806|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=23
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[23]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603959-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603959-00]
+10/16 19:15:04.806|END         |
+10/16 19:15:04.806|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.806|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603959%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603959%']
+10/16 19:15:04.806|END         |
+10/16 19:15:04.806|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.837|END         |
+10/16 19:15:04.837|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:04.837|START       |NAME=ID抽出結果なし 
+10/16 19:15:04.838|END         |
+10/16 19:15:04.838|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.840|END         |
+10/16 19:15:04.840|BRANCH_END  |
+10/16 19:15:04.840|BRANCH_END  |
+10/16 19:15:04.840|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=24
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[24]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P224016491
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P224016491]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603960-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603960-00]
+10/16 19:15:04.841|END         |
+10/16 19:15:04.841|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.841|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603960%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603960%']
+10/16 19:15:04.841|END         |
+10/16 19:15:04.841|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.895|END         |
+10/16 19:15:04.895|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:04.895|START       |NAME=ID抽出結果なし 
+10/16 19:15:04.895|END         |
+10/16 19:15:04.895|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.897|END         |
+10/16 19:15:04.897|BRANCH_END  |
+10/16 19:15:04.897|BRANCH_END  |
+10/16 19:15:04.897|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=25
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[25]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P224016491
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P224016491]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603961-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603961-00]
+10/16 19:15:04.898|END         |
+10/16 19:15:04.898|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.898|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603961%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603961%']
+10/16 19:15:04.898|END         |
+10/16 19:15:04.898|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:04.958|END         |
+10/16 19:15:04.958|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:04.958|START       |NAME=ID抽出結果なし 
+10/16 19:15:04.959|END         |
+10/16 19:15:04.959|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:04.961|END         |
+10/16 19:15:04.961|BRANCH_END  |
+10/16 19:15:04.961|BRANCH_END  |
+10/16 19:15:04.961|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=26
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[26]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P224016491
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P224016491]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603962-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603962-00]
+10/16 19:15:04.961|END         |
+10/16 19:15:04.961|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:04.961|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603962%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603962%']
+10/16 19:15:04.962|END         |
+10/16 19:15:04.962|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:05.015|END         |
+10/16 19:15:05.016|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:05.016|START       |NAME=ID抽出結果なし 
+10/16 19:15:05.016|END         |
+10/16 19:15:05.016|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.018|END         |
+10/16 19:15:05.018|BRANCH_END  |
+10/16 19:15:05.018|BRANCH_END  |
+10/16 19:15:05.018|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=27
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[27]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603972-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603972-00]
+10/16 19:15:05.018|END         |
+10/16 19:15:05.018|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:05.018|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603972%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603972%']
+10/16 19:15:05.018|END         |
+10/16 19:15:05.018|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:05.070|END         |
+10/16 19:15:05.070|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:05.070|START       |NAME=ID抽出結果なし 
+10/16 19:15:05.070|END         |
+10/16 19:15:05.070|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.073|END         |
+10/16 19:15:05.073|BRANCH_END  |
+10/16 19:15:05.073|BRANCH_END  |
+10/16 19:15:05.073|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=28
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[28]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603975-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603975-00]
+10/16 19:15:05.073|END         |
+10/16 19:15:05.073|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:05.073|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603975%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603975%']
+10/16 19:15:05.073|END         |
+10/16 19:15:05.073|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:05.125|END         |
+10/16 19:15:05.125|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:05.125|START       |NAME=ID抽出結果なし 
+10/16 19:15:05.126|END         |
+10/16 19:15:05.126|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.128|END         |
+10/16 19:15:05.128|BRANCH_END  |
+10/16 19:15:05.128|BRANCH_END  |
+10/16 19:15:05.128|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=29
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[29]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603976-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603976-00]
+10/16 19:15:05.128|END         |
+10/16 19:15:05.128|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:05.128|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603976%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603976%']
+10/16 19:15:05.128|END         |
+10/16 19:15:05.128|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:05.178|END         |
+10/16 19:15:05.179|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:05.179|START       |NAME=ID抽出結果なし 
+10/16 19:15:05.179|END         |
+10/16 19:15:05.179|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.181|END         |
+10/16 19:15:05.181|BRANCH_END  |
+10/16 19:15:05.181|BRANCH_END  |
+10/16 19:15:05.181|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=30
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[30]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603977-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603977-00]
+10/16 19:15:05.182|END         |
+10/16 19:15:05.182|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:05.182|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603977%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603977%']
+10/16 19:15:05.182|END         |
+10/16 19:15:05.182|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:05.236|END         |
+10/16 19:15:05.236|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:05.236|START       |NAME=ID抽出結果なし 
+10/16 19:15:05.237|END         |
+10/16 19:15:05.237|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.239|END         |
+10/16 19:15:05.239|BRANCH_END  |
+10/16 19:15:05.239|BRANCH_END  |
+10/16 19:15:05.239|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=31
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[31]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603978-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603978-00]
+10/16 19:15:05.239|END         |
+10/16 19:15:05.239|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:05.239|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603978%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603978%']
+10/16 19:15:05.240|END         |
+10/16 19:15:05.240|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:05.292|END         |
+10/16 19:15:05.292|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:05.292|START       |NAME=ID抽出結果なし 
+10/16 19:15:05.292|END         |
+10/16 19:15:05.292|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.295|END         |
+10/16 19:15:05.295|BRANCH_END  |
+10/16 19:15:05.295|BRANCH_END  |
+10/16 19:15:05.295|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=32
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[32]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603979-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603979-00]
+10/16 19:15:05.295|END         |
+10/16 19:15:05.295|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:05.295|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603979%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603979%']
+10/16 19:15:05.295|END         |
+10/16 19:15:05.295|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:05.350|END         |
+10/16 19:15:05.350|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:05.350|START       |NAME=ID抽出結果なし 
+10/16 19:15:05.350|END         |
+10/16 19:15:05.350|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.352|END         |
+10/16 19:15:05.353|BRANCH_END  |
+10/16 19:15:05.353|BRANCH_END  |
+10/16 19:15:05.353|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=33
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[33]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P21800668D
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P21800668D]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603995-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603995-00]
+10/16 19:15:05.353|END         |
+10/16 19:15:05.353|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:05.353|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603995%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603995%']
+10/16 19:15:05.353|END         |
+10/16 19:15:05.353|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:05.407|END         |
+10/16 19:15:05.407|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:05.407|START       |NAME=ID抽出結果なし 
+10/16 19:15:05.408|END         |
+10/16 19:15:05.408|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.410|END         |
+10/16 19:15:05.410|BRANCH_END  |
+10/16 19:15:05.410|BRANCH_END  |
+10/16 19:15:05.410|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=34
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[34]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P230451537
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P230451537]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603999-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603999-00]
+10/16 19:15:05.410|END         |
+10/16 19:15:05.410|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:05.410|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101603999%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101603999%']
+10/16 19:15:05.410|END         |
+10/16 19:15:05.410|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:05.465|END         |
+10/16 19:15:05.465|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:05.465|START       |NAME=ID抽出結果なし 
+10/16 19:15:05.466|END         |
+10/16 19:15:05.466|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.468|END         |
+10/16 19:15:05.468|BRANCH_END  |
+10/16 19:15:05.468|BRANCH_END  |
+10/16 19:15:05.468|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=35
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[35]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002B9A
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002B9A]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101604007-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101604007-00]
+10/16 19:15:05.468|END         |
+10/16 19:15:05.468|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:05.468|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101604007%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101604007%']
+10/16 19:15:05.468|END         |
+10/16 19:15:05.468|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:05.517|END         |
+10/16 19:15:05.517|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:05.517|START       |NAME=ID抽出結果なし 
+10/16 19:15:05.518|END         |
+10/16 19:15:05.518|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.520|END         |
+10/16 19:15:05.520|BRANCH_END  |
+10/16 19:15:05.520|BRANCH_END  |
+10/16 19:15:05.520|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=36
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[36]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P21800668D
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P21800668D]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101604011-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101604011-00]
+10/16 19:15:05.520|END         |
+10/16 19:15:05.520|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 19:15:05.520|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101604011%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101604011%']
+10/16 19:15:05.520|END         |
+10/16 19:15:05.520|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 19:15:05.592|END         |
+10/16 19:15:05.592|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 19:15:05.592|START       |NAME=ID抽出結果なし 
+10/16 19:15:05.592|END         |
+10/16 19:15:05.592|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.595|END         |
+10/16 19:15:05.595|BRANCH_END  |
+10/16 19:15:05.595|BRANCH_END  |
+10/16 19:15:05.595|LOOP_END    |COUNT=36
+10/16 19:15:05.595|BRANCH_START|NAME=F読込件数判定
+--/-- --:--:--.---|EVALUATION  |NAME=空ファイル, RESULT=false
+10/16 19:15:05.595|BRANCH_END  |
+10/16 19:15:05.595|START       |NAME=変数初期化_1 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=                  
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[                  ]
+10/16 19:15:05.595|END         |
+10/16 19:15:05.595|START       |NAME=中間1読込 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[36]行のデータを抽出しました。
+10/16 19:15:05.597|END         |
+10/16 19:15:05.597|START       |NAME=中間1_IDソート 
+--/-- --:--:--.---|INFO        |ソート処理の中間データ抽出処理が正常に終了しました。
+10/16 19:15:05.598|END         |
+10/16 19:15:05.598|LOOP_START  |NAME=繰り返し_R削除
+10/16 19:15:05.598|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=3
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[3]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002B57
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002B57]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100701177-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100701177-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.599|END         |
+10/16 19:15:05.599|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.599|BRANCH_END  |
+10/16 19:15:05.599|START       |NAME=削除結果F内容 
+10/16 19:15:05.599|END         |
+10/16 19:15:05.599|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.603|END         |
+10/16 19:15:05.603|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=4
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[4]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002B57
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002B57]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100702403-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100702403-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.603|END         |
+10/16 19:15:05.603|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.603|BRANCH_END  |
+10/16 19:15:05.603|START       |NAME=削除結果F内容 
+10/16 19:15:05.603|END         |
+10/16 19:15:05.603|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.606|END         |
+10/16 19:15:05.606|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=14
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[14]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002171
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002171]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603294-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603294-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.606|END         |
+10/16 19:15:05.606|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.606|BRANCH_END  |
+10/16 19:15:05.606|START       |NAME=削除結果F内容 
+10/16 19:15:05.606|END         |
+10/16 19:15:05.606|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.608|END         |
+10/16 19:15:05.608|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=19
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[19]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603955-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603955-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.609|END         |
+10/16 19:15:05.609|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.609|BRANCH_END  |
+10/16 19:15:05.609|START       |NAME=削除結果F内容 
+10/16 19:15:05.609|END         |
+10/16 19:15:05.609|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.611|END         |
+10/16 19:15:05.611|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=20
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[20]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603956-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603956-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.611|END         |
+10/16 19:15:05.611|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.611|BRANCH_END  |
+10/16 19:15:05.611|START       |NAME=削除結果F内容 
+10/16 19:15:05.611|END         |
+10/16 19:15:05.611|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.614|END         |
+10/16 19:15:05.614|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=21
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[21]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603957-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603957-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.614|END         |
+10/16 19:15:05.614|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.614|BRANCH_END  |
+10/16 19:15:05.614|START       |NAME=削除結果F内容 
+10/16 19:15:05.614|END         |
+10/16 19:15:05.614|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.616|END         |
+10/16 19:15:05.616|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=22
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[22]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603958-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603958-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.616|END         |
+10/16 19:15:05.616|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.616|BRANCH_END  |
+10/16 19:15:05.616|START       |NAME=削除結果F内容 
+10/16 19:15:05.616|END         |
+10/16 19:15:05.616|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.618|END         |
+10/16 19:15:05.618|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=23
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[23]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603959-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603959-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.619|END         |
+10/16 19:15:05.619|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.619|BRANCH_END  |
+10/16 19:15:05.619|START       |NAME=削除結果F内容 
+10/16 19:15:05.619|END         |
+10/16 19:15:05.619|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.621|END         |
+10/16 19:15:05.621|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=24
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[24]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P224016491
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P224016491]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603960-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603960-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.621|END         |
+10/16 19:15:05.621|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.621|BRANCH_END  |
+10/16 19:15:05.621|START       |NAME=削除結果F内容 
+10/16 19:15:05.621|END         |
+10/16 19:15:05.621|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.623|END         |
+10/16 19:15:05.623|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=25
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[25]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P224016491
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P224016491]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603961-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603961-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.623|END         |
+10/16 19:15:05.623|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.623|BRANCH_END  |
+10/16 19:15:05.624|START       |NAME=削除結果F内容 
+10/16 19:15:05.624|END         |
+10/16 19:15:05.624|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.626|END         |
+10/16 19:15:05.626|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=26
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[26]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P224016491
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P224016491]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603962-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603962-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.626|END         |
+10/16 19:15:05.626|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.626|BRANCH_END  |
+10/16 19:15:05.626|START       |NAME=削除結果F内容 
+10/16 19:15:05.626|END         |
+10/16 19:15:05.626|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.628|END         |
+10/16 19:15:05.628|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=27
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[27]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603972-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603972-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.629|END         |
+10/16 19:15:05.629|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.629|BRANCH_END  |
+10/16 19:15:05.629|START       |NAME=削除結果F内容 
+10/16 19:15:05.629|END         |
+10/16 19:15:05.629|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.631|END         |
+10/16 19:15:05.631|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=28
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[28]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603975-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603975-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.631|END         |
+10/16 19:15:05.631|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.631|BRANCH_END  |
+10/16 19:15:05.631|START       |NAME=削除結果F内容 
+10/16 19:15:05.631|END         |
+10/16 19:15:05.631|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.633|END         |
+10/16 19:15:05.633|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=29
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[29]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603976-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603976-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.633|END         |
+10/16 19:15:05.633|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.633|BRANCH_END  |
+10/16 19:15:05.633|START       |NAME=削除結果F内容 
+10/16 19:15:05.634|END         |
+10/16 19:15:05.634|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.636|END         |
+10/16 19:15:05.636|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=30
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[30]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603977-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603977-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.636|END         |
+10/16 19:15:05.636|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.636|BRANCH_END  |
+10/16 19:15:05.636|START       |NAME=削除結果F内容 
+10/16 19:15:05.636|END         |
+10/16 19:15:05.636|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.638|END         |
+10/16 19:15:05.638|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=31
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[31]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603978-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603978-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.638|END         |
+10/16 19:15:05.638|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.638|BRANCH_END  |
+10/16 19:15:05.638|START       |NAME=削除結果F内容 
+10/16 19:15:05.639|END         |
+10/16 19:15:05.639|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.641|END         |
+10/16 19:15:05.641|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=32
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[32]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603979-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603979-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.641|END         |
+10/16 19:15:05.641|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.641|BRANCH_END  |
+10/16 19:15:05.641|START       |NAME=削除結果F内容 
+10/16 19:15:05.641|END         |
+10/16 19:15:05.641|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.643|END         |
+10/16 19:15:05.643|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=33
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[33]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P21800668D
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P21800668D]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603995-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603995-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.643|END         |
+10/16 19:15:05.643|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.643|BRANCH_END  |
+10/16 19:15:05.643|START       |NAME=削除結果F内容 
+10/16 19:15:05.644|END         |
+10/16 19:15:05.644|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.646|END         |
+10/16 19:15:05.646|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=34
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[34]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P230451537
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P230451537]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603999-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603999-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.646|END         |
+10/16 19:15:05.646|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.646|BRANCH_END  |
+10/16 19:15:05.646|START       |NAME=削除結果F内容 
+10/16 19:15:05.646|END         |
+10/16 19:15:05.646|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.648|END         |
+10/16 19:15:05.648|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=35
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[35]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002B9A
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002B9A]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101604007-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101604007-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.648|END         |
+10/16 19:15:05.648|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.648|BRANCH_END  |
+10/16 19:15:05.648|START       |NAME=削除結果F内容 
+10/16 19:15:05.649|END         |
+10/16 19:15:05.649|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.651|END         |
+10/16 19:15:05.651|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=36
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[36]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P21800668D
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P21800668D]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101604011-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101604011-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 19:15:05.651|END         |
+10/16 19:15:05.651|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 19:15:05.651|BRANCH_END  |
+10/16 19:15:05.651|START       |NAME=削除結果F内容 
+10/16 19:15:05.651|END         |
+10/16 19:15:05.651|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.653|END         |
+10/16 19:15:05.653|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=10
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[10]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101504230-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101504230-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMyqE2AT
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMyqE2AT]
+10/16 19:15:05.653|END         |
+10/16 19:15:05.653|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=true
+10/16 19:15:05.653|START       |NAME=削除条件設定 
+10/16 19:15:05.653|END         |
+10/16 19:15:05.653|START       |NAME=オーダ進捗_R削除 [salesforce_adapter/put_delete]
+--/-- --:--:--.---|INFO        |[1]件の入力データから、[1]件のデータ書き込み（DELETE）に成功しました。
+10/16 19:15:05.984|END         |
+10/16 19:15:05.984|START       |NAME=R削除結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 19:15:05.985|END         |
+10/16 19:15:05.985|BRANCH_START|NAME=R削除結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=削除失敗, RESULT=false
+10/16 19:15:05.985|BRANCH_END  |
+10/16 19:15:05.985|START       |NAME=削除件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=削除件数, VALUE=1
+--/-- --:--:--.---|INFO        |削除件数(int) 入力=[1]
+10/16 19:15:05.985|END         |
+10/16 19:15:05.985|START       |NAME=前回ID更新 
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=a2JGC00000KMyqE2AT
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[a2JGC00000KMyqE2AT]
+10/16 19:15:05.985|END         |
+10/16 19:15:05.985|BRANCH_END  |
+10/16 19:15:05.985|START       |NAME=削除結果F内容 
+10/16 19:15:05.985|END         |
+10/16 19:15:05.985|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:05.987|END         |
+10/16 19:15:05.987|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=11
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[11]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101504248-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101504248-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMyqJ2AT
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMyqJ2AT]
+10/16 19:15:05.987|END         |
+10/16 19:15:05.987|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=true
+10/16 19:15:05.987|START       |NAME=削除条件設定 
+10/16 19:15:05.987|END         |
+10/16 19:15:05.987|START       |NAME=オーダ進捗_R削除 [salesforce_adapter/put_delete]
+--/-- --:--:--.---|INFO        |[1]件の入力データから、[1]件のデータ書き込み（DELETE）に成功しました。
+10/16 19:15:06.150|END         |
+10/16 19:15:06.150|START       |NAME=R削除結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 19:15:06.150|END         |
+10/16 19:15:06.150|BRANCH_START|NAME=R削除結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=削除失敗, RESULT=false
+10/16 19:15:06.150|BRANCH_END  |
+10/16 19:15:06.150|START       |NAME=削除件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=削除件数, VALUE=2
+--/-- --:--:--.---|INFO        |削除件数(int) 入力=[2]
+10/16 19:15:06.151|END         |
+10/16 19:15:06.151|START       |NAME=前回ID更新 
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=a2JGC00000KMyqJ2AT
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[a2JGC00000KMyqJ2AT]
+10/16 19:15:06.151|END         |
+10/16 19:15:06.151|BRANCH_END  |
+10/16 19:15:06.151|START       |NAME=削除結果F内容 
+10/16 19:15:06.151|END         |
+10/16 19:15:06.151|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:06.153|END         |
+10/16 19:15:06.153|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=12
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[12]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101504278-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101504278-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMyqN2AT
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMyqN2AT]
+10/16 19:15:06.153|END         |
+10/16 19:15:06.153|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=true
+10/16 19:15:06.153|START       |NAME=削除条件設定 
+10/16 19:15:06.153|END         |
+10/16 19:15:06.153|START       |NAME=オーダ進捗_R削除 [salesforce_adapter/put_delete]
+--/-- --:--:--.---|INFO        |[1]件の入力データから、[1]件のデータ書き込み（DELETE）に成功しました。
+10/16 19:15:06.330|END         |
+10/16 19:15:06.330|START       |NAME=R削除結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 19:15:06.330|END         |
+10/16 19:15:06.330|BRANCH_START|NAME=R削除結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=削除失敗, RESULT=false
+10/16 19:15:06.330|BRANCH_END  |
+10/16 19:15:06.330|START       |NAME=削除件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=削除件数, VALUE=3
+--/-- --:--:--.---|INFO        |削除件数(int) 入力=[3]
+10/16 19:15:06.330|END         |
+10/16 19:15:06.330|START       |NAME=前回ID更新 
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=a2JGC00000KMyqN2AT
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[a2JGC00000KMyqN2AT]
+10/16 19:15:06.330|END         |
+10/16 19:15:06.330|BRANCH_END  |
+10/16 19:15:06.330|START       |NAME=削除結果F内容 
+10/16 19:15:06.330|END         |
+10/16 19:15:06.330|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:06.333|END         |
+10/16 19:15:06.333|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=13
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[13]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241432304
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241432304]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101504288-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101504288-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMyqP2AT
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMyqP2AT]
+10/16 19:15:06.333|END         |
+10/16 19:15:06.333|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=true
+10/16 19:15:06.333|START       |NAME=削除条件設定 
+10/16 19:15:06.333|END         |
+10/16 19:15:06.333|START       |NAME=オーダ進捗_R削除 [salesforce_adapter/put_delete]
+--/-- --:--:--.---|INFO        |[1]件の入力データから、[1]件のデータ書き込み（DELETE）に成功しました。
+10/16 19:15:06.493|END         |
+10/16 19:15:06.493|START       |NAME=R削除結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 19:15:06.493|END         |
+10/16 19:15:06.493|BRANCH_START|NAME=R削除結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=削除失敗, RESULT=false
+10/16 19:15:06.493|BRANCH_END  |
+10/16 19:15:06.493|START       |NAME=削除件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=削除件数, VALUE=4
+--/-- --:--:--.---|INFO        |削除件数(int) 入力=[4]
+10/16 19:15:06.494|END         |
+10/16 19:15:06.494|START       |NAME=前回ID更新 
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=a2JGC00000KMyqP2AT
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[a2JGC00000KMyqP2AT]
+10/16 19:15:06.494|END         |
+10/16 19:15:06.494|BRANCH_END  |
+10/16 19:15:06.494|START       |NAME=削除結果F内容 
+10/16 19:15:06.494|END         |
+10/16 19:15:06.494|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:06.496|END         |
+10/16 19:15:06.496|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=1
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[1]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P230482234
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P230482234]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24081302276-03
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24081302276-03]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMywC2AT
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMywC2AT]
+10/16 19:15:06.496|END         |
+10/16 19:15:06.496|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=true
+10/16 19:15:06.496|START       |NAME=削除条件設定 
+10/16 19:15:06.496|END         |
+10/16 19:15:06.496|START       |NAME=オーダ進捗_R削除 [salesforce_adapter/put_delete]
+--/-- --:--:--.---|INFO        |[1]件の入力データから、[1]件のデータ書き込み（DELETE）に成功しました。
+10/16 19:15:06.634|END         |
+10/16 19:15:06.634|START       |NAME=R削除結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 19:15:06.634|END         |
+10/16 19:15:06.634|BRANCH_START|NAME=R削除結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=削除失敗, RESULT=false
+10/16 19:15:06.634|BRANCH_END  |
+10/16 19:15:06.634|START       |NAME=削除件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=削除件数, VALUE=5
+--/-- --:--:--.---|INFO        |削除件数(int) 入力=[5]
+10/16 19:15:06.634|END         |
+10/16 19:15:06.634|START       |NAME=前回ID更新 
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=a2JGC00000KMywC2AT
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[a2JGC00000KMywC2AT]
+10/16 19:15:06.634|END         |
+10/16 19:15:06.634|BRANCH_END  |
+10/16 19:15:06.634|START       |NAME=削除結果F内容 
+10/16 19:15:06.635|END         |
+10/16 19:15:06.635|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:06.637|END         |
+10/16 19:15:06.637|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=5
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[5]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P21300244A
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P21300244A]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100803788-01
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100803788-01]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMywb2AD
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMywb2AD]
+10/16 19:15:06.637|END         |
+10/16 19:15:06.637|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=true
+10/16 19:15:06.637|START       |NAME=削除条件設定 
+10/16 19:15:06.637|END         |
+10/16 19:15:06.637|START       |NAME=オーダ進捗_R削除 [salesforce_adapter/put_delete]
+--/-- --:--:--.---|INFO        |[1]件の入力データから、[1]件のデータ書き込み（DELETE）に成功しました。
+10/16 19:15:06.829|END         |
+10/16 19:15:06.829|START       |NAME=R削除結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 19:15:06.829|END         |
+10/16 19:15:06.829|BRANCH_START|NAME=R削除結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=削除失敗, RESULT=false
+10/16 19:15:06.829|BRANCH_END  |
+10/16 19:15:06.829|START       |NAME=削除件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=削除件数, VALUE=6
+--/-- --:--:--.---|INFO        |削除件数(int) 入力=[6]
+10/16 19:15:06.829|END         |
+10/16 19:15:06.829|START       |NAME=前回ID更新 
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=a2JGC00000KMywb2AD
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[a2JGC00000KMywb2AD]
+10/16 19:15:06.829|END         |
+10/16 19:15:06.829|BRANCH_END  |
+10/16 19:15:06.829|START       |NAME=削除結果F内容 
+10/16 19:15:06.830|END         |
+10/16 19:15:06.830|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:06.831|END         |
+10/16 19:15:06.831|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=2
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[2]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241024944
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241024944]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100400902-02
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100400902-02]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMyyJ2AT
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMyyJ2AT]
+10/16 19:15:06.831|END         |
+10/16 19:15:06.831|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=true
+10/16 19:15:06.831|START       |NAME=削除条件設定 
+10/16 19:15:06.831|END         |
+10/16 19:15:06.831|START       |NAME=オーダ進捗_R削除 [salesforce_adapter/put_delete]
+--/-- --:--:--.---|INFO        |[1]件の入力データから、[1]件のデータ書き込み（DELETE）に成功しました。
+10/16 19:15:07.021|END         |
+10/16 19:15:07.021|START       |NAME=R削除結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 19:15:07.021|END         |
+10/16 19:15:07.021|BRANCH_START|NAME=R削除結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=削除失敗, RESULT=false
+10/16 19:15:07.021|BRANCH_END  |
+10/16 19:15:07.021|START       |NAME=削除件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=削除件数, VALUE=7
+--/-- --:--:--.---|INFO        |削除件数(int) 入力=[7]
+10/16 19:15:07.021|END         |
+10/16 19:15:07.021|START       |NAME=前回ID更新 
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=a2JGC00000KMyyJ2AT
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[a2JGC00000KMyyJ2AT]
+10/16 19:15:07.021|END         |
+10/16 19:15:07.021|BRANCH_END  |
+10/16 19:15:07.021|START       |NAME=削除結果F内容 
+10/16 19:15:07.022|END         |
+10/16 19:15:07.022|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:07.024|END         |
+10/16 19:15:07.024|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=9
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[9]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P22400F739
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P22400F739]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101500509-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101500509-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMz4o2AD
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMz4o2AD]
+10/16 19:15:07.024|END         |
+10/16 19:15:07.024|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=true
+10/16 19:15:07.024|START       |NAME=削除条件設定 
+10/16 19:15:07.024|END         |
+10/16 19:15:07.024|START       |NAME=オーダ進捗_R削除 [salesforce_adapter/put_delete]
+--/-- --:--:--.---|INFO        |[1]件の入力データから、[1]件のデータ書き込み（DELETE）に成功しました。
+10/16 19:15:07.193|END         |
+10/16 19:15:07.193|START       |NAME=R削除結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 19:15:07.193|END         |
+10/16 19:15:07.193|BRANCH_START|NAME=R削除結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=削除失敗, RESULT=false
+10/16 19:15:07.193|BRANCH_END  |
+10/16 19:15:07.193|START       |NAME=削除件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=削除件数, VALUE=8
+--/-- --:--:--.---|INFO        |削除件数(int) 入力=[8]
+10/16 19:15:07.193|END         |
+10/16 19:15:07.193|START       |NAME=前回ID更新 
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=a2JGC00000KMz4o2AD
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[a2JGC00000KMz4o2AD]
+10/16 19:15:07.193|END         |
+10/16 19:15:07.193|BRANCH_END  |
+10/16 19:15:07.193|START       |NAME=削除結果F内容 
+10/16 19:15:07.194|END         |
+10/16 19:15:07.194|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:07.195|END         |
+10/16 19:15:07.195|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=6
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[6]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P214016AEC
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P214016AEC]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100900811-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100900811-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMz6i2AD
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMz6i2AD]
+10/16 19:15:07.196|END         |
+10/16 19:15:07.196|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=true
+10/16 19:15:07.196|START       |NAME=削除条件設定 
+10/16 19:15:07.196|END         |
+10/16 19:15:07.196|START       |NAME=オーダ進捗_R削除 [salesforce_adapter/put_delete]
+--/-- --:--:--.---|INFO        |[1]件の入力データから、[1]件のデータ書き込み（DELETE）に成功しました。
+10/16 19:15:07.369|END         |
+10/16 19:15:07.369|START       |NAME=R削除結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 19:15:07.369|END         |
+10/16 19:15:07.369|BRANCH_START|NAME=R削除結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=削除失敗, RESULT=false
+10/16 19:15:07.369|BRANCH_END  |
+10/16 19:15:07.369|START       |NAME=削除件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=削除件数, VALUE=9
+--/-- --:--:--.---|INFO        |削除件数(int) 入力=[9]
+10/16 19:15:07.369|END         |
+10/16 19:15:07.369|START       |NAME=前回ID更新 
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=a2JGC00000KMz6i2AD
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[a2JGC00000KMz6i2AD]
+10/16 19:15:07.369|END         |
+10/16 19:15:07.369|BRANCH_END  |
+10/16 19:15:07.369|START       |NAME=削除結果F内容 
+10/16 19:15:07.369|END         |
+10/16 19:15:07.369|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:07.371|END         |
+10/16 19:15:07.371|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=7
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[7]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P214016AEC
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P214016AEC]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100901622-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100901622-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMz6j2AD
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMz6j2AD]
+10/16 19:15:07.371|END         |
+10/16 19:15:07.371|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=true
+10/16 19:15:07.371|START       |NAME=削除条件設定 
+10/16 19:15:07.371|END         |
+10/16 19:15:07.371|START       |NAME=オーダ進捗_R削除 [salesforce_adapter/put_delete]
+--/-- --:--:--.---|INFO        |[1]件の入力データから、[1]件のデータ書き込み（DELETE）に成功しました。
+10/16 19:15:07.511|END         |
+10/16 19:15:07.511|START       |NAME=R削除結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 19:15:07.511|END         |
+10/16 19:15:07.511|BRANCH_START|NAME=R削除結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=削除失敗, RESULT=false
+10/16 19:15:07.511|BRANCH_END  |
+10/16 19:15:07.511|START       |NAME=削除件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=削除件数, VALUE=10
+--/-- --:--:--.---|INFO        |削除件数(int) 入力=[10]
+10/16 19:15:07.511|END         |
+10/16 19:15:07.511|START       |NAME=前回ID更新 
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=a2JGC00000KMz6j2AD
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[a2JGC00000KMz6j2AD]
+10/16 19:15:07.511|END         |
+10/16 19:15:07.511|BRANCH_END  |
+10/16 19:15:07.511|START       |NAME=削除結果F内容 
+10/16 19:15:07.511|END         |
+10/16 19:15:07.511|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:07.513|END         |
+10/16 19:15:07.513|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=8
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[8]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P214016AEC
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P214016AEC]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101500226-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101500226-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMz7D2AT
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMz7D2AT]
+10/16 19:15:07.513|END         |
+10/16 19:15:07.513|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=true
+10/16 19:15:07.513|START       |NAME=削除条件設定 
+10/16 19:15:07.513|END         |
+10/16 19:15:07.513|START       |NAME=オーダ進捗_R削除 [salesforce_adapter/put_delete]
+--/-- --:--:--.---|INFO        |[1]件の入力データから、[1]件のデータ書き込み（DELETE）に成功しました。
+10/16 19:15:07.686|END         |
+10/16 19:15:07.686|START       |NAME=R削除結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 19:15:07.686|END         |
+10/16 19:15:07.686|BRANCH_START|NAME=R削除結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=削除失敗, RESULT=false
+10/16 19:15:07.686|BRANCH_END  |
+10/16 19:15:07.686|START       |NAME=削除件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=削除件数, VALUE=11
+--/-- --:--:--.---|INFO        |削除件数(int) 入力=[11]
+10/16 19:15:07.686|END         |
+10/16 19:15:07.686|START       |NAME=前回ID更新 
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=a2JGC00000KMz7D2AT
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[a2JGC00000KMz7D2AT]
+10/16 19:15:07.686|END         |
+10/16 19:15:07.686|BRANCH_END  |
+10/16 19:15:07.686|START       |NAME=削除結果F内容 
+10/16 19:15:07.687|END         |
+10/16 19:15:07.687|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:07.689|END         |
+10/16 19:15:07.689|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=15
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[15]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002167
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002167]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603680-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603680-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMz9c2AD
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMz9c2AD]
+10/16 19:15:07.689|END         |
+10/16 19:15:07.689|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=true
+10/16 19:15:07.689|START       |NAME=削除条件設定 
+10/16 19:15:07.689|END         |
+10/16 19:15:07.689|START       |NAME=オーダ進捗_R削除 [salesforce_adapter/put_delete]
+--/-- --:--:--.---|INFO        |[1]件の入力データから、[1]件のデータ書き込み（DELETE）に成功しました。
+10/16 19:15:07.872|END         |
+10/16 19:15:07.872|START       |NAME=R削除結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 19:15:07.872|END         |
+10/16 19:15:07.872|BRANCH_START|NAME=R削除結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=削除失敗, RESULT=false
+10/16 19:15:07.872|BRANCH_END  |
+10/16 19:15:07.872|START       |NAME=削除件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=削除件数, VALUE=12
+--/-- --:--:--.---|INFO        |削除件数(int) 入力=[12]
+10/16 19:15:07.872|END         |
+10/16 19:15:07.872|START       |NAME=前回ID更新 
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=a2JGC00000KMz9c2AD
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[a2JGC00000KMz9c2AD]
+10/16 19:15:07.872|END         |
+10/16 19:15:07.872|BRANCH_END  |
+10/16 19:15:07.872|START       |NAME=削除結果F内容 
+10/16 19:15:07.872|END         |
+10/16 19:15:07.872|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:07.874|END         |
+10/16 19:15:07.874|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=16
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[16]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P212006AFD
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P212006AFD]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603832-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603832-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMzA22AL
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMzA22AL]
+10/16 19:15:07.874|END         |
+10/16 19:15:07.874|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=true
+10/16 19:15:07.874|START       |NAME=削除条件設定 
+10/16 19:15:07.874|END         |
+10/16 19:15:07.874|START       |NAME=オーダ進捗_R削除 [salesforce_adapter/put_delete]
+--/-- --:--:--.---|INFO        |[1]件の入力データから、[1]件のデータ書き込み（DELETE）に成功しました。
+10/16 19:15:08.010|END         |
+10/16 19:15:08.010|START       |NAME=R削除結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 19:15:08.010|END         |
+10/16 19:15:08.010|BRANCH_START|NAME=R削除結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=削除失敗, RESULT=false
+10/16 19:15:08.010|BRANCH_END  |
+10/16 19:15:08.010|START       |NAME=削除件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=削除件数, VALUE=13
+--/-- --:--:--.---|INFO        |削除件数(int) 入力=[13]
+10/16 19:15:08.010|END         |
+10/16 19:15:08.010|START       |NAME=前回ID更新 
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=a2JGC00000KMzA22AL
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[a2JGC00000KMzA22AL]
+10/16 19:15:08.010|END         |
+10/16 19:15:08.010|BRANCH_END  |
+10/16 19:15:08.010|START       |NAME=削除結果F内容 
+10/16 19:15:08.010|END         |
+10/16 19:15:08.010|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.012|END         |
+10/16 19:15:08.012|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=17
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[17]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P212006ACF
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P212006ACF]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603882-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603882-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMzA82AL
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMzA82AL]
+10/16 19:15:08.012|END         |
+10/16 19:15:08.012|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=true
+10/16 19:15:08.012|START       |NAME=削除条件設定 
+10/16 19:15:08.012|END         |
+10/16 19:15:08.012|START       |NAME=オーダ進捗_R削除 [salesforce_adapter/put_delete]
+--/-- --:--:--.---|INFO        |[1]件の入力データから、[1]件のデータ書き込み（DELETE）に成功しました。
+10/16 19:15:08.134|END         |
+10/16 19:15:08.134|START       |NAME=R削除結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 19:15:08.135|END         |
+10/16 19:15:08.135|BRANCH_START|NAME=R削除結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=削除失敗, RESULT=false
+10/16 19:15:08.135|BRANCH_END  |
+10/16 19:15:08.135|START       |NAME=削除件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=削除件数, VALUE=14
+--/-- --:--:--.---|INFO        |削除件数(int) 入力=[14]
+10/16 19:15:08.135|END         |
+10/16 19:15:08.135|START       |NAME=前回ID更新 
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=a2JGC00000KMzA82AL
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[a2JGC00000KMzA82AL]
+10/16 19:15:08.135|END         |
+10/16 19:15:08.135|BRANCH_END  |
+10/16 19:15:08.135|START       |NAME=削除結果F内容 
+10/16 19:15:08.135|END         |
+10/16 19:15:08.135|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.137|END         |
+10/16 19:15:08.137|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=18
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[18]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P212006ACF
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P212006ACF]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603951-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603951-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=a2JGC00000KMzAV2A1
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[a2JGC00000KMzAV2A1]
+10/16 19:15:08.137|END         |
+10/16 19:15:08.137|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=true
+10/16 19:15:08.137|START       |NAME=削除条件設定 
+10/16 19:15:08.137|END         |
+10/16 19:15:08.137|START       |NAME=オーダ進捗_R削除 [salesforce_adapter/put_delete]
+--/-- --:--:--.---|INFO        |[1]件の入力データから、[1]件のデータ書き込み（DELETE）に成功しました。
+10/16 19:15:08.324|END         |
+10/16 19:15:08.324|START       |NAME=R削除結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 19:15:08.324|END         |
+10/16 19:15:08.324|BRANCH_START|NAME=R削除結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=削除失敗, RESULT=false
+10/16 19:15:08.324|BRANCH_END  |
+10/16 19:15:08.324|START       |NAME=削除件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=削除件数, VALUE=15
+--/-- --:--:--.---|INFO        |削除件数(int) 入力=[15]
+10/16 19:15:08.324|END         |
+10/16 19:15:08.324|START       |NAME=前回ID更新 
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=a2JGC00000KMzAV2A1
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[a2JGC00000KMzAV2A1]
+10/16 19:15:08.324|END         |
+10/16 19:15:08.324|BRANCH_END  |
+10/16 19:15:08.324|START       |NAME=削除結果F内容 
+10/16 19:15:08.324|END         |
+10/16 19:15:08.324|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.326|END         |
+10/16 19:15:08.326|LOOP_END    |COUNT=36
+10/16 19:15:08.326|TRY_END     |
+10/16 19:15:08.326|TRY_START   |NAME=try_登録
+10/16 19:15:08.326|START       |NAME=中間2読込 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[36]行のデータを抽出しました。
+10/16 19:15:08.329|END         |
+10/16 19:15:08.329|START       |NAME=削除Err集計 
+--/-- --:--:--.---|INFO        |集計処理(グループ分けあり)が正常に終了しました。
+10/16 19:15:08.329|END         |
+10/16 19:15:08.329|START       |NAME=削除Err抽出 
+10/16 19:15:08.329|END         |
+10/16 19:15:08.329|START       |NAME=ErrKeysF出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[0]行のデータを挿入しました。
+10/16 19:15:08.332|END         |
+10/16 19:15:08.332|START       |NAME=登録前変数初期化 
+--/-- --:--:--.---|VARIABLE    |NAME=正常件数, VALUE=0
+--/-- --:--:--.---|INFO        |正常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=0
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[0]
+10/16 19:15:08.332|END         |
+10/16 19:15:08.332|START       |NAME=オーダー進捗F読込_2 [variablelength_adapter/get_data]
+--/-- --:--:--.---|INFO        |[36]行のデータを抽出しました。
+10/16 19:15:08.336|END         |
+10/16 19:15:08.336|LOOP_START  |NAME=繰り返し_登録内容
+10/16 19:15:08.336|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=1
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[1]
+10/16 19:15:08.337|END         |
+10/16 19:15:08.337|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.337|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.337|END         |
+10/16 19:15:08.337|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.340|END         |
+10/16 19:15:08.340|BRANCH_END  |
+10/16 19:15:08.340|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=2
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[2]
+10/16 19:15:08.341|END         |
+10/16 19:15:08.341|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.341|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.341|END         |
+10/16 19:15:08.341|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.343|END         |
+10/16 19:15:08.343|BRANCH_END  |
+10/16 19:15:08.343|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=3
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[3]
+10/16 19:15:08.344|END         |
+10/16 19:15:08.344|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.344|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.344|END         |
+10/16 19:15:08.344|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.346|END         |
+10/16 19:15:08.346|BRANCH_END  |
+10/16 19:15:08.346|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=4
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[4]
+10/16 19:15:08.347|END         |
+10/16 19:15:08.347|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.347|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.347|END         |
+10/16 19:15:08.347|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.349|END         |
+10/16 19:15:08.349|BRANCH_END  |
+10/16 19:15:08.349|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=5
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[5]
+10/16 19:15:08.351|END         |
+10/16 19:15:08.351|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.351|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.351|END         |
+10/16 19:15:08.351|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.353|END         |
+10/16 19:15:08.353|BRANCH_END  |
+10/16 19:15:08.353|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=6
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[6]
+10/16 19:15:08.354|END         |
+10/16 19:15:08.354|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.354|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.355|END         |
+10/16 19:15:08.355|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.357|END         |
+10/16 19:15:08.357|BRANCH_END  |
+10/16 19:15:08.357|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=7
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[7]
+10/16 19:15:08.358|END         |
+10/16 19:15:08.358|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.358|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.359|END         |
+10/16 19:15:08.359|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.361|END         |
+10/16 19:15:08.361|BRANCH_END  |
+10/16 19:15:08.361|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=8
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[8]
+10/16 19:15:08.362|END         |
+10/16 19:15:08.362|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.362|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.363|END         |
+10/16 19:15:08.363|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.365|END         |
+10/16 19:15:08.365|BRANCH_END  |
+10/16 19:15:08.365|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=9
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[9]
+10/16 19:15:08.366|END         |
+10/16 19:15:08.366|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.366|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.367|END         |
+10/16 19:15:08.367|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.369|END         |
+10/16 19:15:08.369|BRANCH_END  |
+10/16 19:15:08.369|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=10
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[10]
+10/16 19:15:08.370|END         |
+10/16 19:15:08.370|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.370|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.371|END         |
+10/16 19:15:08.371|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.373|END         |
+10/16 19:15:08.373|BRANCH_END  |
+10/16 19:15:08.373|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=11
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[11]
+10/16 19:15:08.374|END         |
+10/16 19:15:08.374|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.374|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.375|END         |
+10/16 19:15:08.375|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.377|END         |
+10/16 19:15:08.377|BRANCH_END  |
+10/16 19:15:08.377|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=12
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[12]
+10/16 19:15:08.378|END         |
+10/16 19:15:08.378|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.378|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.379|END         |
+10/16 19:15:08.379|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.381|END         |
+10/16 19:15:08.381|BRANCH_END  |
+10/16 19:15:08.381|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=13
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[13]
+10/16 19:15:08.382|END         |
+10/16 19:15:08.382|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.382|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.383|END         |
+10/16 19:15:08.383|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.385|END         |
+10/16 19:15:08.385|BRANCH_END  |
+10/16 19:15:08.385|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=14
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[14]
+10/16 19:15:08.386|END         |
+10/16 19:15:08.386|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.386|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.386|END         |
+10/16 19:15:08.386|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.389|END         |
+10/16 19:15:08.389|BRANCH_END  |
+10/16 19:15:08.389|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=15
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[15]
+10/16 19:15:08.390|END         |
+10/16 19:15:08.390|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.390|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.390|END         |
+10/16 19:15:08.390|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.393|END         |
+10/16 19:15:08.393|BRANCH_END  |
+10/16 19:15:08.393|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=16
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[16]
+10/16 19:15:08.394|END         |
+10/16 19:15:08.394|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.394|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.394|END         |
+10/16 19:15:08.394|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.396|END         |
+10/16 19:15:08.396|BRANCH_END  |
+10/16 19:15:08.396|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=17
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[17]
+10/16 19:15:08.398|END         |
+10/16 19:15:08.398|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.398|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.398|END         |
+10/16 19:15:08.398|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.400|END         |
+10/16 19:15:08.400|BRANCH_END  |
+10/16 19:15:08.400|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=18
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[18]
+10/16 19:15:08.402|END         |
+10/16 19:15:08.402|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.402|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.402|END         |
+10/16 19:15:08.402|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.404|END         |
+10/16 19:15:08.404|BRANCH_END  |
+10/16 19:15:08.404|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=19
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[19]
+10/16 19:15:08.406|END         |
+10/16 19:15:08.406|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.406|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.406|END         |
+10/16 19:15:08.406|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.408|END         |
+10/16 19:15:08.408|BRANCH_END  |
+10/16 19:15:08.408|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=20
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[20]
+10/16 19:15:08.409|END         |
+10/16 19:15:08.409|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.409|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.410|END         |
+10/16 19:15:08.410|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.412|END         |
+10/16 19:15:08.412|BRANCH_END  |
+10/16 19:15:08.412|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=21
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[21]
+10/16 19:15:08.413|END         |
+10/16 19:15:08.413|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.413|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.414|END         |
+10/16 19:15:08.414|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.416|END         |
+10/16 19:15:08.416|BRANCH_END  |
+10/16 19:15:08.416|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=22
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[22]
+10/16 19:15:08.417|END         |
+10/16 19:15:08.417|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.417|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.418|END         |
+10/16 19:15:08.418|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.420|END         |
+10/16 19:15:08.420|BRANCH_END  |
+10/16 19:15:08.420|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=23
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[23]
+10/16 19:15:08.421|END         |
+10/16 19:15:08.421|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.421|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.421|END         |
+10/16 19:15:08.421|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.423|END         |
+10/16 19:15:08.423|BRANCH_END  |
+10/16 19:15:08.423|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=24
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[24]
+10/16 19:15:08.424|END         |
+10/16 19:15:08.424|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.424|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.424|END         |
+10/16 19:15:08.424|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.426|END         |
+10/16 19:15:08.426|BRANCH_END  |
+10/16 19:15:08.426|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=25
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[25]
+10/16 19:15:08.427|END         |
+10/16 19:15:08.427|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.427|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.427|END         |
+10/16 19:15:08.427|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.429|END         |
+10/16 19:15:08.429|BRANCH_END  |
+10/16 19:15:08.429|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=26
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[26]
+10/16 19:15:08.430|END         |
+10/16 19:15:08.430|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.430|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.430|END         |
+10/16 19:15:08.430|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.432|END         |
+10/16 19:15:08.432|BRANCH_END  |
+10/16 19:15:08.432|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=27
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[27]
+10/16 19:15:08.433|END         |
+10/16 19:15:08.433|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.433|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.433|END         |
+10/16 19:15:08.433|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.434|END         |
+10/16 19:15:08.434|BRANCH_END  |
+10/16 19:15:08.434|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=28
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[28]
+10/16 19:15:08.435|END         |
+10/16 19:15:08.435|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.435|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.436|END         |
+10/16 19:15:08.436|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.437|END         |
+10/16 19:15:08.437|BRANCH_END  |
+10/16 19:15:08.437|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=29
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[29]
+10/16 19:15:08.438|END         |
+10/16 19:15:08.438|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.438|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.439|END         |
+10/16 19:15:08.439|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.440|END         |
+10/16 19:15:08.440|BRANCH_END  |
+10/16 19:15:08.440|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=30
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[30]
+10/16 19:15:08.441|END         |
+10/16 19:15:08.441|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.441|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.442|END         |
+10/16 19:15:08.442|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.443|END         |
+10/16 19:15:08.443|BRANCH_END  |
+10/16 19:15:08.443|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=31
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[31]
+10/16 19:15:08.444|END         |
+10/16 19:15:08.444|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.444|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.445|END         |
+10/16 19:15:08.445|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.446|END         |
+10/16 19:15:08.446|BRANCH_END  |
+10/16 19:15:08.446|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=32
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[32]
+10/16 19:15:08.447|END         |
+10/16 19:15:08.447|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.447|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.448|END         |
+10/16 19:15:08.448|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.449|END         |
+10/16 19:15:08.449|BRANCH_END  |
+10/16 19:15:08.449|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=33
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[33]
+10/16 19:15:08.450|END         |
+10/16 19:15:08.450|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.450|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.451|END         |
+10/16 19:15:08.451|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.452|END         |
+10/16 19:15:08.452|BRANCH_END  |
+10/16 19:15:08.452|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=34
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[34]
+10/16 19:15:08.453|END         |
+10/16 19:15:08.453|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.453|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.454|END         |
+10/16 19:15:08.454|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.455|END         |
+10/16 19:15:08.455|BRANCH_END  |
+10/16 19:15:08.455|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=35
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[35]
+10/16 19:15:08.456|END         |
+10/16 19:15:08.456|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.456|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.456|END         |
+10/16 19:15:08.456|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.458|END         |
+10/16 19:15:08.458|BRANCH_END  |
+10/16 19:15:08.458|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=36
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[36]
+10/16 19:15:08.459|END         |
+10/16 19:15:08.459|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 19:15:08.459|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 19:15:08.459|END         |
+10/16 19:15:08.459|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.461|END         |
+10/16 19:15:08.461|BRANCH_END  |
+10/16 19:15:08.461|LOOP_END    |COUNT=36
+10/16 19:15:08.461|BRANCH_START|NAME=追加有無
+--/-- --:--:--.---|EVALUATION  |NAME=追加あり, RESULT=true
+10/16 19:15:08.461|START       |NAME=追加ファイル読込_1 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[36]行のデータを抽出しました。
+10/16 19:15:08.463|END         |
+10/16 19:15:08.463|START       |NAME=Insert内容作成 
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=1
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[1]
+10/16 19:15:08.466|END         |
+10/16 19:15:08.466|START       |NAME=オーダ進捗情報登録 [salesforce_adapter/put_insert]
+--/-- --:--:--.---|WARN        |INSERTエラー:[読み込み済み件数:36][バッチサイズ:200][発生箇所:2][status:INVALID_FIELD][APIエラーメッセージ:Foreign key external ID: p213002b57 not found for field OpportunityCode__c in entity Opportunity]
+--/-- --:--:--.---|WARN        |INSERTエラー:[読み込み済み件数:36][バッチサイズ:200][発生箇所:3][status:INVALID_FIELD][APIエラーメッセージ:Foreign key external ID: p213002b57 not found for field OpportunityCode__c in entity Opportunity]
+--/-- --:--:--.---|WARN        |INSERTエラー:[読み込み済み件数:36][バッチサイズ:200][発生箇所:13][status:INVALID_FIELD][APIエラーメッセージ:Foreign key external ID: p213002171 not found for field OpportunityCode__c in entity Opportunity]
+--/-- --:--:--.---|WARN        |INSERTエラー:[読み込み済み件数:36][バッチサイズ:200][発生箇所:34][status:INVALID_FIELD][APIエラーメッセージ:Foreign key external ID: p213002b9a not found for field OpportunityCode__c in entity Opportunity]
+--/-- --:--:--.---|INFO        |[36]件の入力データから、[32]件のデータ書き込み（INSERT）に成功しました。
+--/-- --:--:--.---|WARN        |[4]件のデータ書き込み（INSERT）できない入力データがありました。
+10/16 19:15:08.887|END         |
+10/16 19:15:08.887|START       |NAME=処理件数・エラー抽出 
+--/-- --:--:--.---|VARIABLE    |NAME=正常件数, VALUE=32
+--/-- --:--:--.---|INFO        |正常件数(int) 入力=[32]
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=4
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[4]
+10/16 19:15:08.887|END         |
+10/16 19:15:08.887|LOOP_START  |NAME=繰り返し_登録失敗
+10/16 19:15:08.887|START       |NAME=エラー行番取得 
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=3
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[3]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002B57
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002B57]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100701177-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100701177-00]
+10/16 19:15:08.887|END         |
+10/16 19:15:08.887|START       |NAME=エラーログ_SFDC登録エラー 
+10/16 19:15:08.887|SCRIPT_START|SCRIPT=ログ出力, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=9
+--/-- --:--:--.---|VARIABLE    |NAME=カテゴリ, VALUE=IF
+--/-- --:--:--.---|VARIABLE    |NAME=param01, VALUE=P213002B57
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージID, VALUE=MSG0341
+10/16 19:15:08.887|START       |NAME=メッセージ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=ログレベル, VALUE=E
+--/-- --:--:--.---|INFO        |ログレベル(String) 入力=[E]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=f00000mvvv000980e4t5n55ep556 レコード更新に失敗しました。　商談コード=P213002B57
+--/-- --:--:--.---|INFO        |メッセージ(String) 入力=[f00000mvvv000980e4t5n55ep556 レコード更新に失敗しました。　商談コード=P213002B57]
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=f00000mvvv000980e4t5n55ep556
+--/-- --:--:--.---|INFO        |実行ID(String) 入力=[f00000mvvv000980e4t5n55ep556]
+10/16 19:15:08.891|END         |
+10/16 19:15:08.891|BRANCH_START|NAME=ログレベル判定
+--/-- --:--:--.---|EVALUATION  |NAME=INFO, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=WARN, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=ERROR, RESULT=true
+10/16 19:15:08.891|START       |NAME=ログ出力_ERROR 
+10/16 19:15:08.891|END         |
+10/16 19:15:08.891|BRANCH_END  |
+10/16 19:15:08.891|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=警告終了, RESULT=false
+10/16 19:15:08.891|BRANCH_END  |
+10/16 19:15:08.891|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:08.891|END         |
+10/16 19:15:08.891|START       |NAME=追加ファイル読込_2 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[36]行のデータを抽出しました。
+10/16 19:15:08.894|END         |
+10/16 19:15:08.894|START       |NAME=エラー行抽出 
+10/16 19:15:08.894|END         |
+10/16 19:15:08.894|START       |NAME=Errファイル出力_3 
+10/16 19:15:08.894|SCRIPT_START|SCRIPT=sub/004_不正レコードファイル出力, PROJECT=【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), REPOSITORY=/share/projects/【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), VERSION=7
+--/-- --:--:--.---|VARIABLE    |NAME=レコード情報, VALUE=com.appresso.ds.xmlfw.table.MemoryTableData@669ff9f4
+--/-- --:--:--.---|VARIABLE    |NAME=不正レコードファイルパス, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error/BF_orderstatus_202410161910_20241016191500_error.csv
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=null: null
+--/-- --:--:--.---|VARIABLE    |NAME=エラーコード, VALUE=0001
+10/16 19:15:08.894|START       |NAME=不正レコード出力設定 
+10/16 19:15:08.895|END         |
+10/16 19:15:08.895|START       |NAME=不正レコードF出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.899|END         |
+10/16 19:15:08.899|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:08.899|END         |
+10/16 19:15:08.899|START       |NAME=エラー行番取得 
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=4
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[4]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002B57
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002B57]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24100702403-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24100702403-00]
+10/16 19:15:08.899|END         |
+10/16 19:15:08.899|START       |NAME=エラーログ_SFDC登録エラー 
+10/16 19:15:08.899|SCRIPT_START|SCRIPT=ログ出力, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=9
+--/-- --:--:--.---|VARIABLE    |NAME=カテゴリ, VALUE=IF
+--/-- --:--:--.---|VARIABLE    |NAME=param01, VALUE=P213002B57
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージID, VALUE=MSG0341
+10/16 19:15:08.899|START       |NAME=メッセージ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=ログレベル, VALUE=E
+--/-- --:--:--.---|INFO        |ログレベル(String) 入力=[E]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=f00000mvvv000980e4t5n55ep556 レコード更新に失敗しました。　商談コード=P213002B57
+--/-- --:--:--.---|INFO        |メッセージ(String) 入力=[f00000mvvv000980e4t5n55ep556 レコード更新に失敗しました。　商談コード=P213002B57]
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=f00000mvvv000980e4t5n55ep556
+--/-- --:--:--.---|INFO        |実行ID(String) 入力=[f00000mvvv000980e4t5n55ep556]
+10/16 19:15:08.902|END         |
+10/16 19:15:08.902|BRANCH_START|NAME=ログレベル判定
+--/-- --:--:--.---|EVALUATION  |NAME=INFO, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=WARN, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=ERROR, RESULT=true
+10/16 19:15:08.902|START       |NAME=ログ出力_ERROR 
+10/16 19:15:08.902|END         |
+10/16 19:15:08.902|BRANCH_END  |
+10/16 19:15:08.902|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=警告終了, RESULT=false
+10/16 19:15:08.902|BRANCH_END  |
+10/16 19:15:08.902|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:08.902|END         |
+10/16 19:15:08.902|START       |NAME=追加ファイル読込_2 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[36]行のデータを抽出しました。
+10/16 19:15:08.905|END         |
+10/16 19:15:08.905|START       |NAME=エラー行抽出 
+10/16 19:15:08.905|END         |
+10/16 19:15:08.905|START       |NAME=Errファイル出力_3 
+10/16 19:15:08.905|SCRIPT_START|SCRIPT=sub/004_不正レコードファイル出力, PROJECT=【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), REPOSITORY=/share/projects/【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), VERSION=7
+--/-- --:--:--.---|VARIABLE    |NAME=レコード情報, VALUE=com.appresso.ds.xmlfw.table.MemoryTableData@4f9a4dfa
+--/-- --:--:--.---|VARIABLE    |NAME=不正レコードファイルパス, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error/BF_orderstatus_202410161910_20241016191500_error.csv
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=null: null
+--/-- --:--:--.---|VARIABLE    |NAME=エラーコード, VALUE=0001
+10/16 19:15:08.905|START       |NAME=不正レコード出力設定 
+10/16 19:15:08.906|END         |
+10/16 19:15:08.906|START       |NAME=不正レコードF出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.908|END         |
+10/16 19:15:08.908|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:08.908|END         |
+10/16 19:15:08.908|START       |NAME=エラー行番取得 
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=14
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[14]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002171
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002171]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101603294-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101603294-00]
+10/16 19:15:08.909|END         |
+10/16 19:15:08.909|START       |NAME=エラーログ_SFDC登録エラー 
+10/16 19:15:08.909|SCRIPT_START|SCRIPT=ログ出力, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=9
+--/-- --:--:--.---|VARIABLE    |NAME=カテゴリ, VALUE=IF
+--/-- --:--:--.---|VARIABLE    |NAME=param01, VALUE=P213002171
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージID, VALUE=MSG0341
+10/16 19:15:08.909|START       |NAME=メッセージ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=ログレベル, VALUE=E
+--/-- --:--:--.---|INFO        |ログレベル(String) 入力=[E]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=f00000mvvv000980e4t5n55ep556 レコード更新に失敗しました。　商談コード=P213002171
+--/-- --:--:--.---|INFO        |メッセージ(String) 入力=[f00000mvvv000980e4t5n55ep556 レコード更新に失敗しました。　商談コード=P213002171]
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=f00000mvvv000980e4t5n55ep556
+--/-- --:--:--.---|INFO        |実行ID(String) 入力=[f00000mvvv000980e4t5n55ep556]
+10/16 19:15:08.912|END         |
+10/16 19:15:08.912|BRANCH_START|NAME=ログレベル判定
+--/-- --:--:--.---|EVALUATION  |NAME=INFO, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=WARN, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=ERROR, RESULT=true
+10/16 19:15:08.912|START       |NAME=ログ出力_ERROR 
+10/16 19:15:08.912|END         |
+10/16 19:15:08.912|BRANCH_END  |
+10/16 19:15:08.912|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=警告終了, RESULT=false
+10/16 19:15:08.912|BRANCH_END  |
+10/16 19:15:08.912|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:08.912|END         |
+10/16 19:15:08.912|START       |NAME=追加ファイル読込_2 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[36]行のデータを抽出しました。
+10/16 19:15:08.914|END         |
+10/16 19:15:08.914|START       |NAME=エラー行抽出 
+10/16 19:15:08.915|END         |
+10/16 19:15:08.915|START       |NAME=Errファイル出力_3 
+10/16 19:15:08.915|SCRIPT_START|SCRIPT=sub/004_不正レコードファイル出力, PROJECT=【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), REPOSITORY=/share/projects/【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), VERSION=7
+--/-- --:--:--.---|VARIABLE    |NAME=レコード情報, VALUE=com.appresso.ds.xmlfw.table.MemoryTableData@3476a84
+--/-- --:--:--.---|VARIABLE    |NAME=不正レコードファイルパス, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error/BF_orderstatus_202410161910_20241016191500_error.csv
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=null: null
+--/-- --:--:--.---|VARIABLE    |NAME=エラーコード, VALUE=0001
+10/16 19:15:08.915|START       |NAME=不正レコード出力設定 
+10/16 19:15:08.915|END         |
+10/16 19:15:08.915|START       |NAME=不正レコードF出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.918|END         |
+10/16 19:15:08.918|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:08.918|END         |
+10/16 19:15:08.918|START       |NAME=エラー行番取得 
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=35
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[35]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002B9A
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002B9A]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101604007-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101604007-00]
+10/16 19:15:08.918|END         |
+10/16 19:15:08.918|START       |NAME=エラーログ_SFDC登録エラー 
+10/16 19:15:08.918|SCRIPT_START|SCRIPT=ログ出力, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=9
+--/-- --:--:--.---|VARIABLE    |NAME=カテゴリ, VALUE=IF
+--/-- --:--:--.---|VARIABLE    |NAME=param01, VALUE=P213002B9A
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージID, VALUE=MSG0341
+10/16 19:15:08.918|START       |NAME=メッセージ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=ログレベル, VALUE=E
+--/-- --:--:--.---|INFO        |ログレベル(String) 入力=[E]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=f00000mvvv000980e4t5n55ep556 レコード更新に失敗しました。　商談コード=P213002B9A
+--/-- --:--:--.---|INFO        |メッセージ(String) 入力=[f00000mvvv000980e4t5n55ep556 レコード更新に失敗しました。　商談コード=P213002B9A]
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=f00000mvvv000980e4t5n55ep556
+--/-- --:--:--.---|INFO        |実行ID(String) 入力=[f00000mvvv000980e4t5n55ep556]
+10/16 19:15:08.921|END         |
+10/16 19:15:08.921|BRANCH_START|NAME=ログレベル判定
+--/-- --:--:--.---|EVALUATION  |NAME=INFO, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=WARN, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=ERROR, RESULT=true
+10/16 19:15:08.921|START       |NAME=ログ出力_ERROR 
+10/16 19:15:08.921|END         |
+10/16 19:15:08.921|BRANCH_END  |
+10/16 19:15:08.921|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=警告終了, RESULT=false
+10/16 19:15:08.921|BRANCH_END  |
+10/16 19:15:08.921|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:08.921|END         |
+10/16 19:15:08.921|START       |NAME=追加ファイル読込_2 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[36]行のデータを抽出しました。
+10/16 19:15:08.923|END         |
+10/16 19:15:08.923|START       |NAME=エラー行抽出 
+10/16 19:15:08.924|END         |
+10/16 19:15:08.924|START       |NAME=Errファイル出力_3 
+10/16 19:15:08.924|SCRIPT_START|SCRIPT=sub/004_不正レコードファイル出力, PROJECT=【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), REPOSITORY=/share/projects/【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), VERSION=7
+--/-- --:--:--.---|VARIABLE    |NAME=レコード情報, VALUE=com.appresso.ds.xmlfw.table.MemoryTableData@1a959e9d
+--/-- --:--:--.---|VARIABLE    |NAME=不正レコードファイルパス, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error/BF_orderstatus_202410161910_20241016191500_error.csv
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=null: null
+--/-- --:--:--.---|VARIABLE    |NAME=エラーコード, VALUE=0001
+10/16 19:15:08.924|START       |NAME=不正レコード出力設定 
+10/16 19:15:08.924|END         |
+10/16 19:15:08.924|START       |NAME=不正レコードF出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 19:15:08.926|END         |
+10/16 19:15:08.926|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:08.926|END         |
+10/16 19:15:08.926|LOOP_END    |COUNT=4
+10/16 19:15:08.926|BRANCH_END  |
+10/16 19:15:08.926|TRY_END     |
+10/16 19:15:08.926|BRANCH_START|NAME=処理結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=処理結果_異常, RESULT=true
+10/16 19:15:08.926|BRANCH_END  |
+10/16 19:15:08.926|SCRIPT_END  |EXIT_STATUS=3
+10/16 19:15:08.926|END         |
+10/16 19:15:08.926|BRANCH_START|NAME=反映結果反映
+--/-- --:--:--.---|EVALUATION  |NAME=反映結果異常, RESULT=true
+10/16 19:15:08.926|START       |NAME=処理結果←異常_1 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=3
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[3]
+--/-- --:--:--.---|VARIABLE    |NAME=異常ファイル数, VALUE=1
+--/-- --:--:--.---|INFO        |異常ファイル数(int) 入力=[1]
+10/16 19:15:08.927|END         |
+10/16 19:15:08.927|TRY_START   |NAME=try_ErrDirへ移動
+10/16 19:15:08.927|START       |NAME=ErrDirへ移動 [file_operation_adapter/move_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0502/BACKUP/20241016191500_f00000mvvv000980e4t5n55ep556_backup/BF_orderstatus_202410161910.csv]ファイル/ディレクトリを移動しました。
+--/-- --:--:--.---|INFO        |[1]件を移動しました。
+10/16 19:15:08.931|END         |
+10/16 19:15:08.932|BRANCH_START|NAME=ErrDir移動結果
+--/-- --:--:--.---|EVALUATION  |NAME=ErrDir移動結果異常, RESULT=false
+10/16 19:15:08.932|BRANCH_END  |
+10/16 19:15:08.932|BRANCH_START|NAME=次処理継続判定
+--/-- --:--:--.---|EVALUATION  |NAME=継続しない, RESULT=false
+10/16 19:15:08.932|BRANCH_END  |
+10/16 19:15:08.932|TRY_END     |
+10/16 19:15:08.932|BRANCH_END  |
+10/16 19:15:08.932|START       |NAME=処理件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=正常件数, VALUE=32
+--/-- --:--:--.---|INFO        |正常件数(int) 入力=[32]
+--/-- --:--:--.---|VARIABLE    |NAME=警告件数, VALUE=4
+--/-- --:--:--.---|INFO        |警告件数(int) 入力=[4]
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=4
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[4]
+10/16 19:15:08.932|END         |
+10/16 19:15:08.932|LOOP_END    |COUNT=1
+10/16 19:15:08.932|START       |NAME=ログ出力_件数出力 
+10/16 19:15:08.932|SCRIPT_START|SCRIPT=ログ出力, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=9
+--/-- --:--:--.---|VARIABLE    |NAME=param02, VALUE=4
+--/-- --:--:--.---|VARIABLE    |NAME=カテゴリ, VALUE=IF
+--/-- --:--:--.---|VARIABLE    |NAME=param01, VALUE=32
+--/-- --:--:--.---|VARIABLE    |NAME=param03, VALUE=4
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージID, VALUE=MSG0105
+10/16 19:15:08.932|START       |NAME=メッセージ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=ログレベル, VALUE=I
+--/-- --:--:--.---|INFO        |ログレベル(String) 入力=[I]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=f00000mvvv000980e4t5n55ep556 正常:32 異常:4 警告:4
+--/-- --:--:--.---|INFO        |メッセージ(String) 入力=[f00000mvvv000980e4t5n55ep556 正常:32 異常:4 警告:4]
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=f00000mvvv000980e4t5n55ep556
+--/-- --:--:--.---|INFO        |実行ID(String) 入力=[f00000mvvv000980e4t5n55ep556]
+10/16 19:15:08.934|END         |
+10/16 19:15:08.934|BRANCH_START|NAME=ログレベル判定
+--/-- --:--:--.---|EVALUATION  |NAME=INFO, RESULT=true
+10/16 19:15:08.934|START       |NAME=ログ出力_INFO 
+10/16 19:15:08.934|END         |
+10/16 19:15:08.934|BRANCH_END  |
+10/16 19:15:08.934|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=警告終了, RESULT=false
+10/16 19:15:08.934|BRANCH_END  |
+10/16 19:15:08.934|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:08.934|END         |
+10/16 19:15:08.934|TRY_END     |
+10/16 19:15:08.934|BRANCH_START|NAME=処理結果分岐
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=true
+10/16 19:15:08.934|BRANCH_END  |
+10/16 19:15:08.934|SCRIPT_END  |EXIT_STATUS=1
+10/16 19:15:08.934|END         |
+10/16 19:15:08.934|BRANCH_START|NAME=取込処理結果
+--/-- --:--:--.---|EVALUATION  |NAME=取込処理結果_異常, RESULT=true
+10/16 19:15:08.934|START       |NAME=処理結果F_異常_5 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=-1
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[-1]
+--/-- --:--:--.---|VARIABLE    |NAME=結果ステータス_規制情報T用, VALUE=1
+--/-- --:--:--.---|INFO        |結果ステータス_規制情報T用(String) 入力=[1]
+10/16 19:15:08.935|END         |
+10/16 19:15:08.935|START       |NAME=エラーF転送処理 
+10/16 19:15:08.935|SCRIPT_START|SCRIPT=S3エラーファイル圧縮格納, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=12
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=エラーフォルダパス, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error
+10/16 19:15:08.935|START       |NAME=格納フォルダ名作成 
+--/-- --:--:--.---|VARIABLE    |NAME=格納フォルダ名, VALUE=WE0502_20241016
+--/-- --:--:--.---|INFO        |格納フォルダ名(String) 入力=[WE0502_20241016]
+--/-- --:--:--.---|VARIABLE    |NAME=ZIPファイル名, VALUE=WE0502_20241016191508935.zip
+--/-- --:--:--.---|INFO        |ZIPファイル名(String) 入力=[WE0502_20241016191508935.zip]
+10/16 19:15:08.935|END         |
+10/16 19:15:08.935|START       |NAME=エラーファイル一覧取得 [file_operation_adapter/list_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error]ディレクトリのファイル名一覧を取得しました。
+10/16 19:15:08.937|END         |
+10/16 19:15:08.937|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=エラーファイル存在, RESULT=true
+10/16 19:15:08.937|START       |NAME=エラーファイル圧縮 [file_operation_adapter/compress_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error/WE0502_20241016191508935.zip]ファイル/ディレクトリを圧縮しました。
+10/16 19:15:08.946|END         |
+10/16 19:15:08.946|START       |NAME=エラーファイル書き込み [amazon_s3_adapter/put]
+10/16 19:15:09.578|END         |
+10/16 19:15:09.578|BRANCH_END  |
+10/16 19:15:09.578|START       |NAME=エラーフォルダ削除 [file_operation_adapter/delete_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0502/ERROR/20241016191500_f00000mvvv000980e4t5n55ep556_error]ファイル/ディレクトリを削除しました。
+--/-- --:--:--.---|INFO        |[1]件を削除しました。
+10/16 19:15:09.584|END         |
+10/16 19:15:09.584|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:09.584|END         |
+10/16 19:15:09.584|BRANCH_END  |
+10/16 19:15:09.584|START       |NAME=作業用Dir削除_3 [file_operation_adapter/delete_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/temp/20241016191500_f00000mvvv000980e4t5n55ep556_WE0502]ファイル/ディレクトリを削除しました。
+--/-- --:--:--.---|INFO        |[1]件を削除しました。
+10/16 19:15:09.595|END         |
+10/16 19:15:09.595|TRY_END     |
+10/16 19:15:09.595|TRY_END     |
+10/16 19:15:09.595|START       |NAME=規制情報更新処理_終 
+10/16 19:15:09.595|SCRIPT_START|SCRIPT=規制情報/03_規制情報更新, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=6
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=予備2, VALUE=1
+--/-- --:--:--.---|VARIABLE    |NAME=予備1, VALUE=0
+--/-- --:--:--.---|VARIABLE    |NAME=レコードNo, VALUE=000
+10/16 19:15:09.595|TRY_START   |NAME=try_catch
+10/16 19:15:09.595|START       |NAME=規制情報更新 [amazon_rds_postgresql_adapter/execute_select_query]
+--/-- --:--:--.---|INFO        |[1]件のデータの抽出に成功しました。
+10/16 19:15:09.599|END         |
+10/16 19:15:09.599|BRANCH_START|NAME=結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=更新失敗, RESULT=false
+10/16 19:15:09.599|BRANCH_END  |
+10/16 19:15:09.599|TRY_END     |
+10/16 19:15:09.599|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:09.599|END         |
+10/16 19:15:09.599|BRANCH_START|NAME=規制情報更新結果_2
+--/-- --:--:--.---|EVALUATION  |NAME=規制情報更新失敗＿２, RESULT=false
+10/16 19:15:09.599|BRANCH_END  |
+10/16 19:15:09.599|BRANCH_START|NAME=処理結果で分岐
+--/-- --:--:--.---|EVALUATION  |NAME=処理結果=異常, RESULT=true
+10/16 19:15:09.599|START       |NAME=ログ出力_異常終了 
+10/16 19:15:09.599|SCRIPT_START|SCRIPT=ログ出力, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=9
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=1
+--/-- --:--:--.---|VARIABLE    |NAME=param02, VALUE=WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=カテゴリ, VALUE=END
+--/-- --:--:--.---|VARIABLE    |NAME=param01, VALUE=オーダー情報取込(Biz-FLOW)
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージID, VALUE=MSG0015
+10/16 19:15:09.599|START       |NAME=メッセージ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=ログレベル, VALUE=E
+--/-- --:--:--.---|INFO        |ログレベル(String) 入力=[E]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=f00000mvvv000980e4t5n55ep556 オーダー情報取込(Biz-FLOW)処理を異常終了しました（WE0502）
+--/-- --:--:--.---|INFO        |メッセージ(String) 入力=[f00000mvvv000980e4t5n55ep556 オーダー情報取込(Biz-FLOW)処理を異常終了しました（WE0502）]
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=f00000mvvv000980e4t5n55ep556
+--/-- --:--:--.---|INFO        |実行ID(String) 入力=[f00000mvvv000980e4t5n55ep556]
+10/16 19:15:09.603|END         |
+10/16 19:15:09.603|BRANCH_START|NAME=ログレベル判定
+--/-- --:--:--.---|EVALUATION  |NAME=INFO, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=WARN, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=ERROR, RESULT=true
+10/16 19:15:09.603|START       |NAME=ログ出力_ERROR 
+10/16 19:15:09.603|END         |
+10/16 19:15:09.603|BRANCH_END  |
+10/16 19:15:09.603|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=true
+10/16 19:15:09.603|START       |NAME=エラーメール送信（異常） 
+10/16 19:15:09.603|SCRIPT_START|SCRIPT=エラーメール送信, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=2
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=1
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=f00000mvvv000980e4t5n55ep556
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0502
+10/16 19:15:09.603|START       |NAME=通知日時取得 
+--/-- --:--:--.---|VARIABLE    |NAME=通知日時, VALUE=2024/10/16 19:15:09
+--/-- --:--:--.---|INFO        |通知日時(String) 入力=[2024/10/16 19:15:09]
+10/16 19:15:09.603|END         |
+10/16 19:15:09.603|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=処理結果_異常, RESULT=true
+10/16 19:15:09.603|START       |NAME=異常時mail送信 [mail_adapter/put_smtp_with_message]
+--/-- --:--:--.---|INFO        |1通のメッセージを送信しました。
+10/16 19:15:09.634|END         |
+10/16 19:15:09.634|BRANCH_END  |
+10/16 19:15:09.634|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:09.634|END         |
+10/16 19:15:09.634|BRANCH_END  |
+10/16 19:15:09.634|SCRIPT_END  |EXIT_STATUS=0
+10/16 19:15:09.634|END         |
+10/16 19:15:09.634|BRANCH_END  |
+10/16 19:15:09.634|SCRIPT_END  |EXIT_STATUS=-1
+10/16 19:15:09.634|EXEC_END    |EXIT_STATUS=-1

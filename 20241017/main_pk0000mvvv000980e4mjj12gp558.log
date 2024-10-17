@@ -1,0 +1,883 @@
+10/16 20:15:00.257|EXEC_START  |
+10/16 20:15:00.258|SCRIPT_START|SCRIPT=main, PROJECT=【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), REPOSITORY=/share/projects/【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), VERSION=31
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=レコードNo, VALUE=000
+10/16 20:15:00.258|TRY_START   |NAME=try_規制T設定前
+10/16 20:15:00.258|START       |NAME=AP設定F読込 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=機能名, VALUE=オーダー情報取込(Biz-FLOW)
+--/-- --:--:--.---|INFO        |機能名(String) 入力=[オーダー情報取込(Biz-FLOW)]
+--/-- --:--:--.---|VARIABLE    |NAME=S3バケットIN, VALUE=bm-s3-datahub-if-prod
+--/-- --:--:--.---|INFO        |S3バケットIN(String) 入力=[bm-s3-datahub-if-prod]
+--/-- --:--:--.---|VARIABLE    |NAME=S3フォルダIN, VALUE=/WE0502
+--/-- --:--:--.---|INFO        |S3フォルダIN(String) 入力=[/WE0502]
+--/-- --:--:--.---|VARIABLE    |NAME=S3バケットOUT, VALUE=bm-s3-datahub-bs-prod
+--/-- --:--:--.---|INFO        |S3バケットOUT(String) 入力=[bm-s3-datahub-bs-prod]
+--/-- --:--:--.---|VARIABLE    |NAME=S3フォルダOUT, VALUE=/backup
+--/-- --:--:--.---|INFO        |S3フォルダOUT(String) 入力=[/backup]
+--/-- --:--:--.---|VARIABLE    |NAME=ファイル名称_フィルター1, VALUE=BF_orderstatus_(19[0-9]{2}|20[0-9]{2})(0[0-9]|1[0-2])([0-2][0-9]|3[01])([0-1][0-9]|2[0-3])([0-5][0-9]).csv
+--/-- --:--:--.---|INFO        |ファイル名称_フィルター1(String) 入力=[BF_orderstatus_(19[0-9]{2}|20[0-9]{2})(0[0-9]|1[0-2])([0-2][0-9]|3[01])([0-1][0-9]|2[0-3])([0-5][0-9]).csv]
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップフォルダパス, VALUE=/data/MERGE/app/data/WE0502/BACKUP
+--/-- --:--:--.---|INFO        |バックアップフォルダパス(String) 入力=[/data/MERGE/app/data/WE0502/BACKUP]
+--/-- --:--:--.---|VARIABLE    |NAME=エラーフォルダパス, VALUE=/data/MERGE/app/data/WE0502/ERROR
+--/-- --:--:--.---|INFO        |エラーフォルダパス(String) 入力=[/data/MERGE/app/data/WE0502/ERROR]
+10/16 20:15:00.298|END         |
+10/16 20:15:00.298|BRANCH_START|NAME=AP設定取得結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=AP設定取得エラー, RESULT=false
+10/16 20:15:00.298|BRANCH_END  |
+10/16 20:15:00.298|START       |NAME=ログ出力_処理開始 
+10/16 20:15:00.298|SCRIPT_START|SCRIPT=ログ出力, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=9
+--/-- --:--:--.---|VARIABLE    |NAME=param02, VALUE=オーダー情報取込(Biz-FLOW)
+--/-- --:--:--.---|VARIABLE    |NAME=カテゴリ, VALUE=START
+--/-- --:--:--.---|VARIABLE    |NAME=param01, VALUE=WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージID, VALUE=MSG0101
+10/16 20:15:00.298|START       |NAME=メッセージ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=ログレベル, VALUE=I
+--/-- --:--:--.---|INFO        |ログレベル(String) 入力=[I]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=pk0000mvvv000980e4mjj12gp558 WE0502（オーダー情報取込(Biz-FLOW)）処理を開始します。
+--/-- --:--:--.---|INFO        |メッセージ(String) 入力=[pk0000mvvv000980e4mjj12gp558 WE0502（オーダー情報取込(Biz-FLOW)）処理を開始します。]
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=pk0000mvvv000980e4mjj12gp558
+--/-- --:--:--.---|INFO        |実行ID(String) 入力=[pk0000mvvv000980e4mjj12gp558]
+10/16 20:15:00.302|END         |
+10/16 20:15:00.302|BRANCH_START|NAME=ログレベル判定
+--/-- --:--:--.---|EVALUATION  |NAME=INFO, RESULT=true
+10/16 20:15:00.302|START       |NAME=ログ出力_INFO 
+10/16 20:15:00.302|END         |
+10/16 20:15:00.302|BRANCH_END  |
+10/16 20:15:00.302|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=警告終了, RESULT=false
+10/16 20:15:00.302|BRANCH_END  |
+10/16 20:15:00.302|SCRIPT_END  |EXIT_STATUS=0
+10/16 20:15:00.302|END         |
+10/16 20:15:00.302|START       |NAME=二重起動チェック 
+10/16 20:15:00.302|SCRIPT_START|SCRIPT=規制情報/01_規制情報設定_開始, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=5
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=レコードNo, VALUE=000
+10/16 20:15:00.302|TRY_START   |NAME=try_catch
+10/16 20:15:00.302|START       |NAME=規制情報更新 [amazon_rds_postgresql_adapter/execute_select_query]
+--/-- --:--:--.---|INFO        |[1]件のデータの抽出に成功しました。
+10/16 20:15:00.307|END         |
+10/16 20:15:00.307|BRANCH_START|NAME=結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=更新失敗(規制中), RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=更新失敗(その他エラー), RESULT=false
+10/16 20:15:00.307|BRANCH_END  |
+10/16 20:15:00.307|TRY_END     |
+10/16 20:15:00.307|SCRIPT_END  |EXIT_STATUS=0
+10/16 20:15:00.307|END         |
+10/16 20:15:00.307|BRANCH_START|NAME=二重起動Chk判定
+--/-- --:--:--.---|EVALUATION  |NAME=二重起動/エラー, RESULT=false
+10/16 20:15:00.307|BRANCH_END  |
+10/16 20:15:00.307|TRY_START   |NAME=try_二重起動C後
+10/16 20:15:00.307|START       |NAME=現在日時・各種一時Dir名設定 
+--/-- --:--:--.---|VARIABLE    |NAME=実行日時, VALUE=1729077300308
+--/-- --:--:--.---|INFO        |実行日時(Date) 入力=[2024-10-16T20:15:00.308+0900]
+--/-- --:--:--.---|VARIABLE    |NAME=作業用ディレクトリParam, VALUE=20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502
+--/-- --:--:--.---|INFO        |作業用ディレクトリParam(String) 入力=[20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502]
+--/-- --:--:--.---|VARIABLE    |NAME=エラーディレクトリParam, VALUE=20241016201500_pk0000mvvv000980e4mjj12gp558_error
+--/-- --:--:--.---|INFO        |エラーディレクトリParam(String) 入力=[20241016201500_pk0000mvvv000980e4mjj12gp558_error]
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップディレクトリParam, VALUE=20241016201500_pk0000mvvv000980e4mjj12gp558_backup
+--/-- --:--:--.---|INFO        |バックアップディレクトリParam(String) 入力=[20241016201500_pk0000mvvv000980e4mjj12gp558_backup]
+10/16 20:15:00.308|END         |
+10/16 20:15:00.308|START       |NAME=各種一時Dir作成処理 
+10/16 20:15:00.308|SCRIPT_START|SCRIPT=一時フォルダ作成, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=6
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップフォルダパス, VALUE=/data/MERGE/app/data/WE0502/BACKUP
+--/-- --:--:--.---|VARIABLE    |NAME=処理フォルダ名, VALUE=20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=エラーフォルダ名, VALUE=20241016201500_pk0000mvvv000980e4mjj12gp558_error
+--/-- --:--:--.---|VARIABLE    |NAME=エラーフォルダパス, VALUE=/data/MERGE/app/data/WE0502/ERROR
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップフォルダ名, VALUE=20241016201500_pk0000mvvv000980e4mjj12gp558_backup
+10/16 20:15:00.308|START       |NAME=処理フォルダ存在確認 [file_operation_adapter/check_exist_file]
+10/16 20:15:00.315|END         |
+10/16 20:15:00.315|BRANCH_START|NAME=if4
+--/-- --:--:--.---|EVALUATION  |NAME=処理フォルダ有り, RESULT=false
+10/16 20:15:00.315|BRANCH_END  |
+10/16 20:15:00.315|START       |NAME=処理フォルダ作成 [file_operation_adapter/make_directory]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/temp/20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502]ディレクトリを作成しました。
+10/16 20:15:00.317|END         |
+10/16 20:15:00.317|START       |NAME=バックアップフォルダ存在確認 [file_operation_adapter/check_exist_file]
+10/16 20:15:00.318|END         |
+10/16 20:15:00.318|BRANCH_START|NAME=if5
+--/-- --:--:--.---|EVALUATION  |NAME=バックアップフォルダ無し, RESULT=true
+10/16 20:15:00.318|START       |NAME=バックアップフォルダ作成 [file_operation_adapter/make_directory]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0502/BACKUP/20241016201500_pk0000mvvv000980e4mjj12gp558_backup]ディレクトリを作成しました。
+10/16 20:15:00.328|END         |
+10/16 20:15:00.328|BRANCH_END  |
+10/16 20:15:00.328|START       |NAME=エラーフォルダ存在確認 [file_operation_adapter/check_exist_file]
+10/16 20:15:00.329|END         |
+10/16 20:15:00.329|BRANCH_START|NAME=if6
+--/-- --:--:--.---|EVALUATION  |NAME=エラーフォルダ無し, RESULT=true
+10/16 20:15:00.329|START       |NAME=エラーフォルダ作成 [file_operation_adapter/make_directory]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0502/ERROR/20241016201500_pk0000mvvv000980e4mjj12gp558_error]ディレクトリを作成しました。
+10/16 20:15:00.337|END         |
+10/16 20:15:00.337|BRANCH_END  |
+10/16 20:15:00.337|START       |NAME=変数格納1 
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップフォルダパス, VALUE=/data/MERGE/app/data/WE0502/BACKUP/20241016201500_pk0000mvvv000980e4mjj12gp558_backup
+--/-- --:--:--.---|INFO        |バックアップフォルダパス(String) 入力=[/data/MERGE/app/data/WE0502/BACKUP/20241016201500_pk0000mvvv000980e4mjj12gp558_backup]
+--/-- --:--:--.---|VARIABLE    |NAME=エラーフォルダパス, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016201500_pk0000mvvv000980e4mjj12gp558_error
+--/-- --:--:--.---|INFO        |エラーフォルダパス(String) 入力=[/data/MERGE/app/data/WE0502/ERROR/20241016201500_pk0000mvvv000980e4mjj12gp558_error]
+--/-- --:--:--.---|VARIABLE    |NAME=処理フォルダパス, VALUE=/data/MERGE/app/temp/20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502
+--/-- --:--:--.---|INFO        |処理フォルダパス(String) 入力=[/data/MERGE/app/temp/20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502]
+10/16 20:15:00.337|END         |
+10/16 20:15:00.337|SCRIPT_END  |EXIT_STATUS=0
+10/16 20:15:00.337|END         |
+10/16 20:15:00.337|START       |NAME=各種一時Dir結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップディレクトリ, VALUE=/data/MERGE/app/data/WE0502/BACKUP/20241016201500_pk0000mvvv000980e4mjj12gp558_backup
+--/-- --:--:--.---|INFO        |バックアップディレクトリ(String) 入力=[/data/MERGE/app/data/WE0502/BACKUP/20241016201500_pk0000mvvv000980e4mjj12gp558_backup]
+--/-- --:--:--.---|VARIABLE    |NAME=エラーディレクトリ, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016201500_pk0000mvvv000980e4mjj12gp558_error
+--/-- --:--:--.---|INFO        |エラーディレクトリ(String) 入力=[/data/MERGE/app/data/WE0502/ERROR/20241016201500_pk0000mvvv000980e4mjj12gp558_error]
+--/-- --:--:--.---|VARIABLE    |NAME=作業用ディレクトリ, VALUE=/data/MERGE/app/temp/20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502
+--/-- --:--:--.---|INFO        |作業用ディレクトリ(String) 入力=[/data/MERGE/app/temp/20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502]
+10/16 20:15:00.337|END         |
+10/16 20:15:00.337|START       |NAME=取込処理実行 
+10/16 20:15:00.338|SCRIPT_START|SCRIPT=sub/001_オーダー情報取込処理, PROJECT=【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), REPOSITORY=/share/projects/【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), VERSION=36
+--/-- --:--:--.---|VARIABLE    |NAME=S3フォルダIN, VALUE=/WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=実行日時, VALUE=1729077300308
+--/-- --:--:--.---|VARIABLE    |NAME=バックアップディレクトリ, VALUE=/data/MERGE/app/data/WE0502/BACKUP/20241016201500_pk0000mvvv000980e4mjj12gp558_backup
+--/-- --:--:--.---|VARIABLE    |NAME=S3フォルダOUT, VALUE=/backup
+--/-- --:--:--.---|VARIABLE    |NAME=機能名, VALUE=オーダー情報取込(Biz-FLOW)
+--/-- --:--:--.---|VARIABLE    |NAME=ファイル名称_フィルター1, VALUE=BF_orderstatus_(19[0-9]{2}|20[0-9]{2})(0[0-9]|1[0-2])([0-2][0-9]|3[01])([0-1][0-9]|2[0-3])([0-5][0-9]).csv
+--/-- --:--:--.---|VARIABLE    |NAME=S3バケットIN, VALUE=bm-s3-datahub-if-prod
+--/-- --:--:--.---|VARIABLE    |NAME=S3バケットOUT, VALUE=bm-s3-datahub-bs-prod
+--/-- --:--:--.---|VARIABLE    |NAME=エラーディレクトリ, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016201500_pk0000mvvv000980e4mjj12gp558_error
+--/-- --:--:--.---|VARIABLE    |NAME=作業用ディレクトリ, VALUE=/data/MERGE/app/temp/20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502
+10/16 20:15:00.338|TRY_START   |NAME=try_S3F取得
+10/16 20:15:00.338|START       |NAME=S3入力Fバックアップ [amazon_s3_adapter/copy]
+--/-- --:--:--.---|INFO        |[2]件コピーしました。
+--/-- --:--:--.---|INFO        |フォルダ: (成功[1]件、失敗[0]件、仮想フォルダ[0]件)
+--/-- --:--:--.---|INFO        |ファイル: (成功[1]件、失敗[0]件)
+10/16 20:15:02.075|END         |
+10/16 20:15:02.075|START       |NAME=S3バックアップ結果 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+10/16 20:15:02.075|END         |
+10/16 20:15:02.075|BRANCH_START|NAME=バックアップ結果
+--/-- --:--:--.---|EVALUATION  |NAME=バックアップ失敗, RESULT=false
+10/16 20:15:02.075|BRANCH_END  |
+10/16 20:15:02.075|START       |NAME=S3F一覧取得 [amazon_s3_adapter/list]
+10/16 20:15:02.465|END         |
+10/16 20:15:02.465|START       |NAME=対象ファイル抽出 
+10/16 20:15:02.467|END         |
+10/16 20:15:02.467|LOOP_START  |NAME=繰り返し_ファイルDL
+10/16 20:15:02.468|START       |NAME=DLファイル設定 
+--/-- --:--:--.---|VARIABLE    |NAME=リモートファイルパス, VALUE=/bm-s3-datahub-if-prod/WE0502/BF_orderstatus_202410162010.csv
+--/-- --:--:--.---|INFO        |リモートファイルパス(String) 入力=[/bm-s3-datahub-if-prod/WE0502/BF_orderstatus_202410162010.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=ファイル名のみ, VALUE=BF_orderstatus_202410162010.csv
+--/-- --:--:--.---|INFO        |ファイル名のみ(String) 入力=[BF_orderstatus_202410162010.csv]
+10/16 20:15:02.470|END         |
+10/16 20:15:02.470|START       |NAME=S3F取得_GET [amazon_s3_adapter/get]
+10/16 20:15:03.092|END         |
+10/16 20:15:03.092|START       |NAME=DL結果取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=ファイル数, VALUE=1
+--/-- --:--:--.---|INFO        |ファイル数(int) 入力=[1]
+--/-- --:--:--.---|VARIABLE    |NAME=ローカルファイルパス, VALUE=/data/MERGE/app/data/WE0502/BACKUP/20241016201500_pk0000mvvv000980e4mjj12gp558_backup/BF_orderstatus_202410162010.csv
+--/-- --:--:--.---|INFO        |ローカルファイルパス(String) 入力=[/data/MERGE/app/data/WE0502/BACKUP/20241016201500_pk0000mvvv000980e4mjj12gp558_backup/BF_orderstatus_202410162010.csv]
+10/16 20:15:03.097|END         |
+10/16 20:15:03.097|BRANCH_START|NAME=Dl結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=DL失敗, RESULT=false
+10/16 20:15:03.097|BRANCH_END  |
+10/16 20:15:03.097|LOOP_END    |COUNT=1
+10/16 20:15:03.097|BRANCH_START|NAME=DL数判定
+--/-- --:--:--.---|EVALUATION  |NAME=DL0件, RESULT=false
+10/16 20:15:03.097|BRANCH_END  |
+10/16 20:15:03.097|TRY_END     |
+10/16 20:15:03.097|TRY_START   |NAME=try_データ反映処理
+10/16 20:15:03.097|START       |NAME=取得ファイル一覧取得 [file_operation_adapter/list_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0502/BACKUP/20241016201500_pk0000mvvv000980e4mjj12gp558_backup]ディレクトリのファイル名一覧を取得しました。
+10/16 20:15:03.100|END         |
+10/16 20:15:03.100|LOOP_START  |NAME=繰り返し_取得F
+10/16 20:15:03.101|START       |NAME=引数作成 
+--/-- --:--:--.---|VARIABLE    |NAME=リモートファイルパス, VALUE=/bm-s3-datahub-if-prod/WE0502/BF_orderstatus_202410162010.csv
+--/-- --:--:--.---|INFO        |リモートファイルパス(String) 入力=[/bm-s3-datahub-if-prod/WE0502/BF_orderstatus_202410162010.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=ローカルファイルパス, VALUE=/data/MERGE/app/data/WE0502/BACKUP/20241016201500_pk0000mvvv000980e4mjj12gp558_backup/BF_orderstatus_202410162010.csv
+--/-- --:--:--.---|INFO        |ローカルファイルパス(String) 入力=[/data/MERGE/app/data/WE0502/BACKUP/20241016201500_pk0000mvvv000980e4mjj12gp558_backup/BF_orderstatus_202410162010.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=ファイル名のみ, VALUE=BF_orderstatus_202410162010.csv
+--/-- --:--:--.---|INFO        |ファイル名のみ(String) 入力=[BF_orderstatus_202410162010.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=不正レコードファイルパス, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016201500_pk0000mvvv000980e4mjj12gp558_error/BF_orderstatus_202410162010_20241016201500_error.csv
+--/-- --:--:--.---|INFO        |不正レコードファイルパス(String) 入力=[/data/MERGE/app/data/WE0502/ERROR/20241016201500_pk0000mvvv000980e4mjj12gp558_error/BF_orderstatus_202410162010_20241016201500_error.csv]
+10/16 20:15:03.104|END         |
+10/16 20:15:03.104|START       |NAME=S3入力ファイル削除 [amazon_s3_adapter/delete]
+10/16 20:15:03.544|END         |
+10/16 20:15:03.544|START       |NAME=データ反映処理 
+10/16 20:15:03.549|SCRIPT_START|SCRIPT=sub/002_オーダー情報反映処理, PROJECT=【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), REPOSITORY=/share/projects/【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), VERSION=71
+--/-- --:--:--.---|VARIABLE    |NAME=ファイル名のみ, VALUE=BF_orderstatus_202410162010.csv
+--/-- --:--:--.---|VARIABLE    |NAME=実行日時, VALUE=1729077300308
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=機能名, VALUE=オーダー情報取込(Biz-FLOW)
+--/-- --:--:--.---|VARIABLE    |NAME=取込ファイル取得元, VALUE=/bm-s3-datahub-if-prod/WE0502/BF_orderstatus_202410162010.csv
+--/-- --:--:--.---|VARIABLE    |NAME=作業用ディレクトリ, VALUE=/data/MERGE/app/temp/20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=不正レコードファイルパス, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016201500_pk0000mvvv000980e4mjj12gp558_error/BF_orderstatus_202410162010_20241016201500_error.csv
+--/-- --:--:--.---|VARIABLE    |NAME=エラーディレクトリ, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016201500_pk0000mvvv000980e4mjj12gp558_error
+--/-- --:--:--.---|VARIABLE    |NAME=取込ファイルパス, VALUE=/data/MERGE/app/data/WE0502/BACKUP/20241016201500_pk0000mvvv000980e4mjj12gp558_backup/BF_orderstatus_202410162010.csv
+10/16 20:15:03.550|START       |NAME=取込F名のみ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=取込ファイルパス, VALUE=/data/MERGE/app/data/WE0502/BACKUP/20241016201500_pk0000mvvv000980e4mjj12gp558_backup/BF_orderstatus_202410162010.csv
+--/-- --:--:--.---|INFO        |取込ファイルパス(String) 入力=[/data/MERGE/app/data/WE0502/BACKUP/20241016201500_pk0000mvvv000980e4mjj12gp558_backup/BF_orderstatus_202410162010.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=中間1ファイルパス, VALUE=/data/MERGE/app/temp/20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502/BF_orderstatus_202410162010_inter1.csv
+--/-- --:--:--.---|INFO        |中間1ファイルパス(String) 入力=[/data/MERGE/app/temp/20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502/BF_orderstatus_202410162010_inter1.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=中間2ファイルパス, VALUE=/data/MERGE/app/temp/20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502/BF_orderstatus_202410162010_inter2.csv
+--/-- --:--:--.---|INFO        |中間2ファイルパス(String) 入力=[/data/MERGE/app/temp/20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502/BF_orderstatus_202410162010_inter2.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=エラーキーファイルパス, VALUE=/data/MERGE/app/temp/20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502/BF_orderstatus_202410162010_errkeys.csv
+--/-- --:--:--.---|INFO        |エラーキーファイルパス(String) 入力=[/data/MERGE/app/temp/20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502/BF_orderstatus_202410162010_errkeys.csv]
+--/-- --:--:--.---|VARIABLE    |NAME=追加ファイルパス, VALUE=/data/MERGE/app/temp/20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502/BF_orderstatus_202410162010_insert.csv
+--/-- --:--:--.---|INFO        |追加ファイルパス(String) 入力=[/data/MERGE/app/temp/20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502/BF_orderstatus_202410162010_insert.csv]
+10/16 20:15:03.550|END         |
+10/16 20:15:03.550|TRY_START   |NAME=try_準備
+10/16 20:15:03.550|START       |NAME=SFDCセッションF作成 
+10/16 20:15:03.550|SCRIPT_START|SCRIPT=セッションファイル生成, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=8
+10/16 20:15:03.550|START       |NAME=セッションファイル存在確認 [file_operation_adapter/check_exist_file]
+10/16 20:15:03.552|END         |
+10/16 20:15:03.552|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=ファイル無し, RESULT=false
+10/16 20:15:03.552|START       |NAME=セッションファイル読取1 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを抽出しました。
+10/16 20:15:03.554|END         |
+10/16 20:15:03.554|START       |NAME=変数代入1 
+--/-- --:--:--.---|VARIABLE    |NAME=サーバURL, VALUE=https://ntt-east-crm.my.salesforce.com/services/Soap/u/43.0
+--/-- --:--:--.---|INFO        |サーバURL(String) 入力=[https://ntt-east-crm.my.salesforce.com/services/Soap/u/43.0]
+--/-- --:--:--.---|VARIABLE    |NAME=セッションID, VALUE=00D2v000002FbUv!ARcAQIlURfz1g9VPRMtamlym.ALWslD4iuvIvl.qD095JlcmStcRn7pVzRy9uCjLgELwRZJDo8XNz.5JeusgQGzkO1QiR22u
+--/-- --:--:--.---|INFO        |セッションID(String) 入力=[00D2v000002FbUv!ARcAQIlURfz1g9VPRMtamlym.ALWslD4iuvIvl.qD095JlcmStcRn7pVzRy9uCjLgELwRZJDo8XNz.5JeusgQGzkO1QiR22u]
+10/16 20:15:03.555|END         |
+10/16 20:15:03.555|BRANCH_END  |
+10/16 20:15:03.555|TRY_START   |NAME=try_catch
+10/16 20:15:03.555|START       |NAME=セッションログイン [salesforce_adapter/session_id_login]
+--/-- --:--:--.---|INFO        |サーバ[https://ntt-east-crm.my.salesforce.com/services/Soap/u/43.0]へセッションIDによる接続を開始します。
+10/16 20:15:03.868|END         |
+10/16 20:15:03.868|TRY_END     |
+10/16 20:15:03.868|SCRIPT_END  |EXIT_STATUS=0
+10/16 20:15:03.868|END         |
+10/16 20:15:03.868|TRY_END     |
+10/16 20:15:03.868|TRY_START   |NAME=try_F読込
+10/16 20:15:03.868|START       |NAME=オーダー進捗F読込_1 [variablelength_adapter/get_data]
+--/-- --:--:--.---|INFO        |[5]行のデータを抽出しました。
+10/16 20:15:03.871|END         |
+10/16 20:15:03.871|LOOP_START  |NAME=繰り返し_F読込_1
+10/16 20:15:03.871|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=1
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[1]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002B9A
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002B9A]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101604007-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101604007-00]
+10/16 20:15:03.871|END         |
+10/16 20:15:03.871|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 20:15:03.871|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101604007%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101604007%']
+10/16 20:15:03.871|END         |
+10/16 20:15:03.871|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 20:15:03.929|END         |
+10/16 20:15:03.929|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 20:15:03.929|START       |NAME=ID抽出結果なし 
+10/16 20:15:03.930|END         |
+10/16 20:15:03.930|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 20:15:03.933|END         |
+10/16 20:15:03.933|BRANCH_END  |
+10/16 20:15:03.933|BRANCH_END  |
+10/16 20:15:03.933|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=2
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[2]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P21800668D
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P21800668D]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101604023-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101604023-00]
+10/16 20:15:03.933|END         |
+10/16 20:15:03.933|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 20:15:03.933|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101604023%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101604023%']
+10/16 20:15:03.933|END         |
+10/16 20:15:03.933|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 20:15:03.995|END         |
+10/16 20:15:03.995|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 20:15:03.995|START       |NAME=ID抽出結果なし 
+10/16 20:15:03.995|END         |
+10/16 20:15:03.995|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 20:15:03.997|END         |
+10/16 20:15:03.998|BRANCH_END  |
+10/16 20:15:03.998|BRANCH_END  |
+10/16 20:15:03.998|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=3
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[3]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241043572
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241043572]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101604024-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101604024-00]
+10/16 20:15:03.998|END         |
+10/16 20:15:03.998|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 20:15:03.998|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101604024%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101604024%']
+10/16 20:15:03.998|END         |
+10/16 20:15:03.998|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 20:15:04.053|END         |
+10/16 20:15:04.053|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 20:15:04.053|START       |NAME=ID抽出結果なし 
+10/16 20:15:04.054|END         |
+10/16 20:15:04.054|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 20:15:04.056|END         |
+10/16 20:15:04.056|BRANCH_END  |
+10/16 20:15:04.056|BRANCH_END  |
+10/16 20:15:04.056|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=4
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[4]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002173
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002173]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101604025-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101604025-00]
+10/16 20:15:04.057|END         |
+10/16 20:15:04.057|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 20:15:04.057|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101604025%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101604025%']
+10/16 20:15:04.057|END         |
+10/16 20:15:04.057|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 20:15:04.114|END         |
+10/16 20:15:04.114|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 20:15:04.114|START       |NAME=ID抽出結果なし 
+10/16 20:15:04.115|END         |
+10/16 20:15:04.115|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 20:15:04.117|END         |
+10/16 20:15:04.117|BRANCH_END  |
+10/16 20:15:04.117|BRANCH_END  |
+10/16 20:15:04.117|START       |NAME=必須chk・値取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ作業用, VALUE=
+--/-- --:--:--.---|INFO        |メッセージ作業用(String) 入力=[]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=5
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[5]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P21800668D
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P21800668D]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101604027-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101604027-00]
+10/16 20:15:04.117|END         |
+10/16 20:15:04.117|BRANCH_START|NAME=必須チェック結果
+--/-- --:--:--.---|EVALUATION  |NAME=必須未入力, RESULT=false
+10/16 20:15:04.117|START       |NAME=削除条件作成 
+--/-- --:--:--.---|VARIABLE    |NAME=検索条件作業用, VALUE=Name LIKE 'BF24101604027%'
+--/-- --:--:--.---|INFO        |検索条件作業用(String) 入力=[Name LIKE 'BF24101604027%']
+10/16 20:15:04.118|END         |
+10/16 20:15:04.118|START       |NAME=オーダ進捗_ID抽出 [salesforce_adapter/get_data]
+--/-- --:--:--.---|INFO        |[0]件のデータ読み取り(クエリー)に成功しました。
+10/16 20:15:04.175|END         |
+10/16 20:15:04.175|BRANCH_START|NAME=ID抽出結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり, RESULT=false
+10/16 20:15:04.175|START       |NAME=ID抽出結果なし 
+10/16 20:15:04.175|END         |
+10/16 20:15:04.175|START       |NAME=中間1出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 20:15:04.178|END         |
+10/16 20:15:04.178|BRANCH_END  |
+10/16 20:15:04.178|BRANCH_END  |
+10/16 20:15:04.178|LOOP_END    |COUNT=5
+10/16 20:15:04.178|BRANCH_START|NAME=F読込件数判定
+--/-- --:--:--.---|EVALUATION  |NAME=空ファイル, RESULT=false
+10/16 20:15:04.178|BRANCH_END  |
+10/16 20:15:04.178|START       |NAME=変数初期化_1 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=前回ID, VALUE=                  
+--/-- --:--:--.---|INFO        |前回ID(String) 入力=[                  ]
+10/16 20:15:04.178|END         |
+10/16 20:15:04.178|START       |NAME=中間1読込 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[5]行のデータを抽出しました。
+10/16 20:15:04.180|END         |
+10/16 20:15:04.180|START       |NAME=中間1_IDソート 
+--/-- --:--:--.---|INFO        |ソート処理の中間データ抽出処理が正常に終了しました。
+10/16 20:15:04.185|END         |
+10/16 20:15:04.185|LOOP_START  |NAME=繰り返し_R削除
+10/16 20:15:04.185|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=1
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[1]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002B9A
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002B9A]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101604007-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101604007-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 20:15:04.185|END         |
+10/16 20:15:04.185|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 20:15:04.185|BRANCH_END  |
+10/16 20:15:04.185|START       |NAME=削除結果F内容 
+10/16 20:15:04.185|END         |
+10/16 20:15:04.185|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 20:15:04.188|END         |
+10/16 20:15:04.188|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=2
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[2]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P21800668D
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P21800668D]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101604023-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101604023-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 20:15:04.189|END         |
+10/16 20:15:04.189|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 20:15:04.189|BRANCH_END  |
+10/16 20:15:04.189|START       |NAME=削除結果F内容 
+10/16 20:15:04.189|END         |
+10/16 20:15:04.189|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 20:15:04.191|END         |
+10/16 20:15:04.191|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=3
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[3]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P241043572
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P241043572]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101604024-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101604024-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 20:15:04.191|END         |
+10/16 20:15:04.191|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 20:15:04.191|BRANCH_END  |
+10/16 20:15:04.191|START       |NAME=削除結果F内容 
+10/16 20:15:04.191|END         |
+10/16 20:15:04.191|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 20:15:04.193|END         |
+10/16 20:15:04.193|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=4
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[4]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002173
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002173]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101604025-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101604025-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 20:15:04.193|END         |
+10/16 20:15:04.193|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 20:15:04.193|BRANCH_END  |
+10/16 20:15:04.193|START       |NAME=削除結果F内容 
+10/16 20:15:04.194|END         |
+10/16 20:15:04.194|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 20:15:04.196|END         |
+10/16 20:15:04.196|START       |NAME=R削除ID取得 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=5
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[5]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P21800668D
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P21800668D]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101604027-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101604027-00]
+--/-- --:--:--.---|VARIABLE    |NAME=カスタムオブジェクトID, VALUE=                  
+--/-- --:--:--.---|INFO        |カスタムオブジェクトID(String) 入力=[                  ]
+10/16 20:15:04.196|END         |
+10/16 20:15:04.196|BRANCH_START|NAME=前回IDと比較
+--/-- --:--:--.---|EVALUATION  |NAME=IDあり&前回IDと異なる, RESULT=false
+10/16 20:15:04.196|BRANCH_END  |
+10/16 20:15:04.196|START       |NAME=削除結果F内容 
+10/16 20:15:04.196|END         |
+10/16 20:15:04.196|START       |NAME=中間2ファイル出力_1 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 20:15:04.198|END         |
+10/16 20:15:04.198|LOOP_END    |COUNT=5
+10/16 20:15:04.198|TRY_END     |
+10/16 20:15:04.198|TRY_START   |NAME=try_登録
+10/16 20:15:04.198|START       |NAME=中間2読込 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[5]行のデータを抽出しました。
+10/16 20:15:04.200|END         |
+10/16 20:15:04.200|START       |NAME=削除Err集計 
+--/-- --:--:--.---|INFO        |集計処理(グループ分けあり)が正常に終了しました。
+10/16 20:15:04.201|END         |
+10/16 20:15:04.201|START       |NAME=削除Err抽出 
+10/16 20:15:04.201|END         |
+10/16 20:15:04.201|START       |NAME=ErrKeysF出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[0]行のデータを挿入しました。
+10/16 20:15:04.204|END         |
+10/16 20:15:04.204|START       |NAME=登録前変数初期化 
+--/-- --:--:--.---|VARIABLE    |NAME=正常件数, VALUE=0
+--/-- --:--:--.---|INFO        |正常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=0
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=0
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[0]
+10/16 20:15:04.204|END         |
+10/16 20:15:04.204|START       |NAME=オーダー進捗F読込_2 [variablelength_adapter/get_data]
+--/-- --:--:--.---|INFO        |[5]行のデータを抽出しました。
+10/16 20:15:04.206|END         |
+10/16 20:15:04.206|LOOP_START  |NAME=繰り返し_登録内容
+10/16 20:15:04.206|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=1
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[1]
+10/16 20:15:04.208|END         |
+10/16 20:15:04.208|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 20:15:04.208|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 20:15:04.208|END         |
+10/16 20:15:04.208|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 20:15:04.212|END         |
+10/16 20:15:04.212|BRANCH_END  |
+10/16 20:15:04.212|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=2
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[2]
+10/16 20:15:04.213|END         |
+10/16 20:15:04.213|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 20:15:04.213|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 20:15:04.214|END         |
+10/16 20:15:04.214|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 20:15:04.217|END         |
+10/16 20:15:04.217|BRANCH_END  |
+10/16 20:15:04.217|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=3
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[3]
+10/16 20:15:04.218|END         |
+10/16 20:15:04.218|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 20:15:04.218|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 20:15:04.219|END         |
+10/16 20:15:04.219|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 20:15:04.222|END         |
+10/16 20:15:04.222|BRANCH_END  |
+10/16 20:15:04.222|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=4
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[4]
+10/16 20:15:04.224|END         |
+10/16 20:15:04.224|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 20:15:04.224|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 20:15:04.224|END         |
+10/16 20:15:04.224|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 20:15:04.227|END         |
+10/16 20:15:04.227|BRANCH_END  |
+10/16 20:15:04.227|START       |NAME=登録可否取得・値設定 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=0
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[0]
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=5
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[5]
+10/16 20:15:04.229|END         |
+10/16 20:15:04.229|BRANCH_START|NAME=登録可否判定
+--/-- --:--:--.---|EVALUATION  |NAME=登録対象, RESULT=true
+10/16 20:15:04.229|START       |NAME=追加Fマップ 
+--/-- --:--:--.---|VARIABLE    |NAME=追加有無, VALUE=1
+--/-- --:--:--.---|INFO        |追加有無(int) 入力=[1]
+10/16 20:15:04.230|END         |
+10/16 20:15:04.230|START       |NAME=追加ファイル出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 20:15:04.232|END         |
+10/16 20:15:04.232|BRANCH_END  |
+10/16 20:15:04.232|LOOP_END    |COUNT=5
+10/16 20:15:04.232|BRANCH_START|NAME=追加有無
+--/-- --:--:--.---|EVALUATION  |NAME=追加あり, RESULT=true
+10/16 20:15:04.232|START       |NAME=追加ファイル読込_1 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[5]行のデータを抽出しました。
+10/16 20:15:04.234|END         |
+10/16 20:15:04.234|START       |NAME=Insert内容作成 
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=1
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[1]
+10/16 20:15:04.238|END         |
+10/16 20:15:04.238|START       |NAME=オーダ進捗情報登録 [salesforce_adapter/put_insert]
+--/-- --:--:--.---|WARN        |INSERTエラー:[読み込み済み件数:5][バッチサイズ:200][発生箇所:0][status:INVALID_FIELD][APIエラーメッセージ:Foreign key external ID: p213002b9a not found for field OpportunityCode__c in entity Opportunity]
+--/-- --:--:--.---|INFO        |[5]件の入力データから、[4]件のデータ書き込み（INSERT）に成功しました。
+--/-- --:--:--.---|WARN        |[1]件のデータ書き込み（INSERT）できない入力データがありました。
+10/16 20:15:04.666|END         |
+10/16 20:15:04.666|START       |NAME=処理件数・エラー抽出 
+--/-- --:--:--.---|VARIABLE    |NAME=正常件数, VALUE=4
+--/-- --:--:--.---|INFO        |正常件数(int) 入力=[4]
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=1
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[1]
+10/16 20:15:04.667|END         |
+10/16 20:15:04.667|LOOP_START  |NAME=繰り返し_登録失敗
+10/16 20:15:04.667|START       |NAME=エラー行番取得 
+--/-- --:--:--.---|VARIABLE    |NAME=読込行番号, VALUE=1
+--/-- --:--:--.---|INFO        |読込行番号(int) 入力=[1]
+--/-- --:--:--.---|VARIABLE    |NAME=商談コード, VALUE=P213002B9A
+--/-- --:--:--.---|INFO        |商談コード(String) 入力=[P213002B9A]
+--/-- --:--:--.---|VARIABLE    |NAME=オーダID, VALUE=BF24101604007-00
+--/-- --:--:--.---|INFO        |オーダID(String) 入力=[BF24101604007-00]
+10/16 20:15:04.667|END         |
+10/16 20:15:04.667|START       |NAME=エラーログ_SFDC登録エラー 
+10/16 20:15:04.667|SCRIPT_START|SCRIPT=ログ出力, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=9
+--/-- --:--:--.---|VARIABLE    |NAME=カテゴリ, VALUE=IF
+--/-- --:--:--.---|VARIABLE    |NAME=param01, VALUE=P213002B9A
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージID, VALUE=MSG0341
+10/16 20:15:04.667|START       |NAME=メッセージ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=ログレベル, VALUE=E
+--/-- --:--:--.---|INFO        |ログレベル(String) 入力=[E]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=pk0000mvvv000980e4mjj12gp558 レコード更新に失敗しました。　商談コード=P213002B9A
+--/-- --:--:--.---|INFO        |メッセージ(String) 入力=[pk0000mvvv000980e4mjj12gp558 レコード更新に失敗しました。　商談コード=P213002B9A]
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=pk0000mvvv000980e4mjj12gp558
+--/-- --:--:--.---|INFO        |実行ID(String) 入力=[pk0000mvvv000980e4mjj12gp558]
+10/16 20:15:04.672|END         |
+10/16 20:15:04.672|BRANCH_START|NAME=ログレベル判定
+--/-- --:--:--.---|EVALUATION  |NAME=INFO, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=WARN, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=ERROR, RESULT=true
+10/16 20:15:04.672|START       |NAME=ログ出力_ERROR 
+10/16 20:15:04.672|END         |
+10/16 20:15:04.672|BRANCH_END  |
+10/16 20:15:04.672|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=警告終了, RESULT=false
+10/16 20:15:04.672|BRANCH_END  |
+10/16 20:15:04.672|SCRIPT_END  |EXIT_STATUS=0
+10/16 20:15:04.672|END         |
+10/16 20:15:04.672|START       |NAME=追加ファイル読込_2 [csv_adapter/get_data]
+--/-- --:--:--.---|INFO        |[5]行のデータを抽出しました。
+10/16 20:15:04.675|END         |
+10/16 20:15:04.675|START       |NAME=エラー行抽出 
+10/16 20:15:04.675|END         |
+10/16 20:15:04.675|START       |NAME=Errファイル出力_3 
+10/16 20:15:04.676|SCRIPT_START|SCRIPT=sub/004_不正レコードファイル出力, PROJECT=【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), REPOSITORY=/share/projects/【データ連携HUB】WE0502_オーダー情報取込(Biz-FLOW), VERSION=7
+--/-- --:--:--.---|VARIABLE    |NAME=レコード情報, VALUE=com.appresso.ds.xmlfw.table.MemoryTableData@404e09a7
+--/-- --:--:--.---|VARIABLE    |NAME=不正レコードファイルパス, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016201500_pk0000mvvv000980e4mjj12gp558_error/BF_orderstatus_202410162010_20241016201500_error.csv
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=null: null
+--/-- --:--:--.---|VARIABLE    |NAME=エラーコード, VALUE=0001
+10/16 20:15:04.676|START       |NAME=不正レコード出力設定 
+10/16 20:15:04.676|END         |
+10/16 20:15:04.676|START       |NAME=不正レコードF出力 [csv_adapter/put_data]
+--/-- --:--:--.---|INFO        |[1]行のデータを挿入しました。
+10/16 20:15:04.684|END         |
+10/16 20:15:04.685|SCRIPT_END  |EXIT_STATUS=0
+10/16 20:15:04.685|END         |
+10/16 20:15:04.685|LOOP_END    |COUNT=1
+10/16 20:15:04.685|BRANCH_END  |
+10/16 20:15:04.685|TRY_END     |
+10/16 20:15:04.685|BRANCH_START|NAME=処理結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=処理結果_異常, RESULT=true
+10/16 20:15:04.685|BRANCH_END  |
+10/16 20:15:04.685|SCRIPT_END  |EXIT_STATUS=3
+10/16 20:15:04.685|END         |
+10/16 20:15:04.685|BRANCH_START|NAME=反映結果反映
+--/-- --:--:--.---|EVALUATION  |NAME=反映結果異常, RESULT=true
+10/16 20:15:04.685|START       |NAME=処理結果←異常_1 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=3
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[3]
+--/-- --:--:--.---|VARIABLE    |NAME=異常ファイル数, VALUE=1
+--/-- --:--:--.---|INFO        |異常ファイル数(int) 入力=[1]
+10/16 20:15:04.685|END         |
+10/16 20:15:04.685|TRY_START   |NAME=try_ErrDirへ移動
+10/16 20:15:04.685|START       |NAME=ErrDirへ移動 [file_operation_adapter/move_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0502/BACKUP/20241016201500_pk0000mvvv000980e4mjj12gp558_backup/BF_orderstatus_202410162010.csv]ファイル/ディレクトリを移動しました。
+--/-- --:--:--.---|INFO        |[1]件を移動しました。
+10/16 20:15:04.695|END         |
+10/16 20:15:04.695|BRANCH_START|NAME=ErrDir移動結果
+--/-- --:--:--.---|EVALUATION  |NAME=ErrDir移動結果異常, RESULT=false
+10/16 20:15:04.695|BRANCH_END  |
+10/16 20:15:04.695|BRANCH_START|NAME=次処理継続判定
+--/-- --:--:--.---|EVALUATION  |NAME=継続しない, RESULT=false
+10/16 20:15:04.695|BRANCH_END  |
+10/16 20:15:04.695|TRY_END     |
+10/16 20:15:04.695|BRANCH_END  |
+10/16 20:15:04.695|START       |NAME=処理件数加算 
+--/-- --:--:--.---|VARIABLE    |NAME=正常件数, VALUE=4
+--/-- --:--:--.---|INFO        |正常件数(int) 入力=[4]
+--/-- --:--:--.---|VARIABLE    |NAME=警告件数, VALUE=1
+--/-- --:--:--.---|INFO        |警告件数(int) 入力=[1]
+--/-- --:--:--.---|VARIABLE    |NAME=異常件数, VALUE=1
+--/-- --:--:--.---|INFO        |異常件数(int) 入力=[1]
+10/16 20:15:04.696|END         |
+10/16 20:15:04.696|LOOP_END    |COUNT=1
+10/16 20:15:04.696|START       |NAME=ログ出力_件数出力 
+10/16 20:15:04.696|SCRIPT_START|SCRIPT=ログ出力, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=9
+--/-- --:--:--.---|VARIABLE    |NAME=param02, VALUE=1
+--/-- --:--:--.---|VARIABLE    |NAME=カテゴリ, VALUE=IF
+--/-- --:--:--.---|VARIABLE    |NAME=param01, VALUE=4
+--/-- --:--:--.---|VARIABLE    |NAME=param03, VALUE=1
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージID, VALUE=MSG0105
+10/16 20:15:04.696|START       |NAME=メッセージ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=ログレベル, VALUE=I
+--/-- --:--:--.---|INFO        |ログレベル(String) 入力=[I]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=pk0000mvvv000980e4mjj12gp558 正常:4 異常:1 警告:1
+--/-- --:--:--.---|INFO        |メッセージ(String) 入力=[pk0000mvvv000980e4mjj12gp558 正常:4 異常:1 警告:1]
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=pk0000mvvv000980e4mjj12gp558
+--/-- --:--:--.---|INFO        |実行ID(String) 入力=[pk0000mvvv000980e4mjj12gp558]
+10/16 20:15:04.700|END         |
+10/16 20:15:04.700|BRANCH_START|NAME=ログレベル判定
+--/-- --:--:--.---|EVALUATION  |NAME=INFO, RESULT=true
+10/16 20:15:04.700|START       |NAME=ログ出力_INFO 
+10/16 20:15:04.700|END         |
+10/16 20:15:04.700|BRANCH_END  |
+10/16 20:15:04.700|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=警告終了, RESULT=false
+10/16 20:15:04.700|BRANCH_END  |
+10/16 20:15:04.700|SCRIPT_END  |EXIT_STATUS=0
+10/16 20:15:04.700|END         |
+10/16 20:15:04.700|TRY_END     |
+10/16 20:15:04.700|BRANCH_START|NAME=処理結果分岐
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=true
+10/16 20:15:04.700|BRANCH_END  |
+10/16 20:15:04.700|SCRIPT_END  |EXIT_STATUS=1
+10/16 20:15:04.700|END         |
+10/16 20:15:04.700|BRANCH_START|NAME=取込処理結果
+--/-- --:--:--.---|EVALUATION  |NAME=取込処理結果_異常, RESULT=true
+10/16 20:15:04.700|START       |NAME=処理結果F_異常_5 
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=-1
+--/-- --:--:--.---|INFO        |処理結果フラグ(int) 入力=[-1]
+--/-- --:--:--.---|VARIABLE    |NAME=結果ステータス_規制情報T用, VALUE=1
+--/-- --:--:--.---|INFO        |結果ステータス_規制情報T用(String) 入力=[1]
+10/16 20:15:04.700|END         |
+10/16 20:15:04.700|START       |NAME=エラーF転送処理 
+10/16 20:15:04.700|SCRIPT_START|SCRIPT=S3エラーファイル圧縮格納, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=12
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=エラーフォルダパス, VALUE=/data/MERGE/app/data/WE0502/ERROR/20241016201500_pk0000mvvv000980e4mjj12gp558_error
+10/16 20:15:04.700|START       |NAME=格納フォルダ名作成 
+--/-- --:--:--.---|VARIABLE    |NAME=格納フォルダ名, VALUE=WE0502_20241016
+--/-- --:--:--.---|INFO        |格納フォルダ名(String) 入力=[WE0502_20241016]
+--/-- --:--:--.---|VARIABLE    |NAME=ZIPファイル名, VALUE=WE0502_20241016201504700.zip
+--/-- --:--:--.---|INFO        |ZIPファイル名(String) 入力=[WE0502_20241016201504700.zip]
+10/16 20:15:04.700|END         |
+10/16 20:15:04.700|START       |NAME=エラーファイル一覧取得 [file_operation_adapter/list_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0502/ERROR/20241016201500_pk0000mvvv000980e4mjj12gp558_error]ディレクトリのファイル名一覧を取得しました。
+10/16 20:15:04.711|END         |
+10/16 20:15:04.711|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=エラーファイル存在, RESULT=true
+10/16 20:15:04.711|START       |NAME=エラーファイル圧縮 [file_operation_adapter/compress_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0502/ERROR/20241016201500_pk0000mvvv000980e4mjj12gp558_error/WE0502_20241016201504700.zip]ファイル/ディレクトリを圧縮しました。
+10/16 20:15:04.731|END         |
+10/16 20:15:04.731|START       |NAME=エラーファイル書き込み [amazon_s3_adapter/put]
+10/16 20:15:05.379|END         |
+10/16 20:15:05.379|BRANCH_END  |
+10/16 20:15:05.379|START       |NAME=エラーフォルダ削除 [file_operation_adapter/delete_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/data/WE0502/ERROR/20241016201500_pk0000mvvv000980e4mjj12gp558_error]ファイル/ディレクトリを削除しました。
+--/-- --:--:--.---|INFO        |[1]件を削除しました。
+10/16 20:15:05.387|END         |
+10/16 20:15:05.387|SCRIPT_END  |EXIT_STATUS=0
+10/16 20:15:05.387|END         |
+10/16 20:15:05.387|BRANCH_END  |
+10/16 20:15:05.387|START       |NAME=作業用Dir削除_3 [file_operation_adapter/delete_file]
+--/-- --:--:--.---|INFO        |[/data/MERGE/app/temp/20241016201500_pk0000mvvv000980e4mjj12gp558_WE0502]ファイル/ディレクトリを削除しました。
+--/-- --:--:--.---|INFO        |[1]件を削除しました。
+10/16 20:15:05.404|END         |
+10/16 20:15:05.404|TRY_END     |
+10/16 20:15:05.404|TRY_END     |
+10/16 20:15:05.404|START       |NAME=規制情報更新処理_終 
+10/16 20:15:05.404|SCRIPT_START|SCRIPT=規制情報/03_規制情報更新, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=6
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=予備2, VALUE=1
+--/-- --:--:--.---|VARIABLE    |NAME=予備1, VALUE=0
+--/-- --:--:--.---|VARIABLE    |NAME=レコードNo, VALUE=000
+10/16 20:15:05.404|TRY_START   |NAME=try_catch
+10/16 20:15:05.404|START       |NAME=規制情報更新 [amazon_rds_postgresql_adapter/execute_select_query]
+--/-- --:--:--.---|INFO        |[1]件のデータの抽出に成功しました。
+10/16 20:15:05.407|END         |
+10/16 20:15:05.407|BRANCH_START|NAME=結果判定
+--/-- --:--:--.---|EVALUATION  |NAME=更新失敗, RESULT=false
+10/16 20:15:05.407|BRANCH_END  |
+10/16 20:15:05.407|TRY_END     |
+10/16 20:15:05.407|SCRIPT_END  |EXIT_STATUS=0
+10/16 20:15:05.407|END         |
+10/16 20:15:05.407|BRANCH_START|NAME=規制情報更新結果_2
+--/-- --:--:--.---|EVALUATION  |NAME=規制情報更新失敗＿２, RESULT=false
+10/16 20:15:05.407|BRANCH_END  |
+10/16 20:15:05.407|BRANCH_START|NAME=処理結果で分岐
+--/-- --:--:--.---|EVALUATION  |NAME=処理結果=異常, RESULT=true
+10/16 20:15:05.407|START       |NAME=ログ出力_異常終了 
+10/16 20:15:05.407|SCRIPT_START|SCRIPT=ログ出力, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=9
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=1
+--/-- --:--:--.---|VARIABLE    |NAME=param02, VALUE=WE0502
+--/-- --:--:--.---|VARIABLE    |NAME=カテゴリ, VALUE=END
+--/-- --:--:--.---|VARIABLE    |NAME=param01, VALUE=オーダー情報取込(Biz-FLOW)
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージID, VALUE=MSG0015
+10/16 20:15:05.407|START       |NAME=メッセージ取得 
+--/-- --:--:--.---|VARIABLE    |NAME=ログレベル, VALUE=E
+--/-- --:--:--.---|INFO        |ログレベル(String) 入力=[E]
+--/-- --:--:--.---|VARIABLE    |NAME=メッセージ, VALUE=pk0000mvvv000980e4mjj12gp558 オーダー情報取込(Biz-FLOW)処理を異常終了しました（WE0502）
+--/-- --:--:--.---|INFO        |メッセージ(String) 入力=[pk0000mvvv000980e4mjj12gp558 オーダー情報取込(Biz-FLOW)処理を異常終了しました（WE0502）]
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=pk0000mvvv000980e4mjj12gp558
+--/-- --:--:--.---|INFO        |実行ID(String) 入力=[pk0000mvvv000980e4mjj12gp558]
+10/16 20:15:05.411|END         |
+10/16 20:15:05.411|BRANCH_START|NAME=ログレベル判定
+--/-- --:--:--.---|EVALUATION  |NAME=INFO, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=WARN, RESULT=false
+--/-- --:--:--.---|EVALUATION  |NAME=ERROR, RESULT=true
+10/16 20:15:05.411|START       |NAME=ログ出力_ERROR 
+10/16 20:15:05.411|END         |
+10/16 20:15:05.411|BRANCH_END  |
+10/16 20:15:05.411|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=異常終了, RESULT=true
+10/16 20:15:05.411|START       |NAME=エラーメール送信（異常） 
+10/16 20:15:05.411|SCRIPT_START|SCRIPT=エラーメール送信, PROJECT=【次期CRM先行】共通処理部品, REPOSITORY=/home/z098334/projects/【次期CRM先行】共通処理部品, VERSION=2
+--/-- --:--:--.---|VARIABLE    |NAME=処理結果フラグ, VALUE=1
+--/-- --:--:--.---|VARIABLE    |NAME=実行ID, VALUE=pk0000mvvv000980e4mjj12gp558
+--/-- --:--:--.---|VARIABLE    |NAME=機能ID, VALUE=WE0502
+10/16 20:15:05.411|START       |NAME=通知日時取得 
+--/-- --:--:--.---|VARIABLE    |NAME=通知日時, VALUE=2024/10/16 20:15:05
+--/-- --:--:--.---|INFO        |通知日時(String) 入力=[2024/10/16 20:15:05]
+10/16 20:15:05.411|END         |
+10/16 20:15:05.411|BRANCH_START|NAME=if
+--/-- --:--:--.---|EVALUATION  |NAME=処理結果_異常, RESULT=true
+10/16 20:15:05.411|START       |NAME=異常時mail送信 [mail_adapter/put_smtp_with_message]
+--/-- --:--:--.---|INFO        |1通のメッセージを送信しました。
+10/16 20:15:05.444|END         |
+10/16 20:15:05.444|BRANCH_END  |
+10/16 20:15:05.444|SCRIPT_END  |EXIT_STATUS=0
+10/16 20:15:05.444|END         |
+10/16 20:15:05.444|BRANCH_END  |
+10/16 20:15:05.444|SCRIPT_END  |EXIT_STATUS=0
+10/16 20:15:05.444|END         |
+10/16 20:15:05.444|BRANCH_END  |
+10/16 20:15:05.445|SCRIPT_END  |EXIT_STATUS=-1
+10/16 20:15:05.445|EXEC_END    |EXIT_STATUS=-1
