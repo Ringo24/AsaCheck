@@ -1,7 +1,7 @@
 #!/bin/bash
 ####################################################################################################
 # 
-# Amazon Connect環境ユーザー出力
+# Amazon Connect環境クイック接続出力
 # 
 ####################################################################################################
 
@@ -39,7 +39,7 @@ Identity_Management_Type=SAML
 # 継続ファイル名
 #-------------------------------------------------------------------------
 OUTPUT_FILE1=U3_OUTPUT_log.txt
-OUTPUT_FILE2=U3_OUTPUT_UsersData.txt
+OUTPUT_FILE2=U3_OUTPUT_UsersData.csv
 OUTPUT_FILE3=U3_INPUT_UsersList.txt
 OUTPUT_FILE4=U3_INPUT_Counter.txt
 
@@ -60,7 +60,7 @@ export AWS_MAX_ATTEMPTS=50
 
 echo ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 echo ◇
-echo ◇  Amazon Connect環境ユーザー出力を開始します。
+echo ◇  Amazon Connect環境クイック接続出力を開始します。
 echo ◇
 echo ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 
@@ -115,7 +115,7 @@ ID_AmazonConnect=`aws --region ${Target_Region} connect list-instances  --output
 
 
 #-------------------------------------------------------------------------
-# ユーザー管理
+# クイック接続管理
 #-------------------------------------------------------------------------
 echo ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 echo ◇　実行状態の確認
@@ -124,9 +124,9 @@ echo ◇
 
 if [ -s ./${OUTPUT_FILE3} ] && [ -s ./${OUTPUT_FILE4} ] ; then
   . ./${OUTPUT_FILE4}
-  echo ◇　仕掛かり中のユーザー情報が存在します。
-  echo ◇　　処理済ユーザー数　：${User_CNT}
-  echo ◇　　総ユーザー数　　　：${Max_CNT}
+  echo ◇　仕掛かり中のクイック接続情報が存在します。
+  echo ◇　　処理済クイック接続数　：${User_CNT}
+  echo ◇　　総クイック接続数　　　：${Max_CNT}
   echo ◇　処理を継続しますか？（Y/N）
   Check_INPUT=
   while true
@@ -159,7 +159,7 @@ if [ -s ./${OUTPUT_FILE3} ] && [ -s ./${OUTPUT_FILE4} ] ; then
   
   
 else
-  echo ◇　仕掛かり中のユーザー情報が存在しません。
+  echo ◇　仕掛かり中のクイック接続情報が存在しません。
   
   echo ◇　一から処理を実施しますか？（Y/N）
   Check_INPUT=
@@ -187,20 +187,20 @@ else
   >${OUTPUT_FILE1}
   >${OUTPUT_FILE2}
   
-  echo ◇　ユーザー一覧を取得します。
+  echo ◇　クイック接続一覧を取得します。
   aws --region ${Target_Region} connect list-users  --instance-id  ${ID_AmazonConnect} --output text  > ${Work_UsersList}
   RC=$?
   if [ "${RC}" != "0" ] ;then
     rm -f ${Work_UsersList}
     echo ◆
-    echo ◆　ユーザー一覧の取得に失敗しました。（RC=${RC}）
+    echo ◆　クイック接続一覧の取得に失敗しました。（RC=${RC}）
     echo ◆　処理を中断します。
     unset AWS_MAX_ATTEMPTS
     exit 10
   fi
 
   echo ◇
-  echo ◇　ユーザー一覧をユーザー名でソートします。
+  echo ◇　クイック接続一覧をクイック接続名でソートします。
   cat ${Work_UsersList} | sort -k 4 > ${OUTPUT_FILE3}
   rm -f ${Work_UsersList}
   
@@ -212,42 +212,46 @@ else
   echo Max_CNT=${Max_CNT}>> ${OUTPUT_FILE4}
   
   echo ◇
-  echo ◇　総ユーザー数は${Max_CNT}件です。
+  echo ◇　総クイック接続数は${Max_CNT}件です。
   
 fi
 
-echo ◇
-echo ◇　ルーティングプロファイル一覧を取得します。
-aws --region ${Target_Region} connect list-routing-profiles  --instance-id  ${ID_AmazonConnect} --output text  > ${Work_R_Pro}
-RC=$?
-if [ "${RC}" != "0" ] ;then
-  rm -f ${Work_R_Pro}
-  echo ◆
-  echo ◆　ルーティングプロファイル一覧の取得に失敗しました。（RC=${RC}）
-  echo ◆　処理を中断します。
-  unset AWS_MAX_ATTEMPTS
-  exit 10
-fi
+#echo ◇
+#echo ◇　ルーティングプロファイル一覧を取得します。
+#aws --region ${Target_Region} connect list-routing-profiles  --instance-id  ${ID_AmazonConnect} --output text  > ${Work_R_Pro}
+#RC=$?
+#if [ "${RC}" != "0" ] ;then
+#  rm -f ${Work_R_Pro}
+#  echo ◆
+#  echo ◆　ルーティングプロファイル一覧の取得に失敗しました。（RC=${RC}）
+#  echo ◆　処理を中断します。
+#  unset AWS_MAX_ATTEMPTS
+#  exit 10
+#fi
 
-echo ◇
-echo ◇　セキュリティプロファイル一覧を取得します。
-aws --region ${Target_Region} connect list-security-profiles  --instance-id  ${ID_AmazonConnect} --output text  > ${Work_S_Pro}
-RC=$?
-if [ "${RC}" != "0" ] ;then
-  rm -f ${Work_R_Pro}
-  rm -f ${Work_S_Pro}
-  echo ◆
-  echo ◆　セキュリティプロファイル一覧の取得に失敗しました。（RC=${RC}）
-  echo ◆　処理を中断します。
-  unset AWS_MAX_ATTEMPTS
-  exit 10
-fi
+#echo ◇
+#echo ◇　セキュリティプロファイル一覧を取得します。
+#aws --region ${Target_Region} connect list-security-profiles  --instance-id  ${ID_AmazonConnect} --output text  > ${Work_S_Pro}
+#RC=$?
+#if [ "${RC}" != "0" ] ;then
+#  rm -f ${Work_R_Pro}
+#  rm -f ${Work_S_Pro}
+#  echo ◆
+#  echo ◆　セキュリティプロファイル一覧の取得に失敗しました。（RC=${RC}）
+#  echo ◆　処理を中断します。
+#  unset AWS_MAX_ATTEMPTS
+#  exit 10
+#fi
 
 
 
   echo ◇
-  echo ◇　ユーザーの出力を開始します。
+  echo ◇　クイック接続の出力を開始します。
   echo ◇
+  ############################################
+  # ヘッダを出力ファイルへ書き込み
+  ############################################
+  echo \"Id\",\"Arn\",\"Name\",\"QuickConnectType\",\"User\",\"ContactFlow\",\"LastModifiedTime\",\"LastModifiedRegion\" > ${OUTPUT_FILE2}
   
   while [ -s ./${OUTPUT_FILE3} ]
   do
@@ -256,29 +260,28 @@ fi
     Def_01=`echo ${line}              | cut -d " " -f  1  `
     Def_02=`echo ${line}              | cut -d " " -f  2  `
     Def_Id=`echo ${line}              | cut -d " " -f  3  `
-    Def_Name=`echo ${line}              | cut -d " " -f  4  `
+    Def_Name=`echo ${line}            | cut -d " " -f  6  `
+    Def_Type=`echo ${line}            | cut -d " " -f  7  `
     
     User_CNT=`expr ${User_CNT} + 1`
-    echo ◇　対象ユーザー（${Def_Name}）の処理を開始します。　（${User_CNT}件目）
-    echo ◇　対象ユーザー（${Def_Name}）の処理を開始します。　（${User_CNT}件目）>>${OUTPUT_FILE1}
+    echo ◇　対象クイック接続（${Def_Name}）の処理を開始します。　（${User_CNT}件目）
+    echo ◇　対象クイック接続（${Def_Name}）の処理を開始します。　（${User_CNT}件目）>>${OUTPUT_FILE1}
     
     ############################################
     # レコード間の区切り
     ############################################
     > ${Work_OutputData}
-    echo ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇>>${Work_OutputData}
-    echo ◇ユーザー情報 >> ${Work_OutputData}
-    
+
     ############################################
-    # ユーザー情報取得
+    # クイック接続情報取得
     ############################################
-    aws --region ${Target_Region} connect describe-user  --instance-id  ${ID_AmazonConnect} --user-id ${Def_Id} --output json > ${Work_UserData}
+    aws --region ${Target_Region} connect describe-quick-connect  --instance-id  ${ID_AmazonConnect} --user-id ${Def_Id}  | jq -r '(.QuickConnect | [.QuickConnectId,.QuickConnectARN,.Name,.QuickConnectConfig.QuickConnectType,.QuickConnectConfig.UserConfig.UserId,.QuickConnectConfig.UserConfig.ContactFlowId,.LastModifiedTime,.LastModifiedRegion]) | @csv' > ${Work_UserData}
     RC=$?
     if [ ${RC} -ne 0 ] ; then
-      echo ◆　　ユーザー（${Def_Name}）の情報取得でエラーが発生しました。（RC=${RC}）
-      echo ◆　　ユーザー（${Def_Name}）の処理を中断します。
-      echo ◆　　ユーザー（${Def_Name}）の情報取得でエラーが発生しました。（RC=${RC}）>>${OUTPUT_FILE1}
-      echo ◆　　ユーザー（${Def_Name}）の処理を中断します。>>${OUTPUT_FILE1}
+      echo ◆　　クイック接続（${Def_Name}）の情報取得でエラーが発生しました。（RC=${RC}）
+      echo ◆　　クイック接続（${Def_Name}）の処理を中断します。
+      echo ◆　　クイック接続（${Def_Name}）の情報取得でエラーが発生しました。（RC=${RC}）>>${OUTPUT_FILE1}
+      echo ◆　　クイック接続（${Def_Name}）の処理を中断します。>>${OUTPUT_FILE1}
       
       exit 10
     fi
@@ -286,29 +289,41 @@ fi
     ############################################
     # ユーザー情報の取得
     ############################################
+    if [ ${Def_Type} = "User"]
+      #WK_UserId=`cat ${Work_UserData} | cut -d ',' -f 11`
+      #WK_UserId=`echo ${WK_UserId} | tr -d '"'`
+      #WK_UserName=`cat ${Work_R_Pro} | grep "${WK_UserId}" | cut -f 6`
+      #echo ◇　ユーザーID（${WK_UserId}）のユーザー名は（${WK_UserName}）>>${OUTPUT_FILE1}
+      #sed -i "s/${WK_UserId}/${WK_UserName}/g" ${Work_UserData}
+    fi
+
+    ############################################
+    # キュー情報の取得
+    ############################################
+    if [ ${Def_Type} = "Queue"]
+      #WK_UserId=`cat ${Work_UserData} | cut -d ',' -f 11`
+      #WK_UserId=`echo ${WK_UserId} | tr -d '"'`
+      #WK_UserName=`cat ${Work_R_Pro} | grep "${WK_UserId}" | cut -f 6`
+      #echo ◇　ユーザーID（${WK_UserId}）のユーザー名は（${WK_UserName}）>>${OUTPUT_FILE1}
+      #sed -i "s/${WK_UserId}/${WK_UserName}/g" ${Work_UserData}
+    fi
+    
+    ############################################
+    # フロー情報の取得
+    ############################################
+    #WK_SecurityProfileIds=`cat ${Work_UserData} | cut -d ',' -f 10`
+    #WK_SecurityProfileIds=`echo ${WK_SecurityProfileIds} | tr -d '"'`
+    #WK_SecurityProfileName=`cat ${Work_S_Pro} | grep "${WK_SecurityProfileIds}" | cut -f 6`
+    #echo ◇　セキュリティプロファイルID（${WK_SecurityProfileIds}）のセキュリティプロファイル名は（${WK_SecurityProfileName}）>>${OUTPUT_FILE1}
+    #sed -i "s/${WK_SecurityProfileIds}/${WK_SecurityProfileName}/g" ${Work_UserData}
+    
+    ############################################
+    # クイック接続情報の取得
+    ############################################
     cat ${Work_UserData} >> ${Work_OutputData}
     
     ############################################
-    # ルーティングプロファイル情報の取得
-    ############################################
-    WK_RoutingProfileId=`cat ${Work_UserData} | jq -r .User.RoutingProfileId`
-    WK_RoutingProfileName=`cat ${Work_R_Pro} | grep ${WK_RoutingProfileId} | cut -f 4`
-    echo ◇ルーティングプロファイルID（${WK_RoutingProfileId}）の名称：${WK_RoutingProfileName} >> ${Work_OutputData}
-    
-    ############################################
-    # セキュリティプロファイル情報の取得
-    ############################################
-    WK_SecurityProfileIds=`cat ${Work_UserData} | jq -r .User.SecurityProfileIds[]`
-    WK_SecurityProfileName=`cat ${Work_S_Pro} | grep ${WK_SecurityProfileIds} | cut -f 4`
-    echo ◇セキュリティプロファイルID（${WK_SecurityProfileIds}）の名称：${WK_SecurityProfileName} >> ${Work_OutputData}
-    
-    ############################################
-    # 空白行の挿入
-    ############################################
-    echo  >> ${Work_OutputData}
-    
-    ############################################
-    # ユーザーデータを出力ファイルへ書き込み
+    # クイック接続データを出力ファイルへ書き込み
     ############################################
     cat ${Work_OutputData} >>${OUTPUT_FILE2}
     
@@ -319,19 +334,19 @@ fi
     echo Max_CNT=${Max_CNT}>> ${OUTPUT_FILE4}
     
     ############################################
-    # ユーザー一覧から1行削除処理
+    # クイック接続一覧から1行削除処理
     ############################################
     sed -e '1d' ${OUTPUT_FILE3} > ${Work_UsersList}
     cp -p ${Work_UsersList} ${OUTPUT_FILE3}
     rm -f ${Work_UsersList}
     
-    echo ◇　対象ユーザー（${Def_Name}）の処理が終了しました。（${User_CNT}件目）
-    echo ◇　対象ユーザー（${Def_Name}）の処理が終了しました。（${User_CNT}件目）>>${OUTPUT_FILE1}
+    echo ◇　対象クイック接続（${Def_Name}）の処理が終了しました。（${User_CNT}件目）
+    echo ◇　対象クイック接続（${Def_Name}）の処理が終了しました。（${User_CNT}件目）>>${OUTPUT_FILE1}
     
   done
   
   echo ◇
-  echo ◇　ユーザーの出力を終了しました。
+  echo ◇　クイック接続の出力を終了しました。
   echo ◇
 
 rm -f ${Work_R_Pro}
@@ -346,21 +361,21 @@ rm -f ${OUTPUT_FILE4}
 
 echo ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 echo ◇
-echo ◇　Amazon Connect環境ユーザー出力が完了しました。
+echo ◇　Amazon Connect環境クイック接続出力が完了しました。
 echo ◇
 echo ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 echo ◇
-echo ◇　ユーザー出力処理
-echo ◇　　出力件数　　　： ${User_CNT} 件
-echo ◇　　総ユーザー数　： ${Max_CNT} 件
+echo ◇　クイック接続出力処理
+echo ◇　　出力件数　　　　　： ${User_CNT} 件
+echo ◇　　総クイック接続数　： ${Max_CNT} 件
 echo ◇
 echo ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 
 echo ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ >>${OUTPUT_FILE1}
 echo ◇ >>${OUTPUT_FILE1}
-echo ◇　ユーザー出力処理 >>${OUTPUT_FILE1}
-echo ◇　　出力件数　　　： ${User_CNT} 件 >>${OUTPUT_FILE1}
-echo ◇　　総ユーザー数　： ${Max_CNT} 件 >>${OUTPUT_FILE1}
+echo ◇　クイック接続出力処理 >>${OUTPUT_FILE1}
+echo ◇　　出力件数　　　　　： ${User_CNT} 件 >>${OUTPUT_FILE1}
+echo ◇　　総クイック接続数　： ${Max_CNT} 件 >>${OUTPUT_FILE1}
 echo ◇ >>${OUTPUT_FILE1}
 echo ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇ >>${OUTPUT_FILE1}
 

@@ -39,7 +39,7 @@ Identity_Management_Type=SAML
 # 継続ファイル名
 #-------------------------------------------------------------------------
 OUTPUT_FILE1=U3_OUTPUT_log.txt
-OUTPUT_FILE2=U3_OUTPUT_UsersData.txt
+OUTPUT_FILE2=U3_OUTPUT_UsersData.csv
 OUTPUT_FILE3=U3_INPUT_UsersList.txt
 OUTPUT_FILE4=U3_INPUT_Counter.txt
 
@@ -248,6 +248,10 @@ fi
   echo ◇
   echo ◇　ユーザーの出力を開始します。
   echo ◇
+  ############################################
+  # ヘッダを出力ファイルへ書き込み
+  ############################################
+  echo \"Id\",\"Arn\",\"Username\",\"LastName\",\"FirstName\",\"PhoneType\",\"AutoAccept\",\"AfterContactWorkTimeLimit\",\"DirectoryUserId\",\"SecurityProfile\",\"RoutingProfile\",\"LastModifiedTime\",\"LastModifiedRegion\" > ${OUTPUT_FILE2}
   
   while [ -s ./${OUTPUT_FILE3} ]
   do
@@ -256,7 +260,7 @@ fi
     Def_01=`echo ${line}              | cut -d " " -f  1  `
     Def_02=`echo ${line}              | cut -d " " -f  2  `
     Def_Id=`echo ${line}              | cut -d " " -f  3  `
-    Def_Name=`echo ${line}              | cut -d " " -f  4  `
+    Def_Name=`echo ${line}            | cut -d " " -f  6  `
     
     User_CNT=`expr ${User_CNT} + 1`
     echo ◇　対象ユーザー（${Def_Name}）の処理を開始します。　（${User_CNT}件目）
@@ -266,13 +270,11 @@ fi
     # レコード間の区切り
     ############################################
     > ${Work_OutputData}
-    echo ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇>>${Work_OutputData}
-    echo ◇ユーザー情報 >> ${Work_OutputData}
-    
+
     ############################################
     # ユーザー情報取得
     ############################################
-    aws --region ${Target_Region} connect describe-user  --instance-id  ${ID_AmazonConnect} --user-id ${Def_Id} --output json > ${Work_UserData}
+    aws --region ${Target_Region} connect describe-user  --instance-id  ${ID_AmazonConnect} --user-id ${Def_Id}  | jq -r '(.User | [.Id,.Arn,.Username,.IdentityInfo.LastName,.IdentityInfo.FirstName,.PhoneConfig.PhoneType,.PhoneConfig.AutoAccept,.PhoneConfig.AfterContactWorkTimeLimit,.DirectoryUserId,.SecurityProfileIds[],.RoutingProfileId,.LastModifiedTime,.LastModifiedRegion]) | @csv' > ${Work_UserData}
     RC=$?
     if [ ${RC} -ne 0 ] ; then
       echo ◆　　ユーザー（${Def_Name}）の情報取得でエラーが発生しました。（RC=${RC}）
@@ -284,28 +286,27 @@ fi
     fi
     
     ############################################
-    # ユーザー情報の取得
-    ############################################
-    cat ${Work_UserData} >> ${Work_OutputData}
-    
-    ############################################
     # ルーティングプロファイル情報の取得
     ############################################
-    WK_RoutingProfileId=`cat ${Work_UserData} | jq -r .User.RoutingProfileId`
-    WK_RoutingProfileName=`cat ${Work_R_Pro} | grep ${WK_RoutingProfileId} | cut -f 4`
-    echo ◇ルーティングプロファイルID（${WK_RoutingProfileId}）の名称：${WK_RoutingProfileName} >> ${Work_OutputData}
+    WK_RoutingProfileId=`cat ${Work_UserData} | cut -d ',' -f 11`
+    WK_RoutingProfileId=`echo ${WK_RoutingProfileId} | tr -d '"'`
+    WK_RoutingProfileName=`cat ${Work_R_Pro} | grep "${WK_RoutingProfileId}" | cut -f 6`
+    echo ◇　ルーティングプロファイルID（${WK_RoutingProfileId}）のルーティングプロファイル名は（${WK_RoutingProfileName}）>>${OUTPUT_FILE1}
+    sed -i "s/${WK_RoutingProfileId}/${WK_RoutingProfileName}/g" ${Work_UserData}
     
     ############################################
     # セキュリティプロファイル情報の取得
     ############################################
-    WK_SecurityProfileIds=`cat ${Work_UserData} | jq -r .User.SecurityProfileIds[]`
-    WK_SecurityProfileName=`cat ${Work_S_Pro} | grep ${WK_SecurityProfileIds} | cut -f 4`
-    echo ◇セキュリティプロファイルID（${WK_SecurityProfileIds}）の名称：${WK_SecurityProfileName} >> ${Work_OutputData}
+    WK_SecurityProfileIds=`cat ${Work_UserData} | cut -d ',' -f 10`
+    WK_SecurityProfileIds=`echo ${WK_SecurityProfileIds} | tr -d '"'`
+    WK_SecurityProfileName=`cat ${Work_S_Pro} | grep "${WK_SecurityProfileIds}" | cut -f 6`
+    echo ◇　セキュリティプロファイルID（${WK_SecurityProfileIds}）のセキュリティプロファイル名は（${WK_SecurityProfileName}）>>${OUTPUT_FILE1}
+    sed -i "s/${WK_SecurityProfileIds}/${WK_SecurityProfileName}/g" ${Work_UserData}
     
     ############################################
-    # 空白行の挿入
+    # ユーザー情報の取得
     ############################################
-    echo  >> ${Work_OutputData}
+    cat ${Work_UserData} >> ${Work_OutputData}
     
     ############################################
     # ユーザーデータを出力ファイルへ書き込み
