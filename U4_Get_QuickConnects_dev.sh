@@ -38,19 +38,20 @@ Identity_Management_Type=SAML
 #-------------------------------------------------------------------------
 # 継続ファイル名
 #-------------------------------------------------------------------------
-OUTPUT_FILE1=U3_OUTPUT_log.txt
-OUTPUT_FILE2=U3_OUTPUT_UsersData.csv
-OUTPUT_FILE3=U3_INPUT_UsersList.txt
-OUTPUT_FILE4=U3_INPUT_Counter.txt
+OUTPUT_FILE1=U4_OUTPUT_log.txt
+OUTPUT_FILE2=U4_OUTPUT_QuickConnectData.csv
+OUTPUT_FILE3=U4_INPUT_QuickConnectList.txt
+OUTPUT_FILE4=U4_INPUT_Counter.txt
 
 #-------------------------------------------------------------------------
 # ワークファイル名
 #-------------------------------------------------------------------------
-Work_UsersList=U3_Work_UsersList.work
-Work_R_Pro=U3_Work_R_Pro.work
-Work_S_Pro=U3_Work_S_Pro.work
-Work_UserData=U3_Work_UserData.work
-Work_OutputData=U3_Work_OutputData.work
+Work_UsersList=U4_Work_UsersList.work
+Work_R_Pro=U4_Work_R_Pro.work
+Work_S_Pro=U4_Work_S_Pro.work
+Work_U_Pro=U4_Work_U_Pro.work
+Work_UserData=U4_Work_UserData.work
+Work_OutputData=U4_Work_OutputData.work
 
 #-------------------------------------------------------------------------
 # 環境変数設定
@@ -188,7 +189,7 @@ else
   >${OUTPUT_FILE2}
   
   echo ◇　クイック接続一覧を取得します。
-  aws --region ${Target_Region} connect list-users  --instance-id  ${ID_AmazonConnect} --output text  > ${Work_UsersList}
+  aws --region ${Target_Region} connect list-quick-connects  --instance-id  ${ID_AmazonConnect} --output text  > ${Work_UsersList}
   RC=$?
   if [ "${RC}" != "0" ] ;then
     rm -f ${Work_UsersList}
@@ -216,32 +217,47 @@ else
   
 fi
 
-#echo ◇
-#echo ◇　ルーティングプロファイル一覧を取得します。
-#aws --region ${Target_Region} connect list-routing-profiles  --instance-id  ${ID_AmazonConnect} --output text  > ${Work_R_Pro}
-#RC=$?
-#if [ "${RC}" != "0" ] ;then
-#  rm -f ${Work_R_Pro}
-#  echo ◆
-#  echo ◆　ルーティングプロファイル一覧の取得に失敗しました。（RC=${RC}）
-#  echo ◆　処理を中断します。
-#  unset AWS_MAX_ATTEMPTS
-#  exit 10
-#fi
+echo ◇
+echo ◇　ユーザー一覧を取得します。
+aws --region ${Target_Region} connect list-users  --instance-id  ${ID_AmazonConnect} --output text  > ${Work_U_Pro}
+RC=$?
+if [ "${RC}" != "0" ] ;then
+  rm -f ${Work_U_Pro}
+  echo ◆
+  echo ◆　ユーザー一覧の取得に失敗しました。（RC=${RC}）
+  echo ◆　処理を中断します。
+  unset AWS_MAX_ATTEMPTS
+  exit 10
+fi
 
-#echo ◇
-#echo ◇　セキュリティプロファイル一覧を取得します。
-#aws --region ${Target_Region} connect list-security-profiles  --instance-id  ${ID_AmazonConnect} --output text  > ${Work_S_Pro}
-#RC=$?
-#if [ "${RC}" != "0" ] ;then
-#  rm -f ${Work_R_Pro}
-#  rm -f ${Work_S_Pro}
-#  echo ◆
-#  echo ◆　セキュリティプロファイル一覧の取得に失敗しました。（RC=${RC}）
-#  echo ◆　処理を中断します。
-#  unset AWS_MAX_ATTEMPTS
-#  exit 10
-#fi
+echo ◇
+echo ◇　キュー一覧を取得します。
+aws --region ${Target_Region} connect list-queues  --instance-id  ${ID_AmazonConnect} --output text  > ${Work_R_Pro}
+RC=$?
+if [ "${RC}" != "0" ] ;then
+  rm -f ${Work_U_Pro}
+  rm -f ${Work_R_Pro}
+  echo ◆
+  echo ◆　キュー一覧の取得に失敗しました。（RC=${RC}）
+  echo ◆　処理を中断します。
+  unset AWS_MAX_ATTEMPTS
+  exit 10
+fi
+
+echo ◇
+echo ◇　フロー一覧を取得します。
+aws --region ${Target_Region} connect list-contact-flows  --instance-id  ${ID_AmazonConnect} --output text  > ${Work_S_Pro}
+RC=$?
+if [ "${RC}" != "0" ] ;then
+  rm -f ${Work_U_Pro}
+  rm -f ${Work_R_Pro}
+  rm -f ${Work_S_Pro}
+  echo ◆
+  echo ◆　フロー一覧の取得に失敗しました。（RC=${RC}）
+  echo ◆　処理を中断します。
+  unset AWS_MAX_ATTEMPTS
+  exit 10
+fi
 
 
 
@@ -252,7 +268,8 @@ fi
   # ヘッダを出力ファイルへ書き込み
   ############################################
   echo \"Id\",\"Arn\",\"Name\",\"QuickConnectType\",\"User\",\"ContactFlow\",\"LastModifiedTime\",\"LastModifiedRegion\" > ${OUTPUT_FILE2}
-  
+  # Todo: UserタイプとQueueタイプのヘッダをどうするか
+
   while [ -s ./${OUTPUT_FILE3} ]
   do
     line=`head -n 1 ./${OUTPUT_FILE3}`
@@ -275,7 +292,7 @@ fi
     ############################################
     # クイック接続情報取得
     ############################################
-    aws --region ${Target_Region} connect describe-quick-connect  --instance-id  ${ID_AmazonConnect} --user-id ${Def_Id}  | jq -r '(.QuickConnect | [.QuickConnectId,.QuickConnectARN,.Name,.QuickConnectConfig.QuickConnectType,.QuickConnectConfig.UserConfig.UserId,.QuickConnectConfig.UserConfig.ContactFlowId,.LastModifiedTime,.LastModifiedRegion]) | @csv' > ${Work_UserData}
+    aws --region ${Target_Region} connect describe-quick-connect  --instance-id  ${ID_AmazonConnect} --quick-connect-id ${Def_Id}  | jq -r '(.QuickConnect | [.QuickConnectId,.QuickConnectARN,.Name,.QuickConnectConfig.QuickConnectType,.QuickConnectConfig.UserConfig.UserId,.QuickConnectConfig.UserConfig.ContactFlowId,.LastModifiedTime,.LastModifiedRegion]) | @csv' > ${Work_UserData}
     RC=$?
     if [ ${RC} -ne 0 ] ; then
       echo ◆　　クイック接続（${Def_Name}）の情報取得でエラーが発生しました。（RC=${RC}）
@@ -311,12 +328,14 @@ fi
     ############################################
     # フロー情報の取得
     ############################################
-    #WK_SecurityProfileIds=`cat ${Work_UserData} | cut -d ',' -f 10`
-    #WK_SecurityProfileIds=`echo ${WK_SecurityProfileIds} | tr -d '"'`
-    #WK_SecurityProfileName=`cat ${Work_S_Pro} | grep "${WK_SecurityProfileIds}" | cut -f 6`
-    #echo ◇　セキュリティプロファイルID（${WK_SecurityProfileIds}）のセキュリティプロファイル名は（${WK_SecurityProfileName}）>>${OUTPUT_FILE1}
-    #sed -i "s/${WK_SecurityProfileIds}/${WK_SecurityProfileName}/g" ${Work_UserData}
-    
+    if [ ${Def_Type} = "Flow"]
+      #WK_UserId=`cat ${Work_UserData} | cut -d ',' -f 11`
+      #WK_UserId=`echo ${WK_UserId} | tr -d '"'`
+      #WK_UserName=`cat ${Work_R_Pro} | grep "${WK_UserId}" | cut -f 6`
+      #echo ◇　ユーザーID（${WK_UserId}）のユーザー名は（${WK_UserName}）>>${OUTPUT_FILE1}
+      #sed -i "s/${WK_UserId}/${WK_UserName}/g" ${Work_UserData}
+    fi
+        
     ############################################
     # クイック接続情報の取得
     ############################################
@@ -349,6 +368,7 @@ fi
   echo ◇　クイック接続の出力を終了しました。
   echo ◇
 
+rm -f ${Work_U_Pro}
 rm -f ${Work_R_Pro}
 rm -f ${Work_S_Pro}
 rm -f ${Work_UserData}
