@@ -188,7 +188,7 @@ else
   >${OUTPUT_FILE2}
   
   echo ◇　ユーザー一覧を取得します。
-  aws --region ${Target_Region} connect list-users  --instance-id  ${ID_AmazonConnect} --output text  > ${Work_UsersList}
+  aws --region ${Target_Region} connect list-users  --instance-id  ${ID_AmazonConnect} --output text | tr '\t' ','  > ${Work_UsersList}
   RC=$?
   if [ "${RC}" != "0" ] ;then
     rm -f ${Work_UsersList}
@@ -201,7 +201,7 @@ else
 
   echo ◇
   echo ◇　ユーザー一覧をユーザー名でソートします。
-  cat ${Work_UsersList} | sort -k 4 > ${OUTPUT_FILE3}
+  cat ${Work_UsersList} | sort -k 6 > ${OUTPUT_FILE3}
   rm -f ${Work_UsersList}
   
   
@@ -251,16 +251,16 @@ fi
   ############################################
   # ヘッダを出力ファイルへ書き込み
   ############################################
-  echo \"Id\",\"Arn\",\"Username\",\"LastName\",\"FirstName\",\"PhoneType\",\"AutoAccept\",\"AfterContactWorkTimeLimit\",\"DirectoryUserId\",\"SecurityProfile\",\"RoutingProfile\",\"LastModifiedTime\",\"LastModifiedRegion\" > ${OUTPUT_FILE2}
+  echo \"Id\",\"Username\",\"LastName\",\"FirstName\",\"PhoneType\",\"AutoAccept\",\"AfterContactWorkTimeLimit\",\"SecurityProfile\",\"RoutingProfile\",\"LastModifiedTime\",\"LastModifiedRegion\" > ${OUTPUT_FILE2}
   
   while [ -s ./${OUTPUT_FILE3} ]
   do
     line=`head -n 1 ./${OUTPUT_FILE3}`
     
-    Def_01=`echo ${line}              | cut -d " " -f  1  `
-    Def_02=`echo ${line}              | cut -d " " -f  2  `
-    Def_Id=`echo ${line}              | cut -d " " -f  3  `
-    Def_Name=`echo ${line}            | cut -d " " -f  6  `
+    Def_01=`echo ${line}              | cut -d "," -f  1  `
+    Def_02=`echo ${line}              | cut -d "," -f  2  `
+    Def_Id=`echo ${line}              | cut -d "," -f  3  `
+    Def_Name=`echo ${line}            | cut -d "," -f  6  `
     
     User_CNT=`expr ${User_CNT} + 1`
     echo ◇　対象ユーザー（${Def_Name}）の処理を開始します。　（${User_CNT}件目）
@@ -274,7 +274,7 @@ fi
     ############################################
     # ユーザー情報取得
     ############################################
-    aws --region ${Target_Region} connect describe-user  --instance-id  ${ID_AmazonConnect} --user-id ${Def_Id}  | jq -r '(.User | [.Id,.Arn,.Username,.IdentityInfo.LastName,.IdentityInfo.FirstName,.PhoneConfig.PhoneType,.PhoneConfig.AutoAccept,.PhoneConfig.AfterContactWorkTimeLimit,.DirectoryUserId,.SecurityProfileIds[],.RoutingProfileId,.LastModifiedTime,.LastModifiedRegion]) | @csv' > ${Work_UserData}
+    aws --region ${Target_Region} connect describe-user  --instance-id  ${ID_AmazonConnect} --user-id ${Def_Id}  | jq -r '(.User | [.Id,.Username,.IdentityInfo.LastName,.IdentityInfo.FirstName,.PhoneConfig.PhoneType,.PhoneConfig.AutoAccept,.PhoneConfig.AfterContactWorkTimeLimit,.SecurityProfileIds[],.RoutingProfileId,.LastModifiedTime,.LastModifiedRegion]) | @csv' > ${Work_UserData}
     RC=$?
     if [ ${RC} -ne 0 ] ; then
       echo ◆　　ユーザー（${Def_Name}）の情報取得でエラーが発生しました。（RC=${RC}）
@@ -288,18 +288,16 @@ fi
     ############################################
     # ルーティングプロファイル情報の取得
     ############################################
-    WK_RoutingProfileId=`cat ${Work_UserData} | cut -d ',' -f 11`
-    WK_RoutingProfileId=`echo ${WK_RoutingProfileId} | tr -d '"'`
-    WK_RoutingProfileName=`cat ${Work_R_Pro} | grep "${WK_RoutingProfileId}" | cut -f 6`
+    WK_RoutingProfileId=$(cut -d "," -f 9 ${Work_UserData} | tr -d '"')
+    WK_RoutingProfileName=$(grep "${WK_RoutingProfileId}" ${Work_R_Pro} | cut -f 6)
     echo ◇　ルーティングプロファイルID（${WK_RoutingProfileId}）のルーティングプロファイル名は（${WK_RoutingProfileName}）>>${OUTPUT_FILE1}
     sed -i "s/${WK_RoutingProfileId}/${WK_RoutingProfileName}/g" ${Work_UserData}
     
     ############################################
     # セキュリティプロファイル情報の取得
     ############################################
-    WK_SecurityProfileIds=`cat ${Work_UserData} | cut -d ',' -f 10`
-    WK_SecurityProfileIds=`echo ${WK_SecurityProfileIds} | tr -d '"'`
-    WK_SecurityProfileName=`cat ${Work_S_Pro} | grep "${WK_SecurityProfileIds}" | cut -f 6`
+    WK_SecurityProfileIds=$(cut -d "," -f 8 ${Work_UserData} | tr -d '"')
+    WK_SecurityProfileName=$(grep "${WK_SecurityProfileIds}" ${Work_S_Pro} | cut -f 6)
     echo ◇　セキュリティプロファイルID（${WK_SecurityProfileIds}）のセキュリティプロファイル名は（${WK_SecurityProfileName}）>>${OUTPUT_FILE1}
     sed -i "s/${WK_SecurityProfileIds}/${WK_SecurityProfileName}/g" ${Work_UserData}
     

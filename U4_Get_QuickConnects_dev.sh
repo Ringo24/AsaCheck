@@ -39,7 +39,7 @@ Identity_Management_Type=SAML
 # 継続ファイル名
 #-------------------------------------------------------------------------
 OUTPUT_FILE1=U4_OUTPUT_log.txt
-OUTPUT_FILE2=U4_OUTPUT_QuickConnectData.csv
+OUTPUT_FILE2=U4_OUTPUT_QuickConnectsData.csv
 OUTPUT_FILE3=U4_INPUT_QuickConnectList.txt
 OUTPUT_FILE4=U4_INPUT_Counter.txt
 
@@ -202,7 +202,7 @@ else
 
   echo ◇
   echo ◇　クイック接続一覧をクイック接続名でソートします。
-  cat ${Work_UsersList} | sort -k 4 > ${OUTPUT_FILE3}
+  cat ${Work_UsersList} | sort -k 6 > ${OUTPUT_FILE3}
   rm -f ${Work_UsersList}
   
   
@@ -267,18 +267,17 @@ fi
   ############################################
   # ヘッダを出力ファイルへ書き込み
   ############################################
-  echo \"Id\",\"Arn\",\"Name\",\"QuickConnectType\",\"User\",\"ContactFlow\",\"LastModifiedTime\",\"LastModifiedRegion\" > ${OUTPUT_FILE2}
-  # Todo: UserタイプとQueueタイプのヘッダをどうするか
+  echo \"Id\",\"Name\",\"QuickConnectType\",\"UserName\",\"ContactFlow\",\"LastModifiedTime\",\"LastModifiedRegion\" > ${OUTPUT_FILE2}
 
   while [ -s ./${OUTPUT_FILE3} ]
   do
     line=`head -n 1 ./${OUTPUT_FILE3}`
     
-    Def_01=`echo ${line}              | cut -d " " -f  1  `
-    Def_02=`echo ${line}              | cut -d " " -f  2  `
-    Def_Id=`echo ${line}              | cut -d " " -f  3  `
-    Def_Name=`echo ${line}            | cut -d " " -f  6  `
-    Def_Type=`echo ${line}            | cut -d " " -f  7  `
+    Def_01=`echo ${line}              | awk '{print $1}'  `
+    Def_02=`echo ${line}              | awk '{print $2}'  `
+    Def_Id=`echo ${line}              | awk '{print $3}'  `
+    Def_Name=`echo ${line}            | awk '{print $6}'  `
+    Def_Type=`echo ${line}            | awk '{print $7}'  `
     
     User_CNT=`expr ${User_CNT} + 1`
     echo ◇　対象クイック接続（${Def_Name}）の処理を開始します。　（${User_CNT}件目）
@@ -290,50 +289,78 @@ fi
     > ${Work_OutputData}
 
     ############################################
-    # クイック接続情報取得
+    # クイック接続情報取得（ユーザー）
     ############################################
-    aws --region ${Target_Region} connect describe-quick-connect  --instance-id  ${ID_AmazonConnect} --quick-connect-id ${Def_Id}  | jq -r '(.QuickConnect | [.QuickConnectId,.QuickConnectARN,.Name,.QuickConnectConfig.QuickConnectType,.QuickConnectConfig.UserConfig.UserId,.QuickConnectConfig.UserConfig.ContactFlowId,.LastModifiedTime,.LastModifiedRegion]) | @csv' > ${Work_UserData}
-    RC=$?
-    if [ ${RC} -ne 0 ] ; then
-      echo ◆　　クイック接続（${Def_Name}）の情報取得でエラーが発生しました。（RC=${RC}）
-      echo ◆　　クイック接続（${Def_Name}）の処理を中断します。
-      echo ◆　　クイック接続（${Def_Name}）の情報取得でエラーが発生しました。（RC=${RC}）>>${OUTPUT_FILE1}
-      echo ◆　　クイック接続（${Def_Name}）の処理を中断します。>>${OUTPUT_FILE1}
-      
-      exit 10
-    fi
+    if [ "${Def_Type}" = "USER" ] ; then
+      aws --region ${Target_Region} connect describe-quick-connect  --instance-id  ${ID_AmazonConnect} --quick-connect-id ${Def_Id}  | jq -r '(.QuickConnect | [.QuickConnectId,.Name,.QuickConnectConfig.QuickConnectType,.QuickConnectConfig.UserConfig.UserId,.QuickConnectConfig.UserConfig.ContactFlowId,.LastModifiedTime,.LastModifiedRegion]) | @csv' > ${Work_UserData}
+      RC=$?
+      if [ ${RC} -ne 0 ] ; then
+        echo ◆　　クイック接続（${Def_Name}）の情報取得でエラーが発生しました。（RC=${RC}）
+        echo ◆　　クイック接続（${Def_Name}）の処理を中断します。
+        echo ◆　　クイック接続（${Def_Name}）の情報取得でエラーが発生しました。（RC=${RC}）>>${OUTPUT_FILE1}
+        echo ◆　　クイック接続（${Def_Name}）の処理を中断します。>>${OUTPUT_FILE1}
+        
+        exit 10
+      fi
     
     ############################################
     # ユーザー情報の取得
+    # ユーザー名の置換
     ############################################
-    if [ ${Def_Type} = "User"]
-      #WK_UserId=`cat ${Work_UserData} | cut -d ',' -f 11`
-      #WK_UserId=`echo ${WK_UserId} | tr -d '"'`
-      #WK_UserName=`cat ${Work_R_Pro} | grep "${WK_UserId}" | cut -f 6`
-      #echo ◇　ユーザーID（${WK_UserId}）のユーザー名は（${WK_UserName}）>>${OUTPUT_FILE1}
-      #sed -i "s/${WK_UserId}/${WK_UserName}/g" ${Work_UserData}
-    fi
+      WK_UserId=$(cut -d "," -f 4 ${Work_UserData} | tr -d '"')
+      WK_UserName=$(grep "${WK_UserId}" ${Work_U_Pro} | cut -f 6)
+      echo ◇　ユーザーID（${WK_UserId}）のユーザー名は（${WK_UserName}）>>${OUTPUT_FILE1}
+      sed -i "s/${WK_UserId}/${WK_UserName}/g" ${Work_UserData}
+    
+    ############################################
+    # クイック接続情報取得（キュー）
+    ############################################
+    elif [ "${Def_Type}" = "QUEUE" ] ; then
+      aws --region ${Target_Region} connect describe-quick-connect  --instance-id  ${ID_AmazonConnect} --quick-connect-id ${Def_Id}  | jq -r '(.QuickConnect | [.QuickConnectId,.Name,.QuickConnectConfig.QuickConnectType,.QuickConnectConfig.QueueConfig.QueueId,.QuickConnectConfig.QueueConfig.ContactFlowId,.LastModifiedTime,.LastModifiedRegion]) | @csv' > ${Work_UserData}
+      RC=$?
+      if [ ${RC} -ne 0 ] ; then
+        echo ◆　　クイック接続（${Def_Name}）の情報取得でエラーが発生しました。（RC=${RC}）
+        echo ◆　　クイック接続（${Def_Name}）の処理を中断します。
+        echo ◆　　クイック接続（${Def_Name}）の情報取得でエラーが発生しました。（RC=${RC}）>>${OUTPUT_FILE1}
+        echo ◆　　クイック接続（${Def_Name}）の処理を中断します。>>${OUTPUT_FILE1}
+        
+        exit 10
+      fi
 
     ############################################
     # キュー情報の取得
+    # キュー名の置換
     ############################################
-    if [ ${Def_Type} = "Queue"]
-      #WK_UserId=`cat ${Work_UserData} | cut -d ',' -f 11`
-      #WK_UserId=`echo ${WK_UserId} | tr -d '"'`
-      #WK_UserName=`cat ${Work_R_Pro} | grep "${WK_UserId}" | cut -f 6`
-      #echo ◇　ユーザーID（${WK_UserId}）のユーザー名は（${WK_UserName}）>>${OUTPUT_FILE1}
-      #sed -i "s/${WK_UserId}/${WK_UserName}/g" ${Work_UserData}
+      WK_QueueId=$(cut -d "," -f 4 ${Work_UserData} | tr -d '"')
+      WK_QueueName=`cat ${Work_R_Pro} | grep "${WK_QueueId}" | cut -f 6`
+      echo ◇　キューID（${WK_QueueId}）のキュー名は（${WK_QueueName}）>>${OUTPUT_FILE1}
+      sed -i "s/${WK_QueueId}/${WK_QueueName}/g" ${Work_UserData}
+
+    ############################################
+    # クイック接続情報取得（電話番号）
+    ############################################
+    elif [ "${Def_Type}" = "PHONE_NUMBER" ] ; then
+      aws --region ${Target_Region} connect describe-quick-connect  --instance-id  ${ID_AmazonConnect} --quick-connect-id ${Def_Id}  | jq -r '(.QuickConnect | [.QuickConnectId,.Name,.QuickConnectConfig.QuickConnectType,.QuickConnectConfig.PhoneConfig.PhoneNumber,"-",.LastModifiedTime,.LastModifiedRegion]) | @csv' > ${Work_UserData}
+      RC=$?
+      if [ ${RC} -ne 0 ] ; then
+        echo ◆　　クイック接続（${Def_Name}）の情報取得でエラーが発生しました。（RC=${RC}）
+        echo ◆　　クイック接続（${Def_Name}）の処理を中断します。
+        echo ◆　　クイック接続（${Def_Name}）の情報取得でエラーが発生しました。（RC=${RC}）>>${OUTPUT_FILE1}
+        echo ◆　　クイック接続（${Def_Name}）の処理を中断します。>>${OUTPUT_FILE1}
+        
+        exit 10
+      fi
     fi
     
     ############################################
-    # フロー情報の取得
+    # ContactFlow情報の取得
+    # ContactFlow名の置換
     ############################################
-    if [ ${Def_Type} = "Flow"]
-      #WK_UserId=`cat ${Work_UserData} | cut -d ',' -f 11`
-      #WK_UserId=`echo ${WK_UserId} | tr -d '"'`
-      #WK_UserName=`cat ${Work_R_Pro} | grep "${WK_UserId}" | cut -f 6`
-      #echo ◇　ユーザーID（${WK_UserId}）のユーザー名は（${WK_UserName}）>>${OUTPUT_FILE1}
-      #sed -i "s/${WK_UserId}/${WK_UserName}/g" ${Work_UserData}
+    WK_FlowId=$(cut -d "," -f 5 ${Work_UserData} | tr -d '"')
+    if [ ${WK_FlowId} != "-" ] ; then
+      WK_FlowName=`cat ${Work_S_Pro} | grep "${WK_FlowId}" | cut -f 7`
+      echo ◇　ContactFlowID（${WK_FlowId}）のContactFlow名は（${WK_FlowName}）>>${OUTPUT_FILE1}
+      sed -i "s/${WK_FlowId}/${WK_FlowName}/g" ${Work_UserData}
     fi
         
     ############################################
@@ -401,4 +428,3 @@ echo ◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 
 unset AWS_MAX_ATTEMPTS
 exit 0
-
